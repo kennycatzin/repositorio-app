@@ -61,7 +61,7 @@ export const RegisterScreen = () => {
                             </div> */}
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
-                                    <span className="input-group-text"><i className="fas fa-user"></i></span>
+                                    <span className="input-group-text"><i className="fas fa-address-card"></i></span>
                                 </div>
                                 <input type="text" 
                                         className="form-control" 

@@ -13,10 +13,11 @@ import { UserRoutes } from './UserRoutes';
 import {PublicRoute} from './PublicRoute'
 import { PrivateRoute } from './PrivateRoute';
 import { DashboardScreen } from '../components/public/dashboard/DashboardScreen';
+import { AdminRoutes } from './AdminRoutes';
 export const AppRouter = () => {
     const dispatch = useDispatch();    
-    const { checking } = useSelector(state => state.auth)
-    console.log(checking);
+    const { checking, tipo} = useSelector(state => state.auth)
+    console.log(checking, tipo);
     useEffect(() => {
         dispatch(startChecking());
     }, [dispatch])
@@ -38,10 +39,15 @@ export const AppRouter = () => {
                     </PublicRoute>
                 }     
             />
+
             <Route path="/*"  element ={
-                  <PrivateRoute>
-                       <UserRoutes/>
-                  </PrivateRoute>
+                tipo == "ADMIN" ? 
+                    <PrivateRoute>
+                        <AdminRoutes/>
+                    </PrivateRoute> :        
+                    <PrivateRoute>
+                        <UserRoutes/>
+                    </PrivateRoute>
               }
           />
                 {/* <Route path="/*" element={<UserRoutes />} />

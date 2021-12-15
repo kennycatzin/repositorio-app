@@ -1,8 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 export const Sidebar = () => {
-
+    const {tipo} = useSelector(state => state.auth)
     return (
         <div className="sidebar" data="blue">
             <div className="sidebar-wrapper">
@@ -11,11 +12,11 @@ export const Sidebar = () => {
                         <i className="fa fa-check-circle" aria-hidden="true"></i>
                     </Link>
                     <Link to="/" className="simple-text logo-normal">
-                    Repositorio
+                        Repositorio
                     </Link>
                 </div>
                 <ul className="nav">
-                    <li >
+                    <li>
                         <Link to="/" className="active">
                             <i className="tim-icons icon-chart-pie-36"></i>
                             <p>Dashboard</p>
@@ -23,13 +24,31 @@ export const Sidebar = () => {
                     </li>
                     <li>
                         <Link to="/category">
-                            <i className="tim-icons icon-atom"></i>
-                            <p>Categorias</p>
+                            <i className="tim-icons icon-paper"></i>
+                            <p>Repositorio</p>
                         </Link>
-                        
                     </li>
+                    {
+                        tipo =='ADMIN' ?
+                            <li>
+                                <Link to="/asignacion">
+                                    <i className="tim-icons icon-badge"></i>
+                                    <p>Asignaciones</p>
+                                </Link>
+                            </li>: null
+                    }
+                    {
+                        tipo =='ADMIN' ?
+                            <li>
+                                <Link to="/configuraciones">
+                                    <i className="tim-icons icon-settings"></i>
+                                    <p>Configuraciones</p>
+                                </Link>
+                            </li>: null
+                    }
+                    
                 </ul>
             </div>
-      </div>
+        </div>
     )
 }

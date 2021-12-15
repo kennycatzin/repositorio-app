@@ -1,7 +1,16 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { startLogout } from '../../actions/actions';
 
 export const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    console.log('Saliendo');
+    dispatch(startLogout());
+
+  }
     return (
         <nav className="navbar navbar-expand-lg navbar-absolute navbar-transparent">
         <div className="container-fluid">
@@ -24,6 +33,7 @@ export const Navbar = () => {
           <div className="collapse navbar-collapse" id="navigation">
             <ul className="navbar-nav ml-auto">
               
+              
               {/* <li className="dropdown nav-item">
                 <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div className="notification d-none d-lg-block d-xl-block"></div>
@@ -41,7 +51,7 @@ export const Navbar = () => {
                 </ul>
               </li> */}
               <li className="dropdown nav-item">
-                <Link to="/" className="dropdown-toggle nav-link" data-toggle="dropdown">
+                <Link to="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div className="photo">
                     <img src="../assets/img/anime3.png" alt="Profile"/>
                   </div>
@@ -51,10 +61,9 @@ export const Navbar = () => {
                   </p>
                 </Link>
                 <ul className="dropdown-menu dropdown-navbar">
-                  <li className="nav-link"><Link to="/" className="nav-item dropdown-item">Profile</Link></li>
-                  <li className="nav-link"><Link to="/" className="nav-item dropdown-item">Settings</Link></li>
+                  <li className="nav-link"><Link to="#" className="nav-item dropdown-item">Perfil</Link></li>
                   <li className="dropdown-divider"></li>
-                  <li className="nav-link"><Link to="/" className="nav-item dropdown-item">Log out</Link></li>
+                  <li className="nav-link"><Link onClick={logout} to="#" className="nav-item dropdown-item">Salir</Link></li>
                 </ul>
               </li>
               <li className="separator d-lg-none"></li>
