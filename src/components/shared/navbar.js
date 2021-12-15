@@ -7,7 +7,6 @@ export const Navbar = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
-    console.log('Saliendo');
     dispatch(startLogout());
 
   }
