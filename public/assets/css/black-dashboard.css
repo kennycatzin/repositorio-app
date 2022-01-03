@@ -17645,7 +17645,7 @@ table.tablesorter thead tr .headerSortDown {
 
 .sidebar .nav i,
 .off-canvas-sidebar .nav i {
-  font-size: 20px;
+  font-size: 23px;
   float: left;
   margin-right: 12px;
   line-height: 30px;
@@ -17838,6 +17838,7 @@ table.tablesorter thead tr .headerSortDown {
   float: right;
   width: 100%;
   min-height: 100vh;
+  border-top: 2px;
   background: linear-gradient(#1e1e2f, #1e1e24);
   -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   -moz-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);

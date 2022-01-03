@@ -1,9 +1,9 @@
-import { types } from "../types/types"
-
-
+import { types } from "../types/types";
 const initialState = {
     loading: false,
-    msgError: null
+    msgError: null,
+    itemActive: null,
+    tabla: null,
 }
 export const uiReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -18,18 +18,39 @@ export const uiReducer = (state = initialState, action) => {
                 msgError: null
             };
         case types.uiStartLoading:
-            console.log('entro in')
             return {
                 ...state,
                 loading: true
             }
     
         case types.uiFinishLoading:
-            console.log('salgo fin')
             return {
                 ...state,
                 loading: false
             }
+        case types.uiModalEstatus:
+            return {
+                ...state,
+                modalEstatusOpen: action.payload.modalEstatusOpen
+            }
+        case types.uiUpdateCatalogoEstatus:
+            return {
+                ...state,
+                itemActive: action.payload.data,
+                modalEstatusOpen: action.payload.modalEstatusOpen
+        }
+        case types.uiGetTableCatalogoObjeto:
+            return {
+                ...state,
+                tabla: action.payload
+            }
+        case types.uiGetRoles:
+            return {
+                ...state,
+                auxRoles: action.payload
+            }
+
+            
         default:
             return state;
     }

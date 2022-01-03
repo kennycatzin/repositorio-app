@@ -20,3 +20,15 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
     type: types.uiFinishLoading
 })
+export const modalEstatus = (estado, data = null) => {
+    return {
+        type: types.uiUpdateCatalogoEstatus,
+        payload: {
+            loading: false,
+            msgError: null,
+            estatus: data,
+            modalEstatusOpen: estado
+        }
+    }
+   
+}

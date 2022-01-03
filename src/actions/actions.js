@@ -2,10 +2,10 @@ import { fetchSinToken } from '../helpers/fetch';
 import {types} from '../types/types';
 import { finishLoading, startLoading } from './ui';
 import Swal from 'sweetalert2'
-export const startLoginEmailPAssword = (email, password) => {
+export const startLoginEmailPAssword = (usuario, password) => {
     return async( dispatch ) => {
         dispatch( startLoading() );
-        const resp = await fetchSinToken( 'auth/login', {email, password}, 'POST' );
+        const resp = await fetchSinToken( 'auth/login', {usuario, password}, 'POST' );
         const body = await resp.json();
         console.log(body);
         if( body.ok ) {
@@ -37,11 +37,12 @@ export const startLoginEmailPAssword = (email, password) => {
     }
      
 }
-export const register = (email, password, name) => {
+export const register = (usuario, email, password, name) => {
     return async( dispatch ) => {
         dispatch( startLoading() );
-        const resp = await fetchSinToken( 'auth/register', {email, password, name, password_confirmation: password}, 'POST' );
+        const resp = await fetchSinToken( 'auth/register', {email, password, name, password_confirmation: password, usuario}, 'POST' );
         const body = await resp.json();
+        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -80,7 +81,6 @@ export const startChecking = () => {
                     name: body.usuario.name,
                     tipo: body.usuario.tipo
                 }) )
-            console.log('Correcto al verificar con id')
             } else {
                 dispatch( checkingFinish() );
             }

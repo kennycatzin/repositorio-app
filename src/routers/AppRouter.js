@@ -12,7 +12,6 @@ import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { UserRoutes } from './UserRoutes';
 import {PublicRoute} from './PublicRoute'
 import { PrivateRoute } from './PrivateRoute';
-import { DashboardScreen } from '../components/public/dashboard/DashboardScreen';
 import { AdminRoutes } from './AdminRoutes';
 export const AppRouter = () => {
     const dispatch = useDispatch();    
@@ -25,7 +24,7 @@ export const AppRouter = () => {
         return(<h5>Espere....</h5>)
     }
     return (
-        <BrowserRouter>
+        <BrowserRouter >
             <Routes>
             <Route path="/login" element={
                     <PublicRoute>
@@ -41,7 +40,7 @@ export const AppRouter = () => {
             />
 
             <Route path="/*"  element ={
-                tipo == "ADMIN" ? 
+                tipo === "ADMIN" ? 
                     <PrivateRoute>
                         <AdminRoutes/>
                     </PrivateRoute> :        

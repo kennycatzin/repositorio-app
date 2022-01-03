@@ -13,16 +13,17 @@ export const RegisterScreen = () => {
     const dispatch = useDispatch();
     const [formValues, handleInputChange] = useForm({
             nombre: 'Kenny Catzin',
+            usuario: 'kennyu.catzin',
             correo: 'kenn2506@gmail.com',
             password: '123456',
             confirm_password: '123456'
     });
-    const {nombre, correo, password} = formValues;
+    const {nombre, correo, password, usuario} = formValues;
     const handleSubmit = (e) =>{
         e.preventDefault();
        if(isFormValid()){
             console.log('ya se debio disparar');
-            dispatch(register(correo, password, nombre));
+            dispatch(register(usuario, correo, password, nombre));
         }else{
             console.log('no se dispararon las acciones')
         }
@@ -30,6 +31,10 @@ export const RegisterScreen = () => {
     const isFormValid = () => {
         if(nombre.trim().length === 0){
             dispatch(uiError('El nombre es requerido'));
+            return false;
+        }else if(usuario.trim().length === 0){
+            dispatch(uiError('El usuario es requerido'));
+            console.log('usuario incorrecto');
             return false;
         }else if(!isEmail(correo)){
             dispatch(uiError('El correo es inválido'));
@@ -79,9 +84,9 @@ export const RegisterScreen = () => {
                                 <input 
                                     type="text" 
                                     className="form-control" 
-                                    placeholder="Correo"
-                                    value={correo}
-                                    name="correo"
+                                    placeholder="Usuario"
+                                    value={usuario}
+                                    name="usuario"
                                     onChange={handleInputChange}
                                 />
                             </div>

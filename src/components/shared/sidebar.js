@@ -19,30 +19,30 @@ export const Sidebar = () => {
                     <li>
                         <Link to="/" className="active">
                             <i className="tim-icons icon-chart-pie-36"></i>
-                            <p>Dashboard</p>
+                            <p className='h5 text-white'>Dashboard</p>
                         </Link>
                     </li>
                     <li>
                         <Link to="/category">
                             <i className="tim-icons icon-paper"></i>
-                            <p>Repositorio</p>
+                            <p className='h5 text-white'>Repositorio</p>
                         </Link>
                     </li>
                     {
-                        tipo =='ADMIN' ?
+                        tipo ==='ADMIN' ?
                             <li>
                                 <Link to="/asignacion">
                                     <i className="tim-icons icon-badge"></i>
-                                    <p>Asignaciones</p>
+                                    <p className='h5 text-white'>Asignaciones</p>
                                 </Link>
                             </li>: null
                     }
                     {
-                        tipo =='ADMIN' ?
+                        tipo ==='ADMIN' ?
                             <li>
                                 <Link to="/configuraciones">
                                     <i className="tim-icons icon-settings"></i>
-                                    <p>Configuraciones</p>
+                                    <p className='h5 text-white'>Configuraciones</p>
                                 </Link>
                             </li>: null
                     }
