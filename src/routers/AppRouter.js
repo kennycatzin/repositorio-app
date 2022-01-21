@@ -17,6 +17,8 @@ export const AppRouter = () => {
     const dispatch = useDispatch();    
     const { checking, tipo} = useSelector(state => state.auth)
     console.log(checking, tipo);
+    const rutaServidor = '';
+    //const rutaServidor = '/repositorio-af';
     useEffect(() => {
         dispatch(startChecking());
     }, [dispatch])
@@ -26,20 +28,20 @@ export const AppRouter = () => {
     return (
         <BrowserRouter >
             <Routes>
-            <Route path="/login" element={
+            <Route path={rutaServidor + "/login"} element={
                     <PublicRoute>
                         <LoginScreen />,
                     </PublicRoute>
                     }
             />
-            <Route path="/register" element={
+            <Route path={rutaServidor + "/register"} element={
                     <PublicRoute>
                         <RegisterScreen />,
                     </PublicRoute>
                 }     
             />
 
-            <Route path="/*"  element ={
+            <Route path={rutaServidor + "/*"}  element ={
                 tipo === "ADMIN" ? 
                     <PrivateRoute>
                         <AdminRoutes/>

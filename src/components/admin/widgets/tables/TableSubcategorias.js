@@ -1,18 +1,26 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2'
-import { eliminarTablero, openCloseModalTablero,  } from '../../../../actions/tablero';
-import { TableroModal } from '../../../modal/tableroModal';
-import moment from 'moment';
+import { bajaSubcategoria, openModalArchivo, openModalSubcategoria } from '../../../../actions/repositorio';
 
-export const TableTablero = ({cabeceras, data}) => {
+export const TableSubcategorias = ({ data }) => {
     const dispatch = useDispatch();
+    const cabeceras = [
+        "Titulo",
+    ];
     const handleEditar = (item) => {
-        console.log(item)
-        dispatch(openCloseModalTablero(true, item));
-    }
+        dispatch(openModalSubcategoria(true, item));
 
+    }
+    const handleAgregarArchivo = (obj) => {
+        console.log('abrir modal bro');
+        //dispatch(openModalSubcategoria(true, data));
+        // TODO: Funcionalidad modal
+        dispatch(openModalArchivo(true, obj));
+    }
     const handleEliminar = (item) => {
+        console.log(item)
+        const { id } = item;
         Swal.fire({
             title: 'Realmente desea elimninar este registro?',
             text: "No podra revertir esta accion",
@@ -21,47 +29,40 @@ export const TableTablero = ({cabeceras, data}) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, emilinar'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                const obj = {
-                    id_tablero: item.id,
-                    usuario: 1
-                }
-                dispatch(eliminarTablero(obj));
-               // dispatch(eliminarObjeto(id, 0 , 1, 'estatus', 'update-baja', 'get-estatus'))
+                dispatch(bajaSubcategoria(id, 1))
+                // dispatch(eliminarObjeto(id, 0, 1, 'user', 'set-usuario-baja', 'get-usuarios-noasignados'))
             }
-          })
+        })
     }
     return (
-        <>
         <table className="table">
             <thead className="text-primary">
                 <tr>
-                    <th className="text-center">Imagen</th>
+                    <th className="text-center">#</th>
                     {
                         cabeceras.map(cabeceras => (
                             <th key={cabeceras} className='text-center'>{cabeceras}</th>
                         ))
-                    }                    
+                    }
                     <th className='text-center'>Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 {
-                    (data !== undefined)&&
+                    (data != null) &&
                     data.map((item, index) => {
-                       return <tr key={item.id}>
+                        return <tr key={item.id}>
                             <td>
-                                <div className="photo">
-                                    <img src={item.url} alt="Table" />
-                                </div>
+                                {index + 1}
                             </td>
                             <td className='text-center'>{item.titulo}</td>
-                            <td className='text-center'>{moment(item.fecha_inicio).format('YYYY-MM-DD') }</td>
-                            <td className='text-center'>{moment(item.fecha_final).format('YYYY-MM-DD')}</td>
-                            <td className='text-center'>{item.dias}</td>
                             <td className="d-flex justify-content-around">
-                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleAgregarArchivo(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                    <i className="tim-icons icon-settings-gear-63"></i>
+                                </button>
+                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="">
                                     <i className="tim-icons icon-pencil"></i>
                                 </button>
                                 <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
@@ -73,7 +74,5 @@ export const TableTablero = ({cabeceras, data}) => {
                 }
             </tbody>
         </table>
-        <TableroModal/>
-        </>
     )
 }

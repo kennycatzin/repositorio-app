@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { modalEstatus } from '../../actions/ui';
+import { guardarTablero, openCloseModalTablero } from '../../actions/tablero';
+import moment from 'moment';
 
+
+const initEvent = {
+    id: null,
+    titulo: '',
+    descripcion: '',
+    fecha_inicio: '',
+    fecha_final: '',
+    archivo: ''
+   
+}
 export const TableroModal = () => {
-    const {modalEstatusOpen} = useSelector(state => state.ui);
+    const { modalTableroOpen, activeTablero } = useSelector(state => state.tablero)
     const dispatch = useDispatch();
     const customStyles = {
         content: {
@@ -17,19 +28,66 @@ export const TableroModal = () => {
         },
     };
     // const [dateStart, setDateStart] = useState(now.toDate())
+    const [formValues, setFormValues] = useState(initEvent);
+    const { id,  titulo, descripcion, fecha_inicio, fecha_final, imagen } = formValues;
+    const [miImagen, setmiImagen] = useState();
+
+    useEffect(() => {
+        if(activeTablero !== undefined && activeTablero !== {}){
+            console.log(activeTablero)
+            const valores = {
+                id: activeTablero.id,
+                titulo: activeTablero.titulo,
+                descripcion: activeTablero.descripcion,
+                fecha_inicio: activeTablero.fecha_inicio,
+                fecha_final: activeTablero.fecha_final,
+                archivo: ''
+               
+            }
+            setFormValues(valores)
+        }
+     }, [activeTablero, setFormValues])
 
     const closeModal = () => {
-        
+
         console.log('cerrando');
-        dispatch(modalEstatus(false));
+        dispatch(openCloseModalTablero(false));
+    }
+    const handleImagenChange = (e) => {
+        console.log(e.target.files[0]);
+        setmiImagen(e.target.files[0]);
+        // setSelectedFile(e.target.files[0]);
+    }
+    const handleInputChange = ({ target }) => {
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value
+        });
     }
 
+    const handleGuardar = (e) => {
+        e.preventDefault();
+
+        let formData = new FormData();
+
+        formData.append("titulo", titulo);
+        formData.append("activo", 1);
+        formData.append("descripcion", descripcion);
+        formData.append("tipo", 1);
+        formData.append("fecha_inicio", fecha_inicio);
+        formData.append("fecha_final", fecha_final);
+        formData.append("archivo", miImagen);
+        formData.append("usuario", 1);
+        formData.append("id", id);
+
+        dispatch(guardarTablero(formData));
+    }
 
     Modal.setAppElement('#root');
 
     return (
         <Modal
-            isOpen={modalEstatusOpen}
+            isOpen={modalTableroOpen}
             onRequestClose={closeModal}
             style={customStyles}
             closeTimeoutMS={200}
@@ -40,7 +98,85 @@ export const TableroModal = () => {
         >
             <div className="scroll-component">
                 <div className="scroll-content">
-                    <h1>Holaaaa</h1>
+                    <div className="card">
+                        <div className="card-header">
+                            <h4 className="card-title">Configuracion de subcategoria</h4>
+                        </div>
+                        <form className="form-horizontal" onSubmit={handleGuardar}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">Titulo</label>
+                                    <div className="col-md-9">
+                                        <div className="form-group">
+                                            <input type="text"
+                                                className="form-control"
+                                                name="titulo"
+                                                value={titulo}
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">Descripcion</label>
+                                    <div className="col-md-9">
+                                        <div className="form-group">
+                                            <input type="text"
+                                                className="form-control"
+                                                name="descripcion"
+                                                value={descripcion}
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">Fecha inicial</label>
+                                    <div className="col-md-9">
+                                        <div className="form-group">
+                                            <input type="date"
+                                                className="form-control"
+                                                name="fecha_inicio"
+                                                value={moment(fecha_inicio).format('YYYY-MM-DD') }
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">Fecha final</label>
+                                    <div className="col-md-9">
+                                        <div className="form-group">
+                                            <input type="date"
+                                                className="form-control"
+                                                name="fecha_final"
+                                                value={moment(fecha_final).format('YYYY-MM-DD') }
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">Imagen</label>
+                                    <div className="col-md-9">
+                                        <div className="">
+                                            <input type="file"
+                                                className="form-control pointer imagen"
+                                                name='imagen'
+                                                value={imagen}
+                                                onChange={handleImagenChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='row justify-content-around card-footer'>
+                                <button className='btn btn-success' type='submit'>Guardar</button>
+                                <button className='btn btn-secundary' onClick={closeModal} type='button'>Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
             </div>
 
@@ -50,52 +186,3 @@ export const TableroModal = () => {
 }
 
 
-{/* <form className="container">
-
-                <div className="form-group">
-                    <label >Fecha y hora inicio</label>
-                    <DateTimePicker
-                            onChange={handleStartDate}
-                            value={dateStart}
-                            className="form-control react-datetime-picker react-datetime-picker__wrapper"
-                        />                
-                </div>
-
-                <div className="form-group">
-                    <label>Fecha y hora fin</label>
-                    <input className="form-control " placeholder="Fecha inicio" />
-                </div>
-
-                <hr />
-                <div className="form-group">
-                    <label>Titulo y notas</label>
-                    <input
-                        type="text"
-                        className="form-control "
-                        placeholder="Título del evento"
-                        name="title"
-                        autoComplete="off"
-                    />
-                    <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
-                </div>
-
-                <div className="form-group">
-                    <textarea
-                        type="text"
-                        className="form-control "
-                        placeholder="Notas"
-                        rows="5"
-                        name="notes"
-                    ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
-                </div>
-
-                <button
-                    type="submit"
-                    className="btn btn-outline-primary btn-block"
-                >
-                    <i className="far fa-save"></i>
-                    <span> Guardar</span>
-                </button>
-
-            </form> */}

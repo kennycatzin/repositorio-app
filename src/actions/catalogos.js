@@ -4,6 +4,7 @@ import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
 export const registroEstatus = (objeto = {}, tipo= '', endpoint = '', segEndpoint = '') => {
     return async( dispatch ) => {
+        console.log(objeto)
         dispatch( startLoading() );
         let url = '';
         let accion = '';

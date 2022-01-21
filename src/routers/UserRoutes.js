@@ -8,6 +8,8 @@ import { SubcategoriesScreen } from '../components/public/subcategories/Subcateg
 import { FilesScreen } from '../components/public/files/FilesScreen';
 
 export const UserRoutes = () => {
+    const rutaServidor = '';
+    //const rutaServidor = '/repositorio-af';
     return (
         <div className="wrapper">
             
@@ -17,10 +19,10 @@ export const UserRoutes = () => {
                 <div className="content">
                     <Routes>
                         
-                            <Route path="/" element={<DashboardScreen/>} />
-                            <Route path="/category" element={<CategoryScreen/>} />
-                            <Route path="/subcategorie" element={<SubcategoriesScreen/>} />               
-                            <Route path="/files" element={<FilesScreen/>} />               
+                            <Route path={rutaServidor + "/"} element={<DashboardScreen/>} />
+                            <Route path={rutaServidor + "/category"} element={<CategoryScreen/>} />
+                            <Route path={rutaServidor + "/subcategorie"} element={<SubcategoriesScreen/>} />               
+                            <Route path={rutaServidor + "/files"} element={<FilesScreen/>} />               
 
                     </Routes>
                 </div>

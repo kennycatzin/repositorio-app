@@ -1,10 +1,14 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
+import { openCloseConfModalRolArchivo } from '../../../actions/roles';
 import { ArchivoModal } from '../../modal/archivoModal';
+import { ConfRolesArchivosModal } from '../../modal/confRolesArchivosModal';
 import { ConfRolCategoria } from '../widgets/ConfRolCategoria';
 
 export const ArchivoConf = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handdleRegresar = () => {
     console.log("regresando");
     navigate(-1);
@@ -67,7 +71,9 @@ export const ArchivoConf = () => {
       ]
     },
   ];
-
+  const handleConfigurar = () => {
+    dispatch(openCloseConfModalRolArchivo(true))
+}
   return (
     <>
       <div className="row">
@@ -99,7 +105,7 @@ export const ArchivoConf = () => {
         <div className="card">
           <div className="card-header d-flex justify-content-between">
             <h4 className="card-title d-inline">Listado de categorias</h4>
-            <button id="twitter" className="btn btn-round btn-success">
+            <button onClick={handleConfigurar} id="twitter" className="btn btn-round btn-success">
               <i className="fa fa-cog"></i> · Configurar
             </button>
           </div>
@@ -118,7 +124,7 @@ export const ArchivoConf = () => {
         </div>
       </div>
       <ArchivoModal/>
-
+                <ConfRolesArchivosModal/>
 
 
     </>

@@ -36,7 +36,7 @@ export const uiReducer = (state = initialState, action) => {
         case types.uiUpdateCatalogoEstatus:
             return {
                 ...state,
-                itemActive: action.payload.data,
+                itemActive: action.payload.estatus,
                 modalEstatusOpen: action.payload.modalEstatusOpen
         }
         case types.uiGetTableCatalogoObjeto:

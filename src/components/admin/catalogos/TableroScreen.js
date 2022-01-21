@@ -1,32 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { getTableroAdmin, openCloseModalTablero } from '../../../actions/tablero';
 import { TableTablero } from '../widgets/tables/TableTablero';
 
 export const TableroScreen = () => {
-    const cabeceras = [
-        "Titulo",
-        "Fecha inicio",
-        "Fecha final",
-        "Dias restantes"
-    ];
-    const data = [
-        {
-            "id": 1,
-            "titulo": "Torneo de Futbolito",
-            "fecha_inicio": "12/12/2020",
-            "fecha_final": "12/12/2022",
-            "descripcion": "PElit qui nostrud laboris eu quis dolore do nisi. Do aute pariatur occaecat ea. Nostrud excepteur nulla Lorem nostrud ex enim et tempor. Lorem deserunt ea nostrud ipsum ad laboris. Labore deserunt exercitation fugiat sit occaecat quis sit. Enim pariatur et aute voluptate fugiat exercitation occaecat do consequat. Dolore sit dolore deserunt reprehenderit voluptate duis nostrud pariatur veniam qui in velit esse laborum.",
-            "dias_restantes": 10
-        },
-        {
-            "id": 2,
-            "titulo": "Torneo de Futbolito",
-            "fecha_inicio": "12/12/2020",
-            "fecha_final": "12/12/2022",
-            "descripcion": "PElit qui nostrud laboris eu quis dolore do nisi. Do aute pariatur occaecat ea. Nostrud excepteur nulla Lorem nostrud ex enim et tempor. Lorem deserunt ea nostrud ipsum ad laboris. Labore deserunt exercitation fugiat sit occaecat quis sit. Enim pariatur et aute voluptate fugiat exercitation occaecat do consequat. Dolore sit dolore deserunt reprehenderit voluptate duis nostrud pariatur veniam qui in velit esse laborum.",
-            "dias_restantes": 10
-        },
-    ];
+const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(getTableroAdmin());
+    }, [dispatch])
+        const cabeceras = [
+            "Titulo",
+            "Fecha inicio",
+            "Fecha final",
+            "Dias restantes"
+        ];
+    const {tablero, checking} = useSelector(state => state.tablero)
+    const handleAgregar = () => {
+        dispatch(openCloseModalTablero(true, {}));
+    }
     return (
         <>
             <div className="row">
@@ -41,14 +35,17 @@ export const TableroScreen = () => {
                 <div className="card ">
                 <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title d-inline">Listado de anuncios</h4>
-
-                        <button type="button" className="btn btn-success btn-circle btn-lg">
+                        <button onClick={handleAgregar } type="button" className="btn btn-success btn-circle btn-lg">
                             <i className="fa fa-plus"></i>
                         </button>
                     </div>
                     <div className="card-body">
                         <div className="table-responsive">
-                            <TableTablero cabeceras={cabeceras} data={data}/>
+                            {
+                                (!checking) ?  <TableTablero cabeceras={cabeceras} data={tablero}/>
+                                : <h5>Espere...</h5>
+                            }
+                            
                         </div>
                     </div>
                 </div>

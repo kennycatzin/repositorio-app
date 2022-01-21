@@ -32,3 +32,15 @@ export const modalEstatus = (estado, data = null) => {
     }
    
 }
+export const modalAsignacion = (estado, data = null) => {
+    return {
+        type: types.uiUpdateCatalogoEstatus,
+        payload: {
+            loading: false,
+            msgError: null,
+            estatus: data,
+            modalEstatusOpen: estado
+        }
+    }
+   
+}

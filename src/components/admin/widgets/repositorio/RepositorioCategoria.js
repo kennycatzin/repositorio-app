@@ -1,10 +1,10 @@
 import React from 'react'
-import { RepositorioSubcategoria } from './RepositorioSubcategoria'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux';
 import { bajaCategoria, categoriaActiva, openModalCategoria, openModalSubcategoria } from '../../../../actions/repositorio';
-import { modalEstatus } from '../../../../actions/ui';
 import { RepositorioModal } from '../../../modal/repositorioModal';
+import { ArchivoModal } from '../../../modal/archivoModal';
+import {TableSubcategorias} from './../tables/TableSubcategorias'
 
 export const RepositorioCategoria = ({ data }) => {
     const dispatch = useDispatch();
@@ -12,6 +12,7 @@ export const RepositorioCategoria = ({ data }) => {
         dispatch(categoriaActiva(obj));
         dispatch(openModalCategoria(true, data));
     }
+
     const handleEliminar = (obj) => {
         const { id } = obj;
         Swal.fire({
@@ -33,7 +34,7 @@ export const RepositorioCategoria = ({ data }) => {
     };
     const handleAgregarSubcategoria = () => {
         console.log('abrir modal bro');
-        dispatch(openModalSubcategoria(true, data));
+        dispatch(openModalSubcategoria(true, {}));
     }
     return (
         <div className="card container">
@@ -67,9 +68,13 @@ export const RepositorioCategoria = ({ data }) => {
                                 <div className="row">
                                     {/* TODO: Agregar categoria */}
                                     {
-                                        data.subcategoria.map((item) => (
-                                            <RepositorioSubcategoria key={item.id} data={item} />
-                                        ))
+                                        // data.subcategoria.map((item) => (
+                                        //     <RepositorioSubcategoria key={item.id} data={item} />
+                                        // ))
+                                        // data.subcategoria.map((item) => (
+                                        //     <TableSubcategorias key={item.id} cabeceras={cabeceras} data={item} />
+                                        // ))
+                                        <TableSubcategorias data={ data.subcategoria} />
                                     }
                                 </div>
                             </div>
@@ -78,6 +83,7 @@ export const RepositorioCategoria = ({ data }) => {
                 </div>
             </div>
             <RepositorioModal/>
+            <ArchivoModal/>
         </div>
     )
 }

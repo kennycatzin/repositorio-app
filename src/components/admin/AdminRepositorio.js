@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getAdminConf, openModalCategoria } from '../../actions/repositorio'
+import { getAdminConf, getAuxFormularioArchivo, getTiposConfigArchivos, openModalCategoria } from '../../actions/repositorio'
 import { RepoCategoriaModal } from '../modal/repoCategoriaModal'
 import { RepositorioEntry } from './widgets/repositorio/RepositorioEntry'
 
@@ -13,6 +13,9 @@ export const AdminRepositorio = () => {
 
     useEffect(() => {
         dispatch(getAdminConf());
+        dispatch(getTiposConfigArchivos());
+
+        
     }, [dispatch])
     return (
         <>

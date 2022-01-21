@@ -1,4 +1,7 @@
-const baseUrl = 'http://localhost:8000/api';
+import axios from 'axios';
+
+//const baseUrl = 'http://localhost:8000/api';
+const baseUrl = 'http://172.18.3.7/repositorio-api/public/api';
 
 const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
     const url = `${ baseUrl }/${ endpoint }`;
@@ -21,11 +24,46 @@ const fetchSinToken = ( endpoint, data, method = 'GET' ) => {
     }
 }
 
+// const fetchFormImagen = ( endpoint, data, method = 'GET' ) => {
+//     const url = `${ baseUrl }/${ endpoint }`;
+//     if ( method === 'GET' ) {
+//         console.log('entrando a buscar');
+//         return fetch( url, {
+//             method,
+//             headers: {
+//                 'Content-type': 'multipart/form-data'
+//             }
+//         });
+//     } else {
+//         return fetch( url, {
+//             method,
+//             headers: {
+//                 'Content-type': 'multipart/form-data'
+//             },
+//             body: data
+//         });
+//     }
+// }
+const fetchFormImagen = async ( endpoint, data, method = 'GET' ) => {
+    const url = `${ baseUrl }/${ endpoint }`;
+    let body;
+    console.log(data)
+    const header = {
+        headers: {
+          'Content-Type': undefined,
+        }};
+    await axios.post(url, data, header)
+     .then( res => {
+        body = res;       
+     });
+     console.log(body)
+     return body;
+}
+
 const fetchConToken = ( endpoint, data, method = 'GET' ) => {
 
     const url = `${ baseUrl }/${ endpoint }`;
     const token = localStorage.getItem('token') || '';
-
     if ( method === 'GET' ) {
         return fetch( url, {
             method,
@@ -46,8 +84,8 @@ const fetchConToken = ( endpoint, data, method = 'GET' ) => {
 }
 
 
-
 export {
     fetchSinToken,
-    fetchConToken
+    fetchConToken,
+    fetchFormImagen
 }

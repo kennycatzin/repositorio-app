@@ -17,6 +17,8 @@ import { AdminRepositorio } from '../components/admin/AdminRepositorio';
 import { ArchivoConf } from '../components/admin/catalogos/ArchivoConf';
 import { UsuariosScreen } from '../components/admin/catalogos/UsuariosScreen';
 export const AdminRoutes = () => {
+    const rutaServidor = '';
+    //const rutaServidor = '/repositorio-af';
     return (
         <div className="wrapper">
             
@@ -26,21 +28,21 @@ export const AdminRoutes = () => {
                 <div className="content">
                     <Routes>
                         
-                            <Route path="/" element={<DashboardScreen/>} />
-                            <Route path="/tablero" element={<TableroScreen/>} />
-                            <Route path="/asignacion" element={<AsignacionScreen/>} />               
-                            <Route path="/category" element={<CategoryScreen/>} />
-                            <Route path="/subcategorie" element={<SubcategoriesScreen/>} />               
-                            <Route path="/files" element={<FilesScreen/>} />      
+                            <Route path={rutaServidor + "/"} element={<DashboardScreen/>} />
+                            <Route path={rutaServidor + "/tablero"} element={<TableroScreen/>} />
+                            <Route path={rutaServidor + "/asignacion"} element={<AsignacionScreen/>} />               
+                            <Route path={rutaServidor + "/category"} element={<CategoryScreen/>} />
+                            <Route path={rutaServidor + "/subcategorie"} element={<SubcategoriesScreen/>} />               
+                            <Route path={rutaServidor + "/files"} element={<FilesScreen/>} />      
 
-                            <Route path="/configuraciones" element={<ConfiruagionesScreen/>} />
-                            <Route path="/departamentos" element={<DepartamentosScreen/>} />
-                            <Route path="/estatus" element={<EstatusScreen/>} />               
-                            <Route path="/roles" element={<RolesScreen/>} />       
-                            <Route path="/tipos" element={<TiposScreen/>} />  
-                            <Route path="/repositorio" element={<AdminRepositorio/>} />       
-                            <Route path="/configurar-rol" element={<ArchivoConf/>} />       
-                            <Route path="/usuarios" element={<UsuariosScreen/>} />       
+                            <Route path={rutaServidor + "/configuraciones"} element={<ConfiruagionesScreen/>} />
+                            <Route path={rutaServidor + "/departamentos"} element={<DepartamentosScreen/>} />
+                            <Route path={rutaServidor + "/estatus"} element={<EstatusScreen/>} />               
+                            <Route path={rutaServidor + "/roles"} element={<RolesScreen/>} />       
+                            <Route path={rutaServidor + "/tipos"} element={<TiposScreen/>} />  
+                            <Route path={rutaServidor + "/repositorio"} element={<AdminRepositorio/>} />       
+                            <Route path={rutaServidor + "/configurar"} element={<ArchivoConf/>} />       
+                            <Route path={rutaServidor + "/usuarios"} element={<UsuariosScreen/>} />       
 
                             
                             

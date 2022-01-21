@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { modalEstatus } from '../../actions/ui';
+import { guardarRol, openCloseModalRol } from '../../actions/roles';
 
+const initialState = {
+    id: 0,
+    rol: "",
+    descripcion: "",
+    id_departamento: 0,
+}
 export const RolesModal = () => {
-    const {modalEstatusOpen} = useSelector(state => state.ui);
+    const {modalRolOpen} = useSelector(state => state.roles);
     const dispatch = useDispatch();
     const customStyles = {
         content: {
@@ -16,20 +22,47 @@ export const RolesModal = () => {
             transform: 'translate(-50%, -50%)',
         },
     };
-    // const [dateStart, setDateStart] = useState(now.toDate())
+    const {depas} = useSelector(state => state.repo.auxiliaresFormArchivos);
+    const [formValues, setFormValues] = useState(initialState);
+    const { id, rol, descripcion, id_departamento} = formValues;
+    const { activeRol } = useSelector(state => state.roles);
 
+    const handleInputChange = ({ target }) => {
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value
+        });
+    }
+    useEffect(() => {
+        if(activeRol != null){
+            setFormValues(activeRol)
+        }
+     }, [activeRol, setFormValues])
+    
     const closeModal = () => {
         
-        console.log('cerrando');
-        dispatch(modalEstatus(false));
+        dispatch(openCloseModalRol(false, {}));
     }
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const obj = {
+            id,
+            rol,
+            descripcion,
+            tipo: "",
+            usuario: 1,
+            id_departamento
+        }
+        dispatch(guardarRol(obj));
+        console.log('guardando...');
+        
+    }
 
     Modal.setAppElement('#root');
 
     return (
         <Modal
-            isOpen={modalEstatusOpen}
+            isOpen={modalRolOpen}
             onRequestClose={closeModal}
             style={customStyles}
             closeTimeoutMS={200}
@@ -38,9 +71,59 @@ export const RolesModal = () => {
             overlayClassName="modal-fondo"
             closeModal
         >
-            <div className="scroll-component">
+             <div className="scroll-component">
                 <div className="scroll-content">
-                    <h1>Holaaaa</h1>
+                    <div className="card">
+                        <div className="card-header">
+                            <h4 className="card-title">Asignaciones</h4>
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="card-body">
+                                <div className="form-group">
+                                    <label >Rol</label>
+                                    <input type="text" 
+                                            className="form-control" 
+                                            id="exampleFormControlInput1" 
+                                            value={rol}
+                                            name="rol"
+                                            onChange={handleInputChange}
+                                             />
+                                </div>
+                                <div className="form-group">
+                                    <label >Descripción</label>
+                                    <input type="text" 
+                                            className="form-control" 
+                                            id="exampleFormControlInput1" 
+                                            value={descripcion}
+                                            name="descripcion"
+                                            onChange={handleInputChange}
+                                             />
+                                </div>
+                                <div className="form-group">
+                                    <label>Departamentos</label>
+                                    <select className="form-control"
+                                             id="exampleFormControlSelect1"
+                                             value={id_departamento}
+                                             name="id_departamento"
+                                             onChange={handleInputChange}>
+                                        <option>Seleccione un departamento</option>
+                                        {
+                                            (depas !== undefined) &&
+                                            depas.map((aux) => (
+                                                <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>
+                                            ))
+
+                                        }
+                                    </select>
+                                </div>                               
+                            </div>
+                            <div className="card-footer text-center">
+                                <button type="submit" className="btn btn-fill btn-info" >Guardar</button>
+                                <button onClick={closeModal} type="button" className="btn btn-fill btn-secundary">Cerrar</button>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
 
@@ -50,52 +133,4 @@ export const RolesModal = () => {
 }
 
 
-{/* <form className="container">
 
-                <div className="form-group">
-                    <label >Fecha y hora inicio</label>
-                    <DateTimePicker
-                            onChange={handleStartDate}
-                            value={dateStart}
-                            className="form-control react-datetime-picker react-datetime-picker__wrapper"
-                        />                
-                </div>
-
-                <div className="form-group">
-                    <label>Fecha y hora fin</label>
-                    <input className="form-control " placeholder="Fecha inicio" />
-                </div>
-
-                <hr />
-                <div className="form-group">
-                    <label>Titulo y notas</label>
-                    <input
-                        type="text"
-                        className="form-control "
-                        placeholder="Título del evento"
-                        name="title"
-                        autoComplete="off"
-                    />
-                    <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
-                </div>
-
-                <div className="form-group">
-                    <textarea
-                        type="text"
-                        className="form-control "
-                        placeholder="Notas"
-                        rows="5"
-                        name="notes"
-                    ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
-                </div>
-
-                <button
-                    type="submit"
-                    className="btn btn-outline-primary btn-block"
-                >
-                    <i className="far fa-save"></i>
-                    <span> Guardar</span>
-                </button>
-
-            </form> */}

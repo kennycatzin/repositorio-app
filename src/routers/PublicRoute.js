@@ -5,9 +5,11 @@ import { Navigate } from 'react-router-dom';
 
 export const PublicRoute = ({children}) => {
     const {uid} = useSelector(state => state.auth)
+    const rutaServidor = '';
+    //const rutaServidor = '/repositorio-af';
     console.log(uid)
     return ( !!uid
-        ? <Navigate to="/" />
+        ? <Navigate to={rutaServidor + "/"} />
         : children 
         
         )

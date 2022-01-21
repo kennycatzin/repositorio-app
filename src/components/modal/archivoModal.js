@@ -1,7 +1,18 @@
 import React from 'react'
+import { useEffect } from 'react';
 import Modal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuxFormularioArchivo, openModalArchivo, openModalFormularioArchivos } from '../../actions/repositorio';
+import { TableConfArchivos } from '../admin/widgets/tables/TableConfArchivos';
+import {ConfiguracionArchivoSub} from './configuracionArchivosSub';
+import { DetalleArchivoModal } from './detalleArchivoModal';
 
 export const ArchivoModal = () => {
+    // const dispatch = useDispatch();
+    const { modalArchivo } = useSelector(state => state.repo);
+    const misArchivos = useSelector(state => state.repo.subcategoriaActiva.archivos);
+
+    const dispatch = useDispatch();
     const customStyles = {
         content: {
             top: '50%',
@@ -12,18 +23,30 @@ export const ArchivoModal = () => {
             transform: 'translate(-50%, -50%)',
         },
     };
+    useEffect(() => {
+        dispatch(getAuxFormularioArchivo());
+    }, [dispatch])
     // const [dateStart, setDateStart] = useState(now.toDate())
 
-    const closeModal = () => {
-        console.log('cerrando')
+
+    const cabeceras = [
+        "",
+        "Documento",
+        "Descripcion",
+    ];
+
+    const handleAgregar = () => {
+        dispatch(openModalFormularioArchivos(true, {}));
     }
 
-
+    const closeModal = () => {
+        dispatch(openModalArchivo(false, {}))
+        console.log('cerrando')
+    }
     Modal.setAppElement('#root');
-
     return (
         <Modal
-            isOpen={false}
+            isOpen={modalArchivo}
             onRequestClose={closeModal}
             style={customStyles}
             closeTimeoutMS={200}
@@ -31,111 +54,35 @@ export const ArchivoModal = () => {
             className="modal"
             overlayClassName="modal-fondo"
         >
-            <div>
-                <div class="card">
-                    <div class="card-header bg-white">
-                        <h4 class="card-title text-dark">Configuracion de rol</h4>
+           
+                    <div className="card">
+                        <div className="card-header">
+                            <div className="card-header d-flex justify-content-between">
+                                <h4 className="card-title d-inline">Listado de archivos configurados</h4>
+                                <button onClick={handleAgregar} type="button" className="btn btn-success btn-circle btn-lg">
+                                    <i className="fa fa-plus"></i>
+                                </button>
+                            </div>                        
+                        </div>
+                        <div className='contenido'>
+                        <div className="scroll-component">
+                <div className="scroll-content">
+                        <div className='container'>
+                            {
+                                (misArchivos !== undefined) ?
+                                    <TableConfArchivos key={1} cabeceras={cabeceras} data={misArchivos} />
+                                    : <h5>Cargando...</h5>
+
+                            }
+                        </div>
+                        </div>
                     </div>
-                    <div class="card-body bg-white">
-                        <form action="#">
-                            <label className='text-dark'>Seleccione una categoria</label>
-                            <div class="form-group">
-                                <select class="form-control text-dark" id="exampleFormControlSelect1">
-                                    <option>A favor</option>
-                                    <option>Descriptivos</option>
-                                    <option>Procedimientos</option>
-
-                                </select>
-                            </div>
-                            <label className='text-dark'>Seleccione una subcategoria</label>
-                            <div class="form-group">
-                                <select class="form-control text-dark" id="exampleFormControlSelect1">
-                                    <option>Documentos del SGC</option>
-                                    <option>Consulta de organigramas</option>
-                                </select>
-                            </div>
-
-                        </form>
-                    </div>
-
                 </div>
+                <br/>
+                <button onClick={closeModal} className='btn btn-secundary btn-block'>Cerrar</button>
             </div>
-            <div className='col-12 row'>
-                <div className='col-6'>
-                    <h3>Lista de documentos</h3>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th className='text-white' scope="col">Nombre</th>
-                                <th scope="col"></th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>C-SGC-04</td>
-                                <td>
-                                    <button type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
-                                        <i className="tim-icons icon-triangle-right-17"></i>
-                                    </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>C-SGC-02</td>
-                                <td>
-                                    <button type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
-                                        <i className="tim-icons icon-triangle-right-17"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>C-SGC-03</td>
-                                <td>
-                                    <button type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
-                                        <i className="tim-icons icon-triangle-right-17"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div className='col-6'>
-                    <h3>Documentos configurados</h3>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th className='text-white' scope="col">Nombre</th>
-                                <th scope="col"></th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>C-SGC-04</td>
-                                <td>
-                                    <button type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Refresh" title="">
-                                        <i className="tim-icons icon-trash-simple"></i>
-                                    </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>C-SGC-03</td>
-                                <td>
-                                    <button type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Refresh" title="">
-                                        <i className="tim-icons icon-trash-simple"></i>
-                                    </button>
-                                </td>
-
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+            <ConfiguracionArchivoSub/>
+            <DetalleArchivoModal/>                
         </Modal>
     )
 }

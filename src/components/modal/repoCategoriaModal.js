@@ -42,7 +42,7 @@ export const RepoCategoriaModal = () => {
     const closeModal = () => {
 
         console.log('cerrando');
-        dispatch(openModalCategoria(false));
+        dispatch(openModalCategoria(false, {}));
     }
 
     const handleGuardar = (e) => {
@@ -81,7 +81,6 @@ export const RepoCategoriaModal = () => {
                             <h4 className="card-title">Configuracion de Categoría</h4>
                         </div>
                         <form className="form-horizontal">
-
                             <div className="card-body">
                                 <div className="row">
                                     <label className="col-md-3 col-form-label">Titulo</label>

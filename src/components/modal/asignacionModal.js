@@ -5,7 +5,7 @@ import { getAuxRoles, registroEstatus } from '../../actions/catalogos';
 import { modalEstatus } from '../../actions/ui';
 
 const initialState = {
-    id: null,
+    id: 0,
     nombre: '',
     usuario: '',
     id_rol: 0,
@@ -28,11 +28,11 @@ export const AsignacionModal = () => {
     // const [dateStart, setDateStart] = useState(now.toDate())
     useEffect(() => {
         dispatch(getAuxRoles())
-        if(itemActive != null){
+        if(itemActive !== null){
             setformValues(itemActive)
         }
     }, [itemActive, dispatch]);
-    const { id, id_rol = 0, name = '', usuario = '', tipo = '' } = formValues;
+    const { id = 0, id_rol = 0, name = '', usuario = '', tipo = '' } = formValues;
     const closeModal = () => {
         dispatch(modalEstatus(false));
         setformValues(initialState);
@@ -43,6 +43,7 @@ export const AsignacionModal = () => {
             [target.name]: target.value
         });
     }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const objSave = {

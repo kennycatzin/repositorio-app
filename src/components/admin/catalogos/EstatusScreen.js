@@ -36,7 +36,7 @@ export const EstatusScreen = () => {
             </div>
             <div className="col-md-12">
                 <div className="card">
-                <div className="card-header d-flex justify-content-between">
+                    <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title d-inline">Listado de estatus</h4>
 
                         <button onClick={handleNuevo} type="button" className="btn btn-success btn-circle btn-lg">

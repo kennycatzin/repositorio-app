@@ -1,24 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { getAuxFormularioArchivo } from '../../../actions/repositorio';
+import { getRolesAdmin, openCloseModalRol } from '../../../actions/roles';
 import { TableRoles } from '../widgets/tables/TableRoles';
 
 export const RolesScreen = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getRolesAdmin());
+        dispatch(getAuxFormularioArchivo())
+    }, [dispatch]);
+
     const cabeceras = [
-        "Departamento",
         "Rol",
+        "Departamento",
     ];
-    const data = [
-        {
-            "id": 1,
-            "departamento": "GIA",
-            "rol": "Hola esta es mi descripcion",
-        },
-        {
-            "id": 2,
-            "departamento": "GIA",
-            "rol": "Hola esta es mi descripcion",
-        },
-    ];
+    const handleAgregar = () => {
+        dispatch(openCloseModalRol(true, {}))
+    }
+    const {roles} = useSelector(state => state.roles)
     return (
         <>
             <div className="row">
@@ -35,13 +36,17 @@ export const RolesScreen = () => {
                     <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title d-inline">Listado de roles</h4>
 
-                        <button type="button" className="btn btn-success btn-circle btn-lg">
+                        <button onClick={handleAgregar} type="button" className="btn btn-success btn-circle btn-lg">
                             <i className="fa fa-plus"></i>
                         </button>
                     </div>
                     <div className="card-body">
                         <div className="table-responsive">
-                            <TableRoles cabeceras={cabeceras} data={data}/>
+                            {
+                                (roles !== undefined)?
+                                    <TableRoles cabeceras={cabeceras} data={roles}/>
+                                : <h5>Espere....</h5>
+                            }
                         </div>
                     </div>
                 </div>

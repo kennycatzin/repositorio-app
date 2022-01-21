@@ -2,8 +2,13 @@ import { types } from "../types/types";
 
 const initialState = {
     checking: true,
+    activeCategoria: {},
     data: [],
-    
+    modalArchivo: false,
+    subcategoriaActiva: {},
+    activeArchivo: {},
+    auxiliaresFormArchivos: {},
+    modalSubcategoria: false 
 }
 export const repositorioReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -41,6 +46,7 @@ export const repositorioReducer = (state = initialState, action) => {
             case types.repoGetConfRepositorio:
                 return {
                 ...state,
+                adminConf: {},
                 adminConf: action.payload,
                 checking: true
             }  
@@ -52,7 +58,9 @@ export const repositorioReducer = (state = initialState, action) => {
             case types.repoModalSubcategoria:
                 return {
                     ...state,
-                    modalSubcategoria: action.payload.modalSubcategoria
+                    subcategoriaActiva: action.payload.objeto,
+                    modalSubcategoria: action.payload.modalSubcategoria,
+
                 }
             case types.repoModalCategoria:
                 console.log('entro')
@@ -60,8 +68,47 @@ export const repositorioReducer = (state = initialState, action) => {
                     ...state,
                     activeCategoria: action.payload.objeto,
                     modalCategoria: action.payload.modalCategoria
+                }  
+            case types.repoModalArchivo:
+                console.log('entro')
+                return {
+                    ...state,
+                    subcategoriaActiva: action.payload.objeto,
+                    modalArchivo: action.payload.modalArchivo
+                }    
+            case types.repoGetTiposConfiguracion:
+                return {
+                    ...state,
+                    configuracionTipos: action.payload
+                } 
+            case types.repoModalFormArchivos:
+                return {
+                    ...state,
+                    activeArchivo: action.payload.archivo,
+                    modalFormularioArchivo: action.payload.modalFormularioArchivo
+                }   
+            case types.repoModalDetalleArchivo:
+                return {
+                    ...state,
+                    activeArchivo: action.payload.objeto,
+                    modalDetalleArchivo: action.payload.modalDetalleArchivo
                 }
-            
+            case types.repoGetAuxFormularioArchivo:
+                return {
+                    ...state,
+                    auxiliaresFormArchivos: action.payload,
+                    checking: false
+                }
+            case types.repoOpenModalChecklist:
+                return {
+                    ...state,
+                    activeArchivo: action.payload.dataArchivo,
+                    modalChecklistArchivo: action.payload.modalChecklist,
+                }    
+                
+                
+
+                
         default:
             return state;
     }
