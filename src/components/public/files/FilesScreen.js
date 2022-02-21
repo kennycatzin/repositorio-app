@@ -6,7 +6,7 @@ import { FilesEntries } from './FilesEntries'
 
 export const FilesScreen = () => {
     const dispatch = useDispatch();
-    const {titulo} = useSelector(state => state.repo.active)
+    const titulo = useSelector(state => state.repo.active)
     useEffect(() => {
         dispatch(getFiles())
     }, [dispatch])
@@ -18,7 +18,7 @@ export const FilesScreen = () => {
                         <Link to="/category">Repositorio</Link>
                     </li>
                     <li className="breadcrumb-item">
-                        <Link to="/subcategorie">{titulo}</Link>
+                        <Link to="/subcategorie">{(!!titulo)? titulo.titulo : "Regresar..."}</Link>
                     </li>
                     <li className="breadcrumb-item active">Archivos</li>
                 </ol>

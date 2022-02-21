@@ -39,7 +39,7 @@ export const EstatusScreen = () => {
                     <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title d-inline">Listado de estatus</h4>
 
-                        <button onClick={handleNuevo} type="button" className="btn btn-success btn-circle btn-lg">
+                        <button onClick={handleNuevo} type="button" className="btn btn-success btn-circle btn-lg" title='Agregar nuevo estatus'>
                             <i className="fa fa-plus"></i>
                         </button>
                     </div>

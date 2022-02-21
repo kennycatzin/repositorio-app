@@ -43,7 +43,7 @@ export const ConfiruagionesScreen = () => {
     <div className="card">
       <div className="card-header">
         <h5 className="title">Configuraciones</h5>
-        <p className="category">Elija una opcion a configurar</p>
+        <p className="">Elija una opción a configurar</p>
       </div>
       <div className="card-body all-icons">
         <div className="row">

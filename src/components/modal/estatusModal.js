@@ -15,7 +15,8 @@ export const EstatusModal = () => {
     const dispatch = useDispatch();
     const [formValues, setFormValues] = useState(initialState);
     const { id, estatus, descripcion } = formValues;
-    
+    const {uid} = useSelector(state => state.auth)
+
     const handleInputChange = ({ target }) => {
         setFormValues({
             ...formValues,
@@ -35,7 +36,7 @@ export const EstatusModal = () => {
             id: id,
             estatus,
             descripcion,
-            usuario: 1,
+            usuario: uid,
             tipo: 1,
             activo: 1
         }
@@ -83,7 +84,6 @@ export const EstatusModal = () => {
                             <h4 className="card-title">Estatus</h4>
                         </div>
                         <form onSubmit={handleSubmit}>
-
                             <div className="card-body">
                                 <label>Estatus</label>
                                 <div className="form-group">

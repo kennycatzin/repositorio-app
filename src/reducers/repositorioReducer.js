@@ -8,11 +8,13 @@ const initialState = {
     subcategoriaActiva: {},
     activeArchivo: {},
     auxiliaresFormArchivos: {},
-    modalSubcategoria: false 
+    modalSubcategoria: false,
+    repoAdminDepa: [],
+    folder_active: {}
 }
 export const repositorioReducer = (state = initialState, action) => {
     switch (action.type) {
-        case types.repoGetFolders:
+        case types.repoGetDataUser:
             return {
                 ...state,
                 data: [...action.payload],
@@ -46,10 +48,35 @@ export const repositorioReducer = (state = initialState, action) => {
             case types.repoGetConfRepositorio:
                 return {
                 ...state,
-                adminConf: {},
                 adminConf: action.payload,
                 checking: true
-            }  
+            } 
+            case types.repoAddDataArchivo:
+               
+                let objArchivo = action.payload;
+                let miObjeto = [ objArchivo,  ...state.subcategoriaActiva.archivos]
+                let subCat = state.subcategoriaActiva;
+                let objFinal = {
+                    ...subCat,
+                    archivos: miObjeto
+                }
+                return {
+                ...state,    
+                subcategoriaActiva: objFinal, 
+                checking: true
+            } 
+            case types.repoDeleteDataArchivo:
+                let idDelArchivo = action.payload;           
+                let newArrayDel = state.subcategoriaActiva.archivos.filter((item) => item.id != idDelArchivo);
+                let subCatDel = state.subcategoriaActiva;
+                let objFinalDel = {
+                    ...subCatDel,
+                    archivos: newArrayDel
+                }
+                return {
+                ...state,
+                subcategoriaActiva: objFinalDel,   
+            }             
             case types.repoActivarCategoria:
                 return {
                 ...state,
@@ -105,7 +132,12 @@ export const repositorioReducer = (state = initialState, action) => {
                     activeArchivo: action.payload.dataArchivo,
                     modalChecklistArchivo: action.payload.modalChecklist,
                 }    
-                
+            case types.repoGetRolesByDepartamento:     
+                console.log('entro a configuracion');       
+                return {
+                    ...state,
+                    repoAdminDepa: action.payload.rolDepa
+                }
                 
 
                 

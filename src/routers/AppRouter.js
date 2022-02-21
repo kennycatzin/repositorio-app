@@ -26,7 +26,7 @@ export const AppRouter = () => {
         return(<h5>Espere....</h5>)
     }
     return (
-        <BrowserRouter >
+        <BrowserRouter>
             <Routes>
             <Route path={rutaServidor + "/login"} element={
                     <PublicRoute>

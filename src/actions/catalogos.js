@@ -4,6 +4,14 @@ import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
 export const registroEstatus = (objeto = {}, tipo= '', endpoint = '', segEndpoint = '') => {
     return async( dispatch ) => {
+        Swal.fire({
+            title: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
         console.log(objeto)
         dispatch( startLoading() );
         let url = '';
@@ -34,7 +42,7 @@ export const registroEstatus = (objeto = {}, tipo= '', endpoint = '', segEndpoin
             dispatch( finishLoading() );
             Swal.fire({
                 title: 'Datos incorrectos',
-                text: 'Ha ocurrido un problema',
+                text: body?.mensaje,
                 confirmButtonColor: "#1d8cf8", 
                 icon: 'error',
             })

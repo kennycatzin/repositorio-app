@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { guardarTablero, openCloseModalTablero } from '../../actions/tablero';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 
 const initEvent = {
@@ -29,8 +30,10 @@ export const TableroModal = () => {
     };
     // const [dateStart, setDateStart] = useState(now.toDate())
     const [formValues, setFormValues] = useState(initEvent);
-    const { id,  titulo, descripcion, fecha_inicio, fecha_final, imagen } = formValues;
+    const fecha = Date.now();
+    const { id,  titulo = '', descripcion = '', fecha_inicio = moment(fecha).format('YYYY-MM-DD'), fecha_final = moment(fecha).format('YYYY-MM-DD'), imagen } = formValues;
     const [miImagen, setmiImagen] = useState();
+    const {uid} = useSelector(state => state.auth)
 
     useEffect(() => {
         if(activeTablero !== undefined && activeTablero !== {}){
@@ -55,14 +58,39 @@ export const TableroModal = () => {
     }
     const handleImagenChange = (e) => {
         console.log(e.target.files[0]);
-        setmiImagen(e.target.files[0]);
+        if(e.target.files[0].type == "image/png" || e.target.files[0].type == "image/jpeg"){
+            setmiImagen(e.target.files[0]);
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Debe elegir un archivo de tipo JPEG o PNG',
+                footer: '<span>No se cargará el archivo</span>'
+              })
+        }
         // setSelectedFile(e.target.files[0]);
     }
     const handleInputChange = ({ target }) => {
-        setFormValues({
-            ...formValues,
-            [target.name]: target.value
-        });
+        if(target.name == "fecha_inicio" || target.name == "fecha_final"){
+            if(target.value >= moment(fecha).format('YYYY-MM-DD')){
+                setFormValues({
+                    ...formValues,
+                    [target.name]: target.value
+                });
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Debe elegir una fecha correcta'
+                  })
+            }
+        }else{
+            setFormValues({
+                ...formValues,
+                [target.name]: target.value
+            });
+        }
+        
     }
 
     const handleGuardar = (e) => {
@@ -77,10 +105,10 @@ export const TableroModal = () => {
         formData.append("fecha_inicio", fecha_inicio);
         formData.append("fecha_final", fecha_final);
         formData.append("archivo", miImagen);
-        formData.append("usuario", 1);
+        formData.append("usuario", uid);
         formData.append("id", id);
-
-        dispatch(guardarTablero(formData));
+        
+       dispatch(guardarTablero(formData));
     }
 
     Modal.setAppElement('#root');
@@ -100,7 +128,7 @@ export const TableroModal = () => {
                 <div className="scroll-content">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Configuracion de subcategoria</h4>
+                            <h4 className="card-title">Configuracion de anuncio</h4>
                         </div>
                         <form className="form-horizontal" onSubmit={handleGuardar}>
                             <div className="card-body">
@@ -120,7 +148,8 @@ export const TableroModal = () => {
                                 <div className="row">
                                     <label className="col-md-3 col-form-label">Descripcion</label>
                                     <div className="col-md-9">
-                                        <div className="form-group">
+                                        <div 
+                                        className="form-group">
                                             <input type="text"
                                                 className="form-control"
                                                 name="descripcion"
@@ -176,11 +205,8 @@ export const TableroModal = () => {
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
-
-
         </Modal>
     )
 }

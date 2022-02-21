@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { guardarDepartamento, openCloseModalDepartamentos } from '../../actions/departamentos';
 import { modalEstatus } from '../../actions/ui';
+import Swal from 'sweetalert2'
+import validator from 'validator';
 
+const initialState = {
+    id: 0,
+    departamento: '',
+    descripcion: '',
+    nombre_corto: '',
+    correo: '',
+    usuario: 1
+
+}
 export const DepartamentosModal = () => {
-    const {modalEstatusOpen} = useSelector(state => state.ui);
+    const { depaModal, depaActive } = useSelector(state => state.departamentos);
     const dispatch = useDispatch();
+    const [formValues, setFormValues] = useState(initialState);
+    const { id = 0, departamento = '', descripcion = '', nombre_corto = '', correo = '', usuario= 1 } = formValues;
+    const {uid} = useSelector(state => state.auth)
+
     const customStyles = {
         content: {
             top: '50%',
@@ -17,19 +33,65 @@ export const DepartamentosModal = () => {
         },
     };
     // const [dateStart, setDateStart] = useState(now.toDate())
-
+    useEffect(() => {
+        (!!depaActive)&&
+            setFormValues(depaActive)
+     }, [depaActive, setFormValues]);
     const closeModal = () => {
         
         console.log('cerrando');
-        dispatch(modalEstatus(false));
-    }
+        dispatch(openCloseModalDepartamentos(false));        
 
+    }
+    const handleInputChange = ({ target }) => {
+        setFormValues({
+            ...formValues,
+            [target.name]: target.value
+        });
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault();      
+        let pasa = email(correo);
+        if(pasa){        
+            const objSave = {
+                id,
+                departamento,
+                descripcion,
+                nombre_corto,
+                correo,
+                usuario: uid
+            }
+            dispatch(guardarDepartamento(objSave));
+            console.log(objSave);
+            // dispatch();
+            closeModal();
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Correo no válido',
+                footer: '<span>Debe contener @ y dominio (correo@dominio.com)</span>'
+              })
+        }
+    }
+    const validaciones = (valor) => {
+        if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)){
+            return true;
+        }
+        return false;
+    }
+    const email = (value) => {
+        if (!validator.isEmail(value)) {
+          return false;
+        }
+        return true;
+      };
 
     Modal.setAppElement('#root');
 
     return (
         <Modal
-            isOpen={modalEstatusOpen}
+            isOpen={depaModal}
             onRequestClose={closeModal}
             style={customStyles}
             closeTimeoutMS={200}
@@ -38,9 +100,71 @@ export const DepartamentosModal = () => {
             overlayClassName="modal-fondo"
             closeModal
         >
-            <div className="scroll-component">
+                        <div className="scroll-component">
                 <div className="scroll-content">
-                    <h1>Holaaaa</h1>
+                    <div className="card estatus">
+                        <div className="card-header">
+                            <h4 className="card-title">Departamentos</h4>
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="card-body">
+                                <div className="row">
+                                    <label className="col-md-2 col-form-label">Departamento</label>
+                                    <div className="col-md-5">
+                                        <div className="form-group">
+                                            <input type="text"
+                                                className="form-control"
+                                                value={departamento}
+                                                name="departamento"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <label className="col-md-2 col-form-label">Nombre Corto</label>
+                                    <div className="col-md-3">
+                                        <div className="form-group">
+                                            <input type="text"
+                                                className="form-control"
+                                                value={nombre_corto}
+                                                name="nombre_corto"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <label className="col-md-2 col-form-label">Correo</label>
+                                    <div className="col-md-10">
+                                        <div className="form-group">
+                                            <input type="text"
+                                                className="form-control"
+                                                value={correo}
+                                                name="correo"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <label className="col-md-2 col-form-label">Descripcion</label>
+                                    <div className="col-md-10">
+                                        <div className="form-group">
+                                            <input type="text"
+                                                className="form-control"
+                                                value={descripcion}
+                                                name="descripcion"
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="card-footer text-center">
+                                <button type="submit" className="btn btn-fill btn-info">Guardar</button>
+                                <button onClick={closeModal} type="button" className="btn btn-fill btn-secundary" >Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -48,54 +172,3 @@ export const DepartamentosModal = () => {
         </Modal>
     )
 }
-
-
-{/* <form className="container">
-
-                <div className="form-group">
-                    <label >Fecha y hora inicio</label>
-                    <DateTimePicker
-                            onChange={handleStartDate}
-                            value={dateStart}
-                            className="form-control react-datetime-picker react-datetime-picker__wrapper"
-                        />                
-                </div>
-
-                <div className="form-group">
-                    <label>Fecha y hora fin</label>
-                    <input className="form-control " placeholder="Fecha inicio" />
-                </div>
-
-                <hr />
-                <div className="form-group">
-                    <label>Titulo y notas</label>
-                    <input
-                        type="text"
-                        className="form-control "
-                        placeholder="Título del evento"
-                        name="title"
-                        autoComplete="off"
-                    />
-                    <small id="emailHelp" className="form-text text-muted">Una descripción corta</small>
-                </div>
-
-                <div className="form-group">
-                    <textarea
-                        type="text"
-                        className="form-control "
-                        placeholder="Notas"
-                        rows="5"
-                        name="notes"
-                    ></textarea>
-                    <small id="emailHelp" className="form-text text-muted">Información adicional</small>
-                </div>
-
-                <button
-                    type="submit"
-                    className="btn btn-outline-primary btn-block"
-                >
-                    <i className="far fa-save"></i>
-                    <span> Guardar</span>
-                </button>
-
-            </form> */}

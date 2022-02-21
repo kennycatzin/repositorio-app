@@ -15,6 +15,7 @@ export const RepositorioModal = () => {
     const { subcategoriaActiva } = useSelector(state => state.repo);
     const id_categoria = useSelector(state => state.repo.activeCategoria.id);
     const { id, titulo = '', descripcion = ''} = formValues;
+    const {uid} = useSelector(state => state.auth)
 
     //
     const customStyles = {
@@ -30,6 +31,7 @@ export const RepositorioModal = () => {
     // const [dateStart, setDateStart] = useState(now.toDate())
     useEffect(() => {
         if (subcategoriaActiva != null) {
+            console.log(subcategoriaActiva);
             setformValues(subcategoriaActiva)
         }
 
@@ -54,7 +56,7 @@ export const RepositorioModal = () => {
             descripcion,
             orden: 3,
             id_categoria,
-            usuario: 1,
+            usuario: uid,
         }
         dispatch(guardarSubcategoria(objeto));
         setformValues(initialState);
@@ -76,6 +78,7 @@ export const RepositorioModal = () => {
                         <div className="card">
                             <div className="card-header">
                                 <h4 className="card-title">Configuracion de subcategoria</h4>
+
                             </div>
                             <form className="form-horizontal" onSubmit={handleGuardar}>
                                 <div className="card-body">

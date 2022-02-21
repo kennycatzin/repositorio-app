@@ -17,6 +17,25 @@
 */
 /*     brand Colors              */
 /* navbar color */
+.size{
+  width: 150px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+.cont-roles{
+  height: 250px !important;
+}
+.scroll-component {
+  width: 100% !important;
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
 :root {
   --blue: #5e72e4;
   --indigo: #5603ad;
@@ -20413,7 +20432,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card-user .card-body {
-  min-height: 240px;
+  min-height: 200px;
 }
 
 .card-user hr {
@@ -20430,11 +20449,11 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .card-tasks {
-  height: 473px;
+  height: 300px;
 }
 
 .card-tasks .table-full-width {
-  max-height: 410px;
+  max-height: 250px;
   position: relative;
 }
 

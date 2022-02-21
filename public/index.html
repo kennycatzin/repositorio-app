@@ -13,9 +13,6 @@
     -->
     <link rel="apple-touch-icon" sizes="76x76" href="https://afavor.mx/wp-content/uploads/2021/09/a-favor-log.png">
     <link rel="icon" type="image/png" href="https://afavor.mx/wp-content/uploads/2021/09/a-favor-log.png">
-    <title>
-      Repositorio A Favor
-    </title>
     <!--     Fonts and icons     -->
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- Nucleo Icons -->
@@ -29,6 +26,21 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
+    <title>
+      Repositorio A Favor
+    </title>
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

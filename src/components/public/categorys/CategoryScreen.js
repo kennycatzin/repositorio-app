@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { getFolders } from '../../../actions/repositorio';
+import { getRepositorioUsuario } from '../../../actions/repositorio';
 import { CategoryEntries } from './CategoryEntries';
 
 export const CategoryScreen = () => {
     const dispatch = useDispatch();
-    useEffect(() => {
-        
-        dispatch( getFolders(1) );
-
+    useEffect(() => {        
+        dispatch( getRepositorioUsuario() );
     }, [ dispatch ])
 
     return (

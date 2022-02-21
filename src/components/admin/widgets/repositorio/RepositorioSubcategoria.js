@@ -10,13 +10,13 @@ export const RepositorioSubcategoria = ({data}) => {
     }
     const handleEliminar = (obj) => {
         Swal.fire({
-            title: 'Realmente desea elimninar este registro?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este registro?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
         }).then((result) => {
             if (result.isConfirmed) {
                // dispatch(bajaCategoria(id, 1))

@@ -157,6 +157,7 @@ select option {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-bottom: 13px !important;
 }
 
 /* Hide the browser's default checkbox */

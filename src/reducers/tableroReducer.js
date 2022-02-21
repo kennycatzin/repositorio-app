@@ -3,6 +3,7 @@ import { types } from "../types/types";
 const initialState = {
     checking: true
 }
+
 export const tableroReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.tableStartLoading:
@@ -26,6 +27,12 @@ export const tableroReducer = (state = initialState, action) => {
                 ...state,
                 modalTableroOpen: action.payload.modal,
                 activeTablero: action.payload.tablero
+            }    
+        case types.tableGetFilesTablero:
+            return {
+                ...state,
+                archivos: action.payload.tableFiles,
+                nombreEstatus: action.payload.nombreEstatus
             }    
         default:
             return state;

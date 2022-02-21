@@ -23,13 +23,13 @@ export const TableConfArchivos = ({cabeceras, data}) => {
         console.log(item)
         const {id} = item;
         Swal.fire({
-            title: 'Realmente desea elimninar este registro?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este registro?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
           }).then((result) => {
             if (result.isConfirmed) {
                 // dispatch(eliminarObjeto(id, 0 , 1, 'estatus', 'update-baja', 'get-estatus'))
@@ -54,7 +54,7 @@ export const TableConfArchivos = ({cabeceras, data}) => {
             <tbody>
                 {
                     data.map((item, index) => {
-                       return <tr key={item.id}>
+                       return <tr key={index + 1}>
                             <td >{index + 1}</td>
                             <td>
                                 <i onClick={() => handleOpenModalArchivo(item)} className="tim-icons icon-image-02 pointer"></i>
@@ -63,13 +63,13 @@ export const TableConfArchivos = ({cabeceras, data}) => {
                             <td >{item.descripcion}</td>
                             <td className="d-flex justify-content-around">
                                 
-                                <button   onClick={() => handleConfigurar(item)}  type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                <button   onClick={() => handleConfigurar(item)}  type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Asignar archivo a roles">
                                     <i className="tim-icons icon-check-2"></i>
                                 </button>
-                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="Editar archivo">
                                     <i className="tim-icons icon-pencil"></i>
                                 </button>
-                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
+                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar archivo">
                                     <i className="tim-icons icon-trash-simple"></i>
                                 </button>
                             </td>

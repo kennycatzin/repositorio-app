@@ -14,13 +14,13 @@ export const TableEstatus = ({cabeceras, data}) => {
         console.log(estatus)
         const {id} = estatus;
         Swal.fire({
-            title: 'Realmente desea elimninar este registro?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este registro?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
           }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(eliminarObjeto(id, 0 , 1, 'estatus', 'update-baja', 'get-estatus'))
@@ -48,10 +48,10 @@ export const TableEstatus = ({cabeceras, data}) => {
                             <td >{item.estatus}</td>
                             <td >{item.descripcion}</td>
                             <td className="d-flex justify-content-around">
-                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Editar estatus">
                                     <i className="tim-icons icon-pencil"></i>
                                 </button>
-                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
+                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar estatus">
                                     <i className="tim-icons icon-trash-simple"></i>
                                 </button>
                             </td>

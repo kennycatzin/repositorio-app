@@ -11,6 +11,8 @@ export const ArchivoModal = () => {
     // const dispatch = useDispatch();
     const { modalArchivo } = useSelector(state => state.repo);
     const misArchivos = useSelector(state => state.repo.subcategoriaActiva.archivos);
+    const {titulo} = useSelector(state => state.repo.subcategoriaActiva);
+    const objCategoria = useSelector(state => state.repo.activeCategoria);
 
     const dispatch = useDispatch();
     const customStyles = {
@@ -58,19 +60,27 @@ export const ArchivoModal = () => {
                     <div className="card">
                         <div className="card-header">
                             <div className="card-header d-flex justify-content-between">
+    
                                 <h4 className="card-title d-inline">Listado de archivos configurados</h4>
-                                <button onClick={handleAgregar} type="button" className="btn btn-success btn-circle btn-lg">
+                                
+                                <button onClick={handleAgregar} type="button" className="btn btn-success btn-circle btn-lg" title='Agregar nuevos archivos'>
                                     <i className="fa fa-plus"></i>
                                 </button>
+                                
                             </div>                        
                         </div>
+                        <div className='container text-center'>
+                            <h4 className="card-subtitle text-primary">{objCategoria.titulo} / {titulo} </h4>
+                        </div>
+                        <br/>
+
                         <div className='contenido'>
                         <div className="scroll-component">
                 <div className="scroll-content">
                         <div className='container'>
                             {
                                 (misArchivos !== undefined) ?
-                                    <TableConfArchivos key={1} cabeceras={cabeceras} data={misArchivos} />
+                                    <TableConfArchivos cabeceras={cabeceras} data={misArchivos} />
                                     : <h5>Cargando...</h5>
 
                             }
@@ -86,4 +96,3 @@ export const ArchivoModal = () => {
         </Modal>
     )
 }
-

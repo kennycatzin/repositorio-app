@@ -8,7 +8,10 @@ export const DetalleArchivoModal = () => {
     // const dispatch = useDispatch();
     const { modalDetalleArchivo } = useSelector(state => state.repo);
     const {detalle} = useSelector(state => state.repo.activeArchivo);
+    const {titulo} = useSelector(state => state.repo.subcategoriaActiva);
+    const {nombre, descripcion} = useSelector(state => state.repo.activeArchivo);
 
+    const objCategoria = useSelector(state => state.repo.activeCategoria);
     const dispatch = useDispatch();
     const customStyles = {
         content: {
@@ -50,11 +53,13 @@ export const DetalleArchivoModal = () => {
                     <div className="card">
                         <div className="card-header">
                             <div className="card-header d-flex justify-content-between">
-                                <h4 className="card-title d-inline">Archivos reemplazados</h4>
-                               
+                                <h4 className="card-title ">Archivos reemplazados</h4>
+
                             </div>                        
                         </div>
                         <div className='container'>
+                            <h5 className="text-primary text-center">{objCategoria.titulo} / {titulo} / {nombre} - {descripcion}</h5>
+
                             {
                                 (detalle !== undefined) ?
                                     <TableDetalleArchivo cabeceras={cabeceras} data={detalle} />

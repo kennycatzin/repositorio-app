@@ -4,6 +4,14 @@ import { finishLoading, startLoading } from './ui';
 import Swal from 'sweetalert2'
 export const startLoginEmailPAssword = (usuario, password) => {
     return async( dispatch ) => {
+        Swal.fire({
+            title: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
         dispatch( startLoading() );
         const resp = await fetchSinToken( 'auth/login', {usuario, password}, 'POST' );
         const body = await resp.json();
@@ -39,6 +47,14 @@ export const startLoginEmailPAssword = (usuario, password) => {
 }
 export const register = (usuario, email, password, name) => {
     return async( dispatch ) => {
+        Swal.fire({
+            title: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
         dispatch( startLoading() );
         const resp = await fetchSinToken( 'auth/register', {email, password, name, password_confirmation: password, usuario}, 'POST' );
         const body = await resp.json();
@@ -73,7 +89,7 @@ export const startChecking = () => {
             const resp = await fetchSinToken( 'auth/renovar/'+ miID);
             const body = await resp.json();
             if( body.ok ) {
-                localStorage.setItem('token', body.token );
+               // localStorage.setItem('token', body.token );
                 localStorage.setItem('id', body.usuario.id );
                 localStorage.setItem('token-init-date', new Date().getTime() );
                 dispatch( login({

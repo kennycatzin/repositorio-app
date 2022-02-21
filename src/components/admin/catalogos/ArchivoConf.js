@@ -1,7 +1,7 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
-import { openCloseConfModalRolArchivo } from '../../../actions/roles';
+import { getAdminConfiguracion, getCategoriasRoles, openCloseConfModalRolArchivo } from '../../../actions/roles';
 import { ArchivoModal } from '../../modal/archivoModal';
 import { ConfRolesArchivosModal } from '../../modal/confRolesArchivosModal';
 import { ConfRolCategoria } from '../widgets/ConfRolCategoria';
@@ -9,71 +9,23 @@ import { ConfRolCategoria } from '../widgets/ConfRolCategoria';
 export const ArchivoConf = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { activeRol } = useSelector(state => state.roles);
+  const { rolAdminListado } = useSelector(state => state.roles);
+
   const handdleRegresar = () => {
     console.log("regresando");
     navigate(-1);
   }
-  const data = [
-    {
-      id: 1,
-      clave: "Documentosdeconsulta",
-      titulo: "Documentos de consulta",
-      subcategorias: [
-        {
-          id: 1,
-          titulo: "Leyes y Normas",
-          archivos: [
-            {
-              id: 1,
-              titulo: "P-GGN-01"
-            },
-            {
-              id: 2,
-              titulo: "P-GGN-06"
-            },
-            {
-              id: 3,
-              titulo: "P-GGN-07"
-            }
-          ]
-        },
+  useEffect(() => {
+   dispatch(getCategoriasRoles());
+   (!!activeRol)&&
+    dispatch(getAdminConfiguracion(activeRol.id))   
+  }, [dispatch]);
+  
 
-      ]
-    },
-    {
-      id: 2,
-      clave: "AFavor",
-      titulo: "A Favor",
-      subcategorias: [
-        {
-          id: 1,
-          titulo: "Documentos del SGC",
-          archivos: [
-            {
-              id: 1,
-              titulo: "C-SGC-04"
-            },
-            {
-              id: 2,
-              titulo: "C-SGC-02"
-            },
-            {
-              id: 3,
-              titulo: "C-SGC-03"
-            },
-            {
-              id: 4,
-              titulo: "C-SGC-05"
-            }
-          ]
-        },
-
-      ]
-    },
-  ];
   const handleConfigurar = () => {
     dispatch(openCloseConfModalRolArchivo(true))
-}
+  }
   return (
     <>
       <div className="row">
@@ -88,7 +40,7 @@ export const ArchivoConf = () => {
       <div className="row">
         <div className="col-sm-6 text-left">
           <h5 className="card-category">Configuracion</h5>
-          <h2 className="card-title">Programador</h2>
+          <h2 className="card-title">{(!!activeRol)&& activeRol.rol}</h2>
         </div>
         <div className="col-sm-6">
           <div className="btn-group btn-group-toggle float-right" data-toggle="buttons">
@@ -105,7 +57,7 @@ export const ArchivoConf = () => {
         <div className="card">
           <div className="card-header d-flex justify-content-between">
             <h4 className="card-title d-inline">Listado de categorias</h4>
-            <button onClick={handleConfigurar} id="twitter" className="btn btn-round btn-success">
+            <button onClick={handleConfigurar} id="twitter" className="btn btn-round btn-success" title='Abrir ventana para configurar rol'>
               <i className="fa fa-cog"></i> · Configurar
             </button>
           </div>
@@ -113,20 +65,19 @@ export const ArchivoConf = () => {
             <div className="table-responsive">
               <div id="accordion">
                 {
-                  data.map(item => (
-                    <ConfRolCategoria key={item.id} data={item} />
-                  ))
+                  (rolAdminListado != undefined)?
+                    rolAdminListado.map(item => (
+                      <ConfRolCategoria key={item.id} data={item} />
+                    )):
+                    <h5>Cargando</h5>
                 }
-
               </div>
             </div>
           </div>
         </div>
       </div>
-      <ArchivoModal/>
-                <ConfRolesArchivosModal/>
-
-
+      <ArchivoModal />
+      <ConfRolesArchivosModal />
     </>
   )
 }

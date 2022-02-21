@@ -33,6 +33,8 @@ export const AsignacionModal = () => {
         }
     }, [itemActive, dispatch]);
     const { id = 0, id_rol = 0, name = '', usuario = '', tipo = '' } = formValues;
+    const {uid} = useSelector(state => state.auth)
+
     const closeModal = () => {
         dispatch(modalEstatus(false));
         setformValues(initialState);
@@ -50,7 +52,7 @@ export const AsignacionModal = () => {
             id: null,
             id_usuario: id,
             id_rol,
-            usuario: 1,
+            usuario: uid,
             tipo,            
         }
         dispatch(registroEstatus(objSave, 'user', 'asignar-rol-usuario', 'get-usuarios-noasignados'));
@@ -128,7 +130,7 @@ export const AsignacionModal = () => {
                                         <option>Seleccione un tipo</option>
                                         <option value="ADMIN">ADMINISTRADOR</option>
                                         <option value="USUARIO">USUARIO</option>
-                                        <option value="SUPERVISOR">SUPERVISOR</option>
+                                        <option value="RH">RH</option>
                                     </select>
                                 </div>
                             </div>
@@ -144,4 +146,3 @@ export const AsignacionModal = () => {
         </Modal>
     )
 }
-

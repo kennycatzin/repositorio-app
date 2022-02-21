@@ -14,13 +14,13 @@ export const TableTablero = ({cabeceras, data}) => {
 
     const handleEliminar = (item) => {
         Swal.fire({
-            title: 'Realmente desea elimninar este registro?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este registro?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
           }).then((result) => {
             if (result.isConfirmed) {
                 const obj = {
@@ -61,10 +61,10 @@ export const TableTablero = ({cabeceras, data}) => {
                             <td className='text-center'>{moment(item.fecha_final).format('YYYY-MM-DD')}</td>
                             <td className='text-center'>{item.dias}</td>
                             <td className="d-flex justify-content-around">
-                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Editar anuncio">
                                     <i className="tim-icons icon-pencil"></i>
                                 </button>
-                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
+                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar anuncio">
                                     <i className="tim-icons icon-trash-simple"></i>
                                 </button>
                             </td>

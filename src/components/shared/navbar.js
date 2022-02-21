@@ -52,7 +52,7 @@ export const Navbar = () => {
             <li className="dropdown nav-item">
               <Link to="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
                 <div className="photo">
-                  <img src="../assets/img/anime3.png" alt="Profile" />
+                  <img src="../assets/img/descarga.png" alt="Profile" />
                 </div>
                 <b className="caret d-none d-lg-block d-xl-block"></b>
                 <p className="d-lg-none">

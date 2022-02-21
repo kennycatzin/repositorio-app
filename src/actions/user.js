@@ -1,18 +1,14 @@
-
 import Swal from 'sweetalert2'
-import { fetchFormImagen, fetchSinToken } from '../helpers/fetch';
+import { fetchSinToken } from '../helpers/fetch';
 import { types } from '../types/types';
-export const getTableroAdmin = () => {
-    return async (dispatch, getStatus) => {
-        dispatch(tableStartLoading());
-
-        const resp = await fetchSinToken('tablero/get-tableros');
+export const getUsuariosAdmin = (index = 0) => {
+    console.log(index);
+    return async (dispatch) => {
+        const resp = await fetchSinToken('user/get-data-admin/' + index);
         const body = await resp.json();
         if (body.ok) {
             console.log(body)
-            dispatch(getTablero(body.data))
-            dispatch( tableFinishLoading() );
-
+            dispatch(getUsuarios(body.data, body.mensaje, body.paginas))
         } else {
             Swal.fire({
                 title: 'Error!',
@@ -20,29 +16,34 @@ export const getTableroAdmin = () => {
                 confirmButtonColor: "#1d8cf8", 
                 icon: 'error',
               })
-            dispatch( tableFinishLoading() );
+            // dispatch( tableFinishLoading() );
         }
 
     }
 }
-const getTablero = (data) => ({
-    type: types.tableGetDataConfig,
-    payload: data
-});
-export const tableStartLoading = () => ({
-    type: types.tableStartLoading
-})
-export const tableFinishLoading = () => ({
-    type: types.tableFinishLoading
-})
-export const openCloseModalTablero = (estado, obj = {}) => ({
-    type: types.tableModalTablero,
+const getUsuarios = (data, totales, paginas) => ({
+    type: types.userGetUsuarios,
     payload: {
-        tablero: obj,
-        modal: estado
+        data,
+        totales,
+        paginas
+    }
+});
+export const openCloseModalUsuarios = (estado, obj = {}) => ({
+    type: types.userModalUsuario,
+    payload: {
+        userActive: obj,
+        userModal: estado
     }
 })
-export const guardarTablero = (objeto) => {
+export const userManejadoPaginador = (conteo, paginador) => ({
+    type: types.userPaginar,
+    payload: {
+        conteo, 
+        paginador
+    }
+})
+export const guardarUsuario = (objeto, conteoActual) => {
     return async( dispatch ) => {
         Swal.fire({
             title: 'Espere por favor',
@@ -54,37 +55,24 @@ export const guardarTablero = (objeto) => {
         })
         let url = '';
         let accion = '';
-        let forma = new FormData();
-        forma = objeto;
-        dispatch( tableStartLoading() );
-        //status/update-baja/' + idObjeto,
-        console.log(forma.get('id'));
-        if (forma.get('id') !== "undefined") {
-            console.log('entro')
-            url = 'update-tablero' + '/' + forma.get('id');
+        if (objeto.id !== 0) {
+            url = 'auth/update-user' + '/' + objeto.id;
             accion = 'POST';
         } else {
-            console.log('salgo')
-
-            url = 'store-tablero';
+            url = 'user/guardar-usuario';
             accion = 'POST';
         }
-        const resp = await fetchFormImagen( 'tablero/' + url, objeto, accion );
-        console.log(resp)
-        if( resp.data.ok ) {
-            // localStorage.setItem('token', body.token );
-            // localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( tableFinishLoading() );
+        const resp = await fetchSinToken( url, objeto, accion );
+        if( resp.ok ) {           
             Swal.fire({
                 title: 'Datos correctos',
                 text: 'Se ha creado correctamente',
                 confirmButtonColor: "#1d8cf8", 
                 icon: 'success',
               })
-            dispatch(getTableroAdmin());
-
+            dispatch(openCloseModalUsuarios(false));
+            dispatch(getUsuariosAdmin(conteoActual));
         } else {
-            dispatch( tableFinishLoading() );
             Swal.fire({
                 title: 'Datos incorrectos',
                 text: 'Ha ocurrido un problema',
@@ -94,26 +82,41 @@ export const guardarTablero = (objeto) => {
         }
     }     
 }
-export const eliminarTablero = (objeto) => {
+export const getBusquedaUsuarios = (obj) => {
+    return async (dispatch) => {
+        const resp = await fetchSinToken('user/get-busqueda', obj, 'POST');
+        const body = await resp.json();
+        if (body.ok) {
+            console.log(body)
+            dispatch(getUsuarios(body.data, body.mensaje));
+
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'No existen datos',
+                confirmButtonColor: "#1d8cf8",
+                icon: 'error',
+            })
+        }
+    }
+}
+export const eliminarUsuario = (objeto, conteo) => {
     return async( dispatch ) => {
-        dispatch( tableStartLoading() );
         //status/update-baja/' + idObjeto,
-        const resp = await fetchSinToken( 'tablero/baja-tablero', objeto, 'POST' );
+        const resp = await fetchSinToken( 'user/set-usuario-baja/' + objeto.id, objeto, 'PUT' );
         const body = await resp.json();
         console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( tableFinishLoading() );
             Swal.fire({
                 title: 'Datos correctos',
                 text: 'Se ha eliminado correctamente',
                 confirmButtonColor: "#1d8cf8", 
                 icon: 'success',
               })
-              dispatch(getTableroAdmin());
+              dispatch(getUsuariosAdmin(conteo));
         } else {
-            dispatch( tableFinishLoading() );
             Swal.fire({
                 title: 'Datos incorrectos',
                 text: 'Ha ocurrido un problema',

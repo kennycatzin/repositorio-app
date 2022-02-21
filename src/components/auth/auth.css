@@ -5,7 +5,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 .contenedor{
-background-image: url('http://172.18.3.7/repositorio-api/public/img/3.png');
+background-image: url('http://172.18.4.205:8080/repositorio-api/public/img/3.png');
 background-size: cover;
 background-repeat: no-repeat;
 height: 100vh;

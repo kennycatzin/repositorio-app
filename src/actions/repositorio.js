@@ -3,30 +3,35 @@ import { fetchFormImagen, fetchSinToken } from '../helpers/fetch';
 import { types } from '../types/types';
 import { finishLoading, startLoading } from './ui';
 import Swal from 'sweetalert2'
+import { getDataDashboard } from './dashboard';
 
 
-export const getFolders = (tipo) => {
+export const getRepositorioUsuario = () => {
     return async (dispatch, getStatus) => {
         const { uid } = getStatus().auth
         console.log(uid);
         if (uid != null) {
-            const resp = await fetchSinToken('user/get-listado-cabeceras', { tipo, id_usuario: uid }, 'POST');
+            const resp = await fetchSinToken( 'user/get-repositorio-usuario/'+uid );
             const body = await resp.json();
             if (body.ok) {
                 console.log(body)
-                dispatch(getCarpetas(body.data))
+                dispatch(getRepoUser(body.data))
             } else {
             }
         } else {
         }
     }
 }
+const getRepoUser = (carpetas) => ({
+    type: types.repoGetDataUser,
+    payload: carpetas
+});
 export const getFiles = () => {
     return async (dispatch, getStatus) => {
         const { uid } = getStatus().auth
-        const { id } = getStatus().repo.active
-        if (uid != null) {
-            const resp = await fetchSinToken('user/get-listado-archivos', { id_subcategoria: id, id_usuario: uid }, 'POST');
+        const sub = getStatus().repo.active
+        if (uid != null && !!sub) {
+            const resp = await fetchSinToken('user/get-listado-archivos', { id_subcategoria: sub.id, id_usuario: uid }, 'POST');
             const body = await resp.json();
             if (body.ok) {
                 console.log(body.data)
@@ -53,12 +58,13 @@ const getTiposAuxiliar = (tipos) => ({
     type: types.repoGetAuxFormularioArchivo,
     payload: tipos
 });
-export const setEstatusFiles = (id_archivo) => {
-    return async () => {
+export const setEstatusFiles = (id_archivo, uid) => {
+    return async (dispatch) => {
         const resp = await fetchSinToken('user/set-archivo-estatus', { id_archivo }, 'POST');
         const body = await resp.json();
         if (body.ok) {
             console.log(body)
+            dispatch(getDataDashboard(uid));   
         } else {
 
         }
@@ -72,6 +78,11 @@ export const repoSetFolderActive = (folder) => ({
     type: types.repoSetFolderActive,
     payload: folder
 })
+export const repoAgregarArchivo = (obj = {}) => ({
+    type: types.repoAddDataArchivo,
+    payload: obj
+})
+
 export const repoSetSubCategoriaActive = (subcategoria = null, accion) => ({
     type: types.repoActivarSubcategoriaAdmin,
     payload: {
@@ -80,18 +91,27 @@ export const repoSetSubCategoriaActive = (subcategoria = null, accion) => ({
     }
 })
 
-const getCarpetas = (carpetas) => ({
-    type: types.repoGetFolders,
-    payload: carpetas
-});
+
 
 const getArchivos = (archivos) => ({
     type: types.repoGetFiles,
     payload: archivos
 });
+const setEliminarArchivos = (id_archivo) => ({
+    type: types.repoDeleteDataArchivo,
+    payload: id_archivo
+});
 
 export const guardarCategoria = (objeto) => {
     return async (dispatch) => {
+        Swal.fire({
+            title: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
         dispatch(startLoading());
         let url = '';
         let accion = '';
@@ -131,6 +151,7 @@ export const guardarCategoria = (objeto) => {
     }
 }
 export const guardarSubcategoria = (objeto) => {
+    
     return async (dispatch) => {
         let url = '';
         let accion = '';
@@ -156,7 +177,7 @@ export const guardarSubcategoria = (objeto) => {
                 icon: 'success',
             })
             dispatch(getAdminConf());
-            dispatch(openModalCategoria(false));
+            dispatch(openModalSubcategoria(false));
         } else {
             Swal.fire({
                 title: 'Datos incorrectos',
@@ -169,6 +190,14 @@ export const guardarSubcategoria = (objeto) => {
 }
 export const guardarConfiguracionRolArchivo = (objeto) => {
     return async (dispatch) => {
+        Swal.fire({
+            title: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
         let url = 'store-conf-rol';
         let accion = 'POST';
         const resp = await fetchSinToken('rol/' + url, objeto, accion);
@@ -185,7 +214,7 @@ export const guardarConfiguracionRolArchivo = (objeto) => {
             })
             dispatch(getAdminConf());
             dispatch(getAuxFormularioArchivo());
-            dispatch(openCloseChecklistArchivoModal(false, {}));
+            // dispatch(openCloseChecklistArchivoModal(true, {}));
 
             // dispatch(openModalCategoria(false));
         } else {
@@ -244,6 +273,7 @@ export const bajaArchivos = (id_archivo, usuario) => {
                 confirmButtonColor: "#1d8cf8",
                 icon: 'success',
             })
+            dispatch(setEliminarArchivos(id_archivo));
             dispatch(getAdminConf());
         } else {
             dispatch(finishLoading());
@@ -396,12 +426,45 @@ export const openModalArchivo = (estado, data = {}) => {
     }
 
 }
+export const getAdminRolesByDepartamento = (id_departamento = 0) => {
+    return async (dispatch) => {
+        const resp = await fetchSinToken('rol/get-roles-departamento/' + id_departamento);
+        const body = await resp.json();
+        if (body.ok) {
+            console.log(body)
+            dispatch(getRolesByDepartamento(body.data));
+
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'No existen datos',
+                confirmButtonColor: "#1d8cf8",
+                icon: 'error',
+            })
+        }
+    }
+}
+const getRolesByDepartamento = (data) => ({
+    type: types.repoGetRolesByDepartamento,
+    payload: {
+        rolDepa: data
+    }
+});
 export const guardarArchivoConfiguracion = (objeto, id= 0) => {
     return async( dispatch ) => {
+        Swal.fire({
+            title: 'Espere por favor',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+            },
+        })
         let url = '';
         let accion = '';
         let forma = new FormData();
         forma = objeto;
+        let tipo;
         dispatch( startLoading() );
         //status/update-baja/' + idObjeto,
         console.log(id);
@@ -409,15 +472,17 @@ export const guardarArchivoConfiguracion = (objeto, id= 0) => {
             console.log('entro')
             url = 'archivo/update-archivo' + '/' + id;
             accion = 'POST';
+            tipo = 1;
         } else {
             console.log('salgo')
 
             url = 'archivo/store-archivo';
             accion = 'POST';
+            tipo = 2;
         }
         const resp = await fetchFormImagen( url, forma, accion );
         console.log(resp)
-        if( resp.data.ok ) {
+        if( resp.data.ok ) {    
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
             dispatch( finishLoading() );
@@ -428,17 +493,21 @@ export const guardarArchivoConfiguracion = (objeto, id= 0) => {
                 confirmButtonColor: "#1d8cf8", 
                 icon: 'success',
               })
+              //TODO: borrar items del state
+              dispatch(setEliminarArchivos(resp.data.data.id));
+              dispatch(repoAgregarArchivo(resp.data.data));
+              dispatch(openModalFormularioArchivos(false));
               dispatch(getAdminConf());
 
               
               console.log('obteniendo datos');
 
         } else {
-            dispatch( getAdminConf() );
+            //ispatch( getAdminConf() );
 
             Swal.fire({
                 title: 'Datos incorrectos',
-                text: 'Ha ocurrido un problema',
+                text: resp.data.mensaje,
                 confirmButtonColor: "#1d8cf8", 
                 icon: 'error',
             })

@@ -22,13 +22,13 @@ export const TableSubcategorias = ({ data }) => {
         console.log(item)
         const { id } = item;
         Swal.fire({
-            title: 'Realmente desea elimninar este registro?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este registro?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(bajaSubcategoria(id, 1))
@@ -59,13 +59,13 @@ export const TableSubcategorias = ({ data }) => {
                             </td>
                             <td className='text-center'>{item.titulo}</td>
                             <td className="d-flex justify-content-around">
-                                <button onClick={() => handleAgregarArchivo(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleAgregarArchivo(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Configurar subcategoría, agregar archivos">
                                     <i className="tim-icons icon-settings-gear-63"></i>
                                 </button>
-                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="Editar información de la subcategpria">
                                     <i className="tim-icons icon-pencil"></i>
                                 </button>
-                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
+                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar subcategoría">
                                     <i className="tim-icons icon-trash-simple"></i>
                                 </button>
                             </td>

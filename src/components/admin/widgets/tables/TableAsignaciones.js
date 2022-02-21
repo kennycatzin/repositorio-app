@@ -16,13 +16,13 @@ export const TableAsignaciones = ({ cabeceras, data }) => {
         console.log(item)
         const {id} = item;
         Swal.fire({
-            title: 'Realmente desea elimninar este usuario?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este usuario?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
           }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(eliminarObjeto(id, 0 , 1, 'user', 'set-usuario-baja', 'get-usuarios-noasignados'))
@@ -53,10 +53,10 @@ export const TableAsignaciones = ({ cabeceras, data }) => {
                             <td className='text-center'>{item.name}</td>
                             <td className='text-center'>{item.usuario}</td>
                             <td className="d-flex justify-content-around">
-                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="">
+                                <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Asignar rol y tipo de usuario">
                                     <i className="tim-icons icon-tap-02"></i>
                                 </button>
-                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
+                                <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Deshechar usuario">
                                     <i className="tim-icons icon-trash-simple"></i>
                                 </button>
                             </td>

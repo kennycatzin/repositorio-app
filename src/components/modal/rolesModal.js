@@ -24,9 +24,10 @@ export const RolesModal = () => {
     };
     const {depas} = useSelector(state => state.repo.auxiliaresFormArchivos);
     const [formValues, setFormValues] = useState(initialState);
-    const { id, rol, descripcion, id_departamento} = formValues;
+    const { id= 0, rol = "", descripcion = "", id_departamento = 0} = formValues;
     const { activeRol } = useSelector(state => state.roles);
-
+    const {uid} = useSelector(state => state.auth)
+    const {actualConteo} = useSelector(state => state.roles)
     const handleInputChange = ({ target }) => {
         setFormValues({
             ...formValues,
@@ -50,10 +51,10 @@ export const RolesModal = () => {
             rol,
             descripcion,
             tipo: "",
-            usuario: 1,
+            usuario: uid,
             id_departamento
         }
-        dispatch(guardarRol(obj));
+        dispatch(guardarRol(obj, actualConteo));        
         console.log('guardando...');
         
     }
@@ -75,7 +76,7 @@ export const RolesModal = () => {
                 <div className="scroll-content">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Asignaciones</h4>
+                            <h4 className="card-title">Roles</h4>
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="card-body">
@@ -109,10 +110,9 @@ export const RolesModal = () => {
                                         <option>Seleccione un departamento</option>
                                         {
                                             (depas !== undefined) &&
-                                            depas.map((aux) => (
-                                                <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>
-                                            ))
-
+                                                depas.map((aux) => (
+                                                    <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>
+                                                ))
                                         }
                                     </select>
                                 </div>                               
@@ -122,12 +122,9 @@ export const RolesModal = () => {
                                 <button onClick={closeModal} type="button" className="btn btn-fill btn-secundary">Cerrar</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-
-
         </Modal>
     )
 }

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import {  guardarArchivoConfiguracion, openModalFormularioArchivos } from '../../actions/repositorio';
+import Swal from 'sweetalert2'
 
 const initialState = {
     id: 0,
@@ -21,7 +22,9 @@ export const ConfiguracionArchivoSub = () => {
     const {tipos} = useSelector(state => state.repo.auxiliaresFormArchivos)
     const {depas} = useSelector(state => state.repo.auxiliaresFormArchivos)
     const {activeArchivo} = useSelector(state => state.repo)
-
+    const {uid} = useSelector(state => state.auth)
+    const {titulo} = useSelector(state => state.repo.subcategoriaActiva);
+    const objCategoria = useSelector(state => state.repo.activeCategoria);
     const { id, consecutivo = 0, descripcion = '', id_tipo = 0, id_departamento= 0,  archivo = ''} = formValues;
 
     const customStyles = {
@@ -42,11 +45,10 @@ export const ConfiguracionArchivoSub = () => {
     const handleImagenChange = (e) => {
         console.log(e.target.files[0]);
         setmiArchivo(e.target.files[0]);
-        
-        // setSelectedFile(e.target.files[0]);
     }
     // const [dateStart, setDateStart] = useState(now.toDate())
     const handleInputChange = ({ target }) => {
+        console.log(target);
         setformValues({
             ...formValues,
             [target.name]: target.value
@@ -65,7 +67,7 @@ export const ConfiguracionArchivoSub = () => {
         formData.append("id_tipo", id_tipo);
         formData.append("id_departamento", id_departamento);
         formData.append("archivo", miArchivo);
-        formData.append("usuario", 1);
+        formData.append("usuario", uid);
         formData.append("id", id);
         
         dispatch(guardarArchivoConfiguracion(formData, id));
@@ -92,12 +94,14 @@ export const ConfiguracionArchivoSub = () => {
                 <div className="scroll-content">
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="card-title">Configuracion de archivo</h4>
+                            <h4 className="card-title">Configuración de archivo</h4>
+                            <h5 className="card-subtitle text-center text-primary">{objCategoria.titulo} / {titulo} </h5>
+
                         </div>
                         <form className="form-horizontal" onSubmit={handleGuardar}>
                             <div className="card-body">
                                 <div className="row">
-                                    <label className="col-md-3 col-form-label">Descripcion</label>
+                                    <label className="col-md-3 col-form-label">Descripción</label>
                                     <div className="col-md-9">
                                         <div className="form-group">
                                             <input type="text"

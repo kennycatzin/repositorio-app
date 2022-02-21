@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getAdminConf, getAuxFormularioArchivo, getTiposConfigArchivos, openModalCategoria } from '../../actions/repositorio'
+import { getAdminConf, getAdminRolesByDepartamento, getTiposConfigArchivos, openModalCategoria } from '../../actions/repositorio'
 import { RepoCategoriaModal } from '../modal/repoCategoriaModal'
 import { RepositorioEntry } from './widgets/repositorio/RepositorioEntry'
 
@@ -10,12 +10,10 @@ export const AdminRepositorio = () => {
     const handleAgregar = () => {
         dispatch(openModalCategoria(true, {}));
     }
-
     useEffect(() => {
         dispatch(getAdminConf());
-        dispatch(getTiposConfigArchivos());
-
-        
+        dispatch(getTiposConfigArchivos());      
+        dispatch(getAdminRolesByDepartamento());  
     }, [dispatch])
     return (
         <>
@@ -31,12 +29,10 @@ export const AdminRepositorio = () => {
                 <div className="card">
                     <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title d-inline">Listado de categorias</h4>
-                            <button onClick={handleAgregar} id="twitter" className="btn btn-round btn-success">
+                            <button onClick={handleAgregar} id="twitter" className="btn btn-round btn-success" title='Agregar nueva categoría'>
                                 <i className="fa fa-plus"></i> · Agregar
                             </button>
                     </div>
-
-                     {/* TODO: importer entry */}
                      <RepositorioEntry/>
                 </div>
             </div>

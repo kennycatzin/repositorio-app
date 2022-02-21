@@ -12,7 +12,7 @@ const dispatch = useDispatch();
         dispatch(getTableroAdmin());
     }, [dispatch])
         const cabeceras = [
-            "Titulo",
+            "Título",
             "Fecha inicio",
             "Fecha final",
             "Dias restantes"
@@ -35,7 +35,7 @@ const dispatch = useDispatch();
                 <div className="card ">
                 <div className="card-header d-flex justify-content-between">
                         <h4 className="card-title d-inline">Listado de anuncios</h4>
-                        <button onClick={handleAgregar } type="button" className="btn btn-success btn-circle btn-lg">
+                        <button onClick={handleAgregar } type="button" className="btn btn-success btn-circle btn-lg" title='Agregar nuevo anuncio'>
                             <i className="fa fa-plus"></i>
                         </button>
                     </div>

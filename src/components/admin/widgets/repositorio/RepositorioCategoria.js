@@ -16,13 +16,13 @@ export const RepositorioCategoria = ({ data }) => {
     const handleEliminar = (obj) => {
         const { id } = obj;
         Swal.fire({
-            title: 'Realmente desea elimninar este registro?',
-            text: "No podra revertir esta accion",
+            title: 'Realmente desea eliminar este registro?',
+            text: "No podrá revertir esta acción",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, emilinar'
+            confirmButtonText: 'Si, eliminar'
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(bajaCategoria(id, 1))
@@ -39,41 +39,35 @@ export const RepositorioCategoria = ({ data }) => {
     return (
         <div className="card container">
             <div className="card-header row col-12" id="headingOne">
-                    <div onClick={() => activarCategoria(data)} className="alert alert-info pointer text-center col-9" data-toggle="collapse" data-target={`#${data.titulo.replace(/\s+/g, '')}`} aria-expanded="false" aria-controls={`${data.titulo.replace(/\s+/g, '')}`}>
+                    <div onClick={() => activarCategoria(data)} className="alert alert-info pointer text-center col-9" data-toggle="collapse" data-target={`#${data.randomUUID.replace(/\s+/g, '')}`} aria-expanded="false" aria-controls={`${data.randomUUID.replace(/\s+/g, '')}`}>
                         <span>{data.titulo}</span><br />                        
                     </div>                    
                     <div className='d-flex justify-content-around col-3'>
-                        <button onClick={() => handleEditar(data)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="">
+                        <button onClick={() => handleEditar(data)} type="button" rel="tooltip" className="btn btn-primary btn-sm " data-original-title="Refresh" title="Editar información de la categoria">
                             <i className="tim-icons icon-pencil"></i>
                         </button>
-                        <button onClick={() => handleEliminar(data)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="">
+                        <button onClick={() => handleEliminar(data)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar categoría, se eliminarán los archivos de los roles">
                             <i className="tim-icons icon-trash-simple"></i>
                         </button>
                     </div>
                 
             </div>
-            <div id={`${data.titulo.replace(/\s+/g, '')}`} className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div id={`${data.randomUUID.replace(/\s+/g, '')}`} className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div className="card-body">
                     <div className="places-buttons">
                         <div className="row">
                             <div className="col-md-6 ml-auto mr-auto text-center">
                                 <h4 className="card-title">
-                                    <button id="twitter" onClick={handleAgregarSubcategoria} className="btn btn-round btn-success"><i className="fa fa-plus"></i> · Agregar</button>
-                                    <p className="category">Agregar nueva subcategoria</p>
+                                    <button id="twitter" onClick={handleAgregarSubcategoria} className="btn btn-round btn-success" title='Agregar nueva subcategoría'>
+                                        <i className="fa fa-plus"></i> · Agregar</button>
+                                    <p className="h5">Agregar nueva subcategoria</p>
                                 </h4>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-lg-10 ml-auto mr-auto">
                                 <div className="row">
-                                    {/* TODO: Agregar categoria */}
-                                    {
-                                        // data.subcategoria.map((item) => (
-                                        //     <RepositorioSubcategoria key={item.id} data={item} />
-                                        // ))
-                                        // data.subcategoria.map((item) => (
-                                        //     <TableSubcategorias key={item.id} cabeceras={cabeceras} data={item} />
-                                        // ))
+                                    {                                        
                                         <TableSubcategorias data={ data.subcategoria} />
                                     }
                                 </div>
