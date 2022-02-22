@@ -7,7 +7,6 @@ import { UsuariosModal } from '../../../modal/usuariosModal'
 export const TableUsuarios = ({ cabeceras, data }) => {
     const dispatch = useDispatch();
     const handleEditar = (item) => {
-        console.log(item)
         dispatch(openCloseModalUsuarios(true, item));
 
     }
@@ -38,7 +37,6 @@ export const TableUsuarios = ({ cabeceras, data }) => {
     }
     const handlePaginar = (index, pagina) => {
         let valor = contador + (index);
-        console.log(valor);
         if (valor >= 0 && valor <= userTotales) {
             dispatch(getUsuariosAdmin(valor));
             dispatch(userManejadoPaginador(index, pagina))
@@ -78,7 +76,7 @@ export const TableUsuarios = ({ cabeceras, data }) => {
                                     <button onClick={() => handleEditar(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Editar registro">
                                         <i className="tim-icons icon-pencil"></i>
                                     </button>
-                                    <button onClick={() => handleEliminar(item)} title="Eliminar usuario" type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar registro">
+                                    <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Delete" title="Eliminar registro">
                                         <i className="tim-icons icon-trash-simple"></i>
                                     </button>
                                 </td>

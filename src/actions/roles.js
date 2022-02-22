@@ -8,7 +8,6 @@ export const getRolesAdmin = (index = 0) => {
         const resp = await fetchSinToken('rol/get-data-paginado/' + index);
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getRoles(body.data, body.mensaje, body.paginas))
             dispatch(rolStartLoading());
 
@@ -29,7 +28,6 @@ export const getAdminConfiguracion = (id_rol) => {
         const resp = await fetchSinToken('rol/get-data-admin/' + id_rol);
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getDataAdminConfig(body.data));
             dispatch(rolFinishLoading());
 
@@ -51,7 +49,6 @@ export const getBusquedaRoles = (obj) => {
         const resp = await fetchSinToken('rol/get-busqueda', obj, 'POST');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getRoles(body.data, body.mensaje));
             dispatch(rolFinishLoading());
 
@@ -72,7 +69,6 @@ export const getCategoriasRoles = () => {
         const resp = await fetchSinToken('categoria/get-categorias');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getCategoriasRolesAdmin(body.data))
             dispatch(rolStartLoading());
 
@@ -93,7 +89,6 @@ export const getSubcategoriasRoles = (id_categoria = 0) => {
         const resp = await fetchSinToken('subcategoria/get-subcategoria-by-categoria/' + id_categoria);
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getSubcategoriasRolesAdmin(body.data))
             dispatch(rolFinishLoading());
 
@@ -133,11 +128,9 @@ export const getArchivosAdminConf = (id_subcategoria, id_rol) => {
             id_subcategoria,
             id_rol
         }
-        console.log(obj);
         const resp = await fetchSinToken('archivo/get-admin-configurar', obj, 'POST');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getAdminConfigurar(body.data))
             dispatch(rolStartLoading());
 
@@ -228,18 +221,15 @@ export const guardarRol = (objeto, conteo) => {
         })
         let url = '';
         let accion = '';
-        console.log(objeto);
         if (objeto.id !== 0) {
-            url = 'update-rol' + '/' + objeto.id;
+            url = `update-rol/${objeto.id}`;
             accion = 'PUT';
         } else {
             url = 'store-rol';
             accion = 'POST';
         }
-        console.log(objeto)
         const resp = await fetchSinToken('rol/' + url, objeto, accion);
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -275,7 +265,6 @@ export const configurarArchivoRol = (obj, id_subcategoria, id_rol) => {
         })
         const resp = await fetchSinToken('rol/store-conf-archivo', obj, 'POST');
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             dispatch(quitArchivos());
 
@@ -304,7 +293,6 @@ export const bajaRol = (id_rol, id_usuario, conteo) => {
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken('rol/baja-rol/' + id_rol, { usuario: id_usuario }, 'PUT');
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -328,10 +316,8 @@ export const bajaRol = (id_rol, id_usuario, conteo) => {
 export const bajaConfArchivoRol = (obj, usuario, id_rol) => {
     return async (dispatch) => {
         //status/update-baja/' + idObjeto,
-        console.log(obj, usuario);
         const resp = await fetchSinToken('rol/eliminar-archivo-rol', { id_archivo_rol: obj.id, usuario, id_archivo: obj.id_archivo }, 'PUT');
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -342,7 +328,6 @@ export const bajaConfArchivoRol = (obj, usuario, id_rol) => {
                 confirmButtonColor: "#1d8cf8",
                 icon: 'success',
             })
-            console.log(id_rol);
             dispatch(getAdminConfiguracion(id_rol))
 
         } else {

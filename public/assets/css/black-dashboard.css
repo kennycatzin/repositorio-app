@@ -15831,6 +15831,15 @@ img {
   background: #1a1e34;
 }
 
+
+
+.table>tbody>tr>td .photo {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
 .navbar .photo {
   display: inline-block;
   height: 30px;

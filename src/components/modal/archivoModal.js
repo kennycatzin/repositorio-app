@@ -25,9 +25,6 @@ export const ArchivoModal = () => {
             transform: 'translate(-50%, -50%)',
         },
     };
-    useEffect(() => {
-        dispatch(getAuxFormularioArchivo());
-    }, [dispatch])
     // const [dateStart, setDateStart] = useState(now.toDate())
 
 
@@ -43,7 +40,6 @@ export const ArchivoModal = () => {
 
     const closeModal = () => {
         dispatch(openModalArchivo(false, {}))
-        console.log('cerrando')
     }
     Modal.setAppElement('#root');
     return (

@@ -21,7 +21,6 @@ export const ConfiguracionRolArchivoModal = () => {
 
     const closeModal = () => {
         dispatch(openModalArchivo(false, null))
-        console.log('cerrando')
     }
     Modal.setAppElement('#root');
     return (

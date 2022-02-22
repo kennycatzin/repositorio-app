@@ -31,7 +31,6 @@ export const EstatusModal = () => {
     const handleSubmit = (e) => {
         let endPoint = '';
         e.preventDefault();
-        console.log(id);
         const objSave = {
             id: id,
             estatus,

@@ -7,7 +7,6 @@ const initialState = {
 export const departamentosReducer = (state = initialState, action) => {
     switch (action.type) {        
         case types.depaGetDepartamentos:
-            console.log('entro a buscqueda');
             return {
                 ...state,
                 depaDepartamentos: action.payload.data,
@@ -23,7 +22,6 @@ export const departamentosReducer = (state = initialState, action) => {
             }  
         case types.depaMovPaginadorDepartamentos:
             let valor = state.depaIndex + action.payload;
-            console.log(valor);
             return {
                 ...state,
                 depaIndex: valor,

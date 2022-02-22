@@ -8,11 +8,9 @@ export const TableConfArchivos = ({cabeceras, data}) => {
     const dispatch = useDispatch();
 
     const handleOpenModalArchivo = (item) => {
-        console.log(item);
         dispatch(openModalDetalleArchivo(true, item));
     }
     const handleEditar = (item) => {
-        console.log(item)
         dispatch(openModalFormularioArchivos(true, item));
 
     }
@@ -20,7 +18,6 @@ export const TableConfArchivos = ({cabeceras, data}) => {
         dispatch(openCloseChecklistArchivoModal(true, item));
     }
     const handleEliminar = (item) => {
-        console.log(item)
         const {id} = item;
         Swal.fire({
             title: 'Realmente desea eliminar este registro?',

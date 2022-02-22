@@ -4,13 +4,10 @@ import Swal from 'sweetalert2'
 
 export const getDataDashboard = (uid) => {
     return async(dispatch)=>{
-        console.log('Entro');
         if(uid != null){        
-            console.log('no entro');
             const resp = await fetchSinToken( 'user/get-dashboard/' + uid);
             const body = await resp.json();
             if( body.ok ) {
-              console.log(body)
               dispatch(getTablero(body.data))
             } else {
                 Swal.fire({
@@ -40,7 +37,6 @@ export const getListaArchivos = (id_usuario, id_estatus, nombre) => {
             const resp = await fetchSinToken( 'tablero/get-files-tablero', obj, 'POST');
             const body = await resp.json();
             if( body.ok ) {
-              console.log(body)
               dispatch(getFilesTablero(body.data, nombre))
             }else{
                 Swal.fire({

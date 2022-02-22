@@ -11,7 +11,6 @@ export const tipoDocumentosReducer = (state = initialState, action) => {
                 checking: true
             }
         case types.tipoGetTipoDocumentos:
-            console.log('entro a buscqueda');
             return {
                 ...state,
                 tipoDocumentos: action.payload,

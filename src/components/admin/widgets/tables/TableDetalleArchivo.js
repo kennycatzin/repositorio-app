@@ -6,7 +6,6 @@ import { ConfiguracionArchivoSub } from '../../../modal/configuracionArchivosSub
 export const TableDetalleArchivo = ({cabeceras, data}) => {
 
     const handleEditar = (item) => {
-        console.log(item);
         // dispatch(modalEstatus(true, estatus));
         window.open(item.url);
     }

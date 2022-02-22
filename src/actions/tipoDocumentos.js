@@ -6,7 +6,6 @@ export const getTipoDocumentos = () => {
         const resp = await fetchSinToken('tipo/get-tipos');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getTipos(body.data))
             // dispatch( tableFinishLoading() );
 
@@ -38,8 +37,7 @@ export const guardarTipoDocumento = (objeto) => {
         let url = '';
         let accion = '';
         if (objeto.id !== 0) {
-            console.log('entro')
-            url = 'update-tipo' + '/' + objeto.id;
+            url = `update-tipo/${objeto.id}`;
             accion = 'PUT';
         } else {
             url = 'store-tipo';
@@ -69,7 +67,6 @@ export const eliminarTipoDocumento = (objeto) => {
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken( 'tipo/baja-tipo', objeto, 'PUT' );
         const body = await resp.json();
-        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );

@@ -27,7 +27,6 @@ export const RepositorioSubcategoria = ({data}) => {
          //dispatch(categoriaActiva(obj));
     };
     const handleAgregarArchivo = (obj) => {
-        console.log('abrir modal bro');
         //dispatch(openModalSubcategoria(true, data));
         // TODO: Funcionalidad modal
         dispatch(openModalArchivo(true, obj));

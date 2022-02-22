@@ -28,7 +28,7 @@ export const TableFiles = () => {
                                        
                                     </td>
                                     <td className="td-actions text-right">
-                                        <a type="button" rel="tooltip" title="" 
+                                        <a type="button"
                                             className="btn btn-link" 
                                             data-original-title="Edit Task" 
                                             title='Abrir archivo'

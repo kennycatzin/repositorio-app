@@ -7,11 +7,9 @@ import { modalEstatus } from '../../../../actions/ui';
 export const TableEstatus = ({cabeceras, data}) => {
     const dispatch = useDispatch();
     const handleEditar = (estatus) => {
-        console.log(estatus);
         dispatch(modalEstatus(true, estatus));
     }
     const handleEliminar = (estatus) => {
-        console.log(estatus)
         const {id} = estatus;
         Swal.fire({
             title: 'Realmente desea eliminar este registro?',

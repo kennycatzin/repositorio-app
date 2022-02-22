@@ -6,7 +6,6 @@ export const CardsComponents = ({data}) => {
     const dispatch = useDispatch();
     const { uid } = useSelector(state => state.auth);   
     const handleClick = (obj) => {
-        console.log(obj)
         dispatch(getListaArchivos(uid, obj.id, obj.nombre));
     }
     return (

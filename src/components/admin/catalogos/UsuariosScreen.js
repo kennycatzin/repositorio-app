@@ -23,16 +23,13 @@ export const UsuariosScreen = () => {
     }
     const handleBuscar = (e) => {
         e.preventDefault();
-        console.log(e);
         setbusqueda(e.target.value)
-        console.log(e.target.value);
-        if(e.target.value != ''){
+        if(e.target.value !== ''){
             if(e.target.value.length > 2){
                 const obj = {
                     busqueda: e.target.value
                 }
                 dispatch(getBusquedaUsuarios(obj));
-                console.log('entrando a buscar');
             }
         }else{
             dispatch(getUsuariosAdmin());

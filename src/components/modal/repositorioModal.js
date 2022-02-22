@@ -6,7 +6,9 @@ import { guardarSubcategoria,  openModalSubcategoria } from '../../actions/repos
 const initialState = {
     id: 0,
     titulo: '',
-    descripcion: ''
+    descripcion: '',
+    orden: 0
+
 }
 export const RepositorioModal = () => {
     const dispatch = useDispatch();
@@ -14,7 +16,7 @@ export const RepositorioModal = () => {
     const [formValues, setformValues] = useState(initialState);
     const { subcategoriaActiva } = useSelector(state => state.repo);
     const id_categoria = useSelector(state => state.repo.activeCategoria.id);
-    const { id, titulo = '', descripcion = ''} = formValues;
+    const { id, titulo = '', descripcion = '', orden = 0} = formValues;
     const {uid} = useSelector(state => state.auth)
 
     //
@@ -30,8 +32,7 @@ export const RepositorioModal = () => {
     };
     // const [dateStart, setDateStart] = useState(now.toDate())
     useEffect(() => {
-        if (subcategoriaActiva != null) {
-            console.log(subcategoriaActiva);
+        if (subcategoriaActiva !== null && Object.keys(subcategoriaActiva).length > 0) {
             setformValues(subcategoriaActiva)
         }
 
@@ -45,7 +46,6 @@ export const RepositorioModal = () => {
     const closeModal = () => {
         setformValues(initialState);
         dispatch(openModalSubcategoria(false, {}));
-        console.log('cerrando')
     }
     const handleGuardar = (e) => {
         e.preventDefault(); 
@@ -54,7 +54,7 @@ export const RepositorioModal = () => {
             id,
             titulo,
             descripcion,
-            orden: 3,
+            orden,
             id_categoria,
             usuario: uid,
         }
@@ -77,13 +77,13 @@ export const RepositorioModal = () => {
                     <div>
                         <div className="card">
                             <div className="card-header">
-                                <h4 className="card-title">Configuracion de subcategoria</h4>
+                                <h4 className="card-title">Configuración de subcategoría</h4>
 
                             </div>
                             <form className="form-horizontal" onSubmit={handleGuardar}>
                                 <div className="card-body">
                                     <div className="row">
-                                        <label className="col-md-3 col-form-label">Titulo</label>
+                                        <label className="col-md-3 col-form-label">Título</label>
                                         <div className="col-md-9">
                                             <div className="form-group">
                                                 <input type="text" 
@@ -104,6 +104,19 @@ export const RepositorioModal = () => {
                                                         name="descripcion"
                                                         value={descripcion}
                                                         onChange={handleInputChange}        
+                                                />
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                    <div className="row">
+                                        <label className="col-md-3 col-form-label">Orden</label>
+                                        <div className="col-md-2">
+                                            <div className="form-group">
+                                                <input type="number" 
+                                                        className="form-control"   
+                                                        name="orden"
+                                                        value={orden}                                                   
+                                                        onChange={handleInputChange}
                                                 />
                                             </div>
                                         </div>

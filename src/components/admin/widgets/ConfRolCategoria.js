@@ -1,7 +1,6 @@
 import React from 'react'
 
 export const ConfRolCategoria = ({ data }) => {
-    console.log(data);
     return (
         <div className="card container">
             <div className="card-header" id="headingThree">

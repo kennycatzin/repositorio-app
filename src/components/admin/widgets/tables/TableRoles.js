@@ -14,7 +14,6 @@ export const TableRoles = ({ cabeceras, data }) => {
     const {actualConteo} = useSelector(state => state.roles)
 
     const handleEditar = (item) => {
-        console.log(item);
         dispatch(openCloseModalRol(true, item));
 
     }
@@ -35,7 +34,6 @@ export const TableRoles = ({ cabeceras, data }) => {
     }
     const handlePaginar = (index, pagina) => {
         let valor = contador + (index);
-        console.log(valor);
         if(valor >= 0 && valor <= rolTotal){
             dispatch(getRolesAdmin(valor));
             
@@ -45,7 +43,6 @@ export const TableRoles = ({ cabeceras, data }) => {
         }
     }
     const handleConfigurar = (item) => {
-        console.log(item)
         dispatch(setRolActivo(item));
         navigate('/configurar')
     }

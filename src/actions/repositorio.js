@@ -9,12 +9,10 @@ import { getDataDashboard } from './dashboard';
 export const getRepositorioUsuario = () => {
     return async (dispatch, getStatus) => {
         const { uid } = getStatus().auth
-        console.log(uid);
         if (uid != null) {
             const resp = await fetchSinToken( 'user/get-repositorio-usuario/'+uid );
             const body = await resp.json();
             if (body.ok) {
-                console.log(body)
                 dispatch(getRepoUser(body.data))
             } else {
             }
@@ -34,7 +32,6 @@ export const getFiles = () => {
             const resp = await fetchSinToken('user/get-listado-archivos', { id_subcategoria: sub.id, id_usuario: uid }, 'POST');
             const body = await resp.json();
             if (body.ok) {
-                console.log(body.data)
                 dispatch(getArchivos(body.data))
             } else {
             }
@@ -48,7 +45,6 @@ export const getTiposConfigArchivos = () => {
         const resp = await fetchSinToken('tipo/get-tipos');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body.data)
             dispatch(getTiposAuxiliar(body.data))
         } 
 
@@ -63,7 +59,6 @@ export const setEstatusFiles = (id_archivo, uid) => {
         const resp = await fetchSinToken('user/set-archivo-estatus', { id_archivo }, 'POST');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getDataDashboard(uid));   
         } else {
 
@@ -115,18 +110,15 @@ export const guardarCategoria = (objeto) => {
         dispatch(startLoading());
         let url = '';
         let accion = '';
-        console.log(objeto);
         if (objeto.id != null) {
-            url = 'update-categoria' + '/' + objeto.id;
+            url = `update-categoria/${objeto.id}`;
             accion = 'PUT';
         } else {
             url = 'store-categoria';
             accion = 'POST';
         }
-        console.log(objeto)
         const resp = await fetchSinToken('categoria/' + url, objeto, accion);
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -155,18 +147,15 @@ export const guardarSubcategoria = (objeto) => {
     return async (dispatch) => {
         let url = '';
         let accion = '';
-        console.log(objeto);
-        if (objeto.id != null) {
-            url = 'update-subcategoria' + '/' + objeto.id;
+        if (objeto.id !== 0) {
+            url = `update-subcategoria/${objeto.id}`;
             accion = 'PUT';
         } else {
             url = 'store-subcategoria';
             accion = 'POST';
         }
-        console.log(objeto)
         const resp = await fetchSinToken('subcategoria/' + url, objeto, accion);
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -202,7 +191,6 @@ export const guardarConfiguracionRolArchivo = (objeto) => {
         let accion = 'POST';
         const resp = await fetchSinToken('rol/' + url, objeto, accion);
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -233,7 +221,6 @@ export const bajaCategoria = (id_categoria, id_usuario) => {
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken('categoria/baja-categoria/' + id_categoria, { usuario: id_usuario }, 'PUT');
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -262,7 +249,6 @@ export const bajaArchivos = (id_archivo, usuario) => {
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken('archivo/delete-archivo', { id_archivo, usuario }, 'PUT');
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -290,10 +276,8 @@ export const bajaSubcategoria = (id_subcategoria, id_usuario) => {
     return async (dispatch) => {
         dispatch(startLoading());
         //status/update-baja/' + idObjeto,
-        console.log(id_subcategoria, id_usuario);
         const resp = await fetchSinToken('subcategoria/baja-subcategoria/' + id_subcategoria, { usuario: id_usuario }, 'PUT');
         const body = await resp.json();
-        console.log(body)
         if (body.ok) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -321,7 +305,6 @@ export const getAdminConf = () => {
         const resp = await fetchSinToken('categoria/get-listado-documentos');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body.data)
             dispatch(adminConf(body.data));
         } else {
             Swal.fire({
@@ -338,7 +321,6 @@ export const getAuxFormularioArchivo = () => {
         const resp = await fetchSinToken('archivo/get-aux-formulario-archivo');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body.data)
             dispatch(auxFormArchivo(body.data));
         } else {
             Swal.fire({
@@ -431,7 +413,6 @@ export const getAdminRolesByDepartamento = (id_departamento = 0) => {
         const resp = await fetchSinToken('rol/get-roles-departamento/' + id_departamento);
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getRolesByDepartamento(body.data));
 
         } else {
@@ -464,24 +445,17 @@ export const guardarArchivoConfiguracion = (objeto, id= 0) => {
         let accion = '';
         let forma = new FormData();
         forma = objeto;
-        let tipo;
         dispatch( startLoading() );
         //status/update-baja/' + idObjeto,
-        console.log(id);
         if (id !== 0) {
-            console.log('entro')
-            url = 'archivo/update-archivo' + '/' + id;
+            url = `archivo/update-archivo/${id}`;
             accion = 'POST';
-            tipo = 1;
         } else {
-            console.log('salgo')
 
             url = 'archivo/store-archivo';
             accion = 'POST';
-            tipo = 2;
         }
         const resp = await fetchFormImagen( url, forma, accion );
-        console.log(resp)
         if( resp.data.ok ) {    
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -500,7 +474,6 @@ export const guardarArchivoConfiguracion = (objeto, id= 0) => {
               dispatch(getAdminConf());
 
               
-              console.log('obteniendo datos');
 
         } else {
             //ispatch( getAdminConf() );

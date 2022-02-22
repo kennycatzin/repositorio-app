@@ -7,7 +7,6 @@ export const PublicRoute = ({children}) => {
     const {uid} = useSelector(state => state.auth)
     const rutaServidor = '';
     //const rutaServidor = '/repositorio-af';
-    console.log(uid)
     return ( !!uid
         ? <Navigate to={rutaServidor + "/"} />
         : children 

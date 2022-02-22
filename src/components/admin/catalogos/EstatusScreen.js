@@ -21,7 +21,6 @@ export const EstatusScreen = () => {
     const {tabla} = useSelector(state => state.ui);
 
     const handleNuevo = () => {
-        console.log('abriendo modal')
         dispatch(modalEstatus(true));
     }
     return (

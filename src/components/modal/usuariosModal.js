@@ -38,7 +38,6 @@ export const UsuariosModal = () => {
 
     useEffect(() => {
         if (userActive !== null) {
-            console.log(userActive);
             setformValues(userActive)
         }
     }, [userActive]);
@@ -52,7 +51,6 @@ export const UsuariosModal = () => {
     }
     const closeModal = () => {
 
-        console.log('cerrando');
         dispatch(openCloseModalUsuarios(false));
     }
     const handleClickShowPassword = () => {
@@ -60,7 +58,7 @@ export const UsuariosModal = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (password == password_confirmation && password.length > 5 || password == "") {
+        if ((password === password_confirmation && password.length > 5) || password === "") {
             const obj = {
                 id,
                 name: nombre,
@@ -72,7 +70,7 @@ export const UsuariosModal = () => {
                 usuario,
                 id_usuario: uid
             }
-            if (id == 0 && password == "") {
+            if (id === 0 && password === "") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -80,12 +78,10 @@ export const UsuariosModal = () => {
                 });
                 return false;
             } else {
-                console.log(obj);
                 dispatch(guardarUsuario(obj, userActualConteo));
                 setformValues(initialState);
             }
         } else {
-            console.log('las contraseñas no coinciden');
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -184,7 +180,7 @@ export const UsuariosModal = () => {
                                                 onChange={handleInputChange}
                                             />
                                             <div className="input-group-addon mt-2 ml-2 mr-2">
-                                                <a className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
+                                                <a href='#' className='text-white' onClick={handleClickShowPassword} title='ver / ocultar'
                                                 >
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
@@ -202,7 +198,7 @@ export const UsuariosModal = () => {
                                                 onChange={handleInputChange}
                                             />
                                             <div className="input-group-addon mt-2 ml-2 mr-2">
-                                                <a className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
+                                                <a href='#' className='text-white' onClick={handleClickShowPassword} title='ver / ocultar'
                                                 >
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>

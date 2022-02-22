@@ -7,7 +7,6 @@ import { TipoModal } from '../../../modal/tipoDocumentos';
 export const TablesTipos = ({cabeceras, data}) => {
     const dispatch = useDispatch();
     const handleEditar = (objeto) => {
-        console.log(objeto)
         dispatch(openCloseModalTipoDocumento(true, objeto));        
     }
     const handleEliminar = (objeto) => {

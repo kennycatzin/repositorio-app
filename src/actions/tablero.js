@@ -9,7 +9,6 @@ export const getTableroAdmin = () => {
         const resp = await fetchSinToken('tablero/get-tableros');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getTablero(body.data))
             dispatch( tableFinishLoading() );
 
@@ -58,19 +57,15 @@ export const guardarTablero = (objeto) => {
         forma = objeto;
         dispatch( tableStartLoading() );
         //status/update-baja/' + idObjeto,
-        console.log(forma.get('id'));
         if (forma.get('id') !== "undefined") {
-            console.log('entro')
-            url = 'update-tablero' + '/' + forma.get('id');
+            url = `update-tablero/${forma.get('id')}`;
             accion = 'POST';
         } else {
-            console.log('salgo')
 
             url = 'store-tablero';
             accion = 'POST';
         }
         const resp = await fetchFormImagen( 'tablero/' + url, objeto, accion );
-        console.log(resp)
         if( resp.data.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -100,7 +95,6 @@ export const eliminarTablero = (objeto) => {
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken( 'tablero/baja-tablero', objeto, 'POST' );
         const body = await resp.json();
-        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );

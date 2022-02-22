@@ -41,7 +41,6 @@ export const RepoCategoriaModal = () => {
     }
     const closeModal = () => {
 
-        console.log('cerrando');
         dispatch(openModalCategoria(false, {}));
     }
 
@@ -56,7 +55,6 @@ export const RepoCategoriaModal = () => {
         }
         dispatch(guardarCategoria(objGuarda));
         setFormValues(initialState);
-        console.log('Guardando');
 
     }
 

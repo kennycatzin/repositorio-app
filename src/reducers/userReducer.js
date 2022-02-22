@@ -10,7 +10,6 @@ const initialState = {
 export const usersReducer = (state = initialState, action) => {
     switch (action.type) {        
         case types.userGetUsuarios:
-            console.log(action.payload)
             return {
                 ...state,
                 userUsuarios: action.payload.data,
@@ -26,7 +25,6 @@ export const usersReducer = (state = initialState, action) => {
                 checking: false
             }
         case types.userPaginar:    
-        console.log(action.payload);
             return {
                 ...state,
                 userActualPage: state.userActualPage + action.payload.paginador,

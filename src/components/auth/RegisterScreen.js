@@ -25,13 +25,11 @@ export const RegisterScreen = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
        if(isFormValid()){
-            console.log('ya se debio disparar');
             dispatch(register(usuario, correo, password, nombre));
             
             navigate("/login", {replace: true});
 
         }else{
-            console.log('no se dispararon las acciones')
         }
     }
     const [values, setValues] = React.useState({
@@ -49,17 +47,14 @@ export const RegisterScreen = () => {
             return false;
         }else if(usuario.trim().length === 0){
             dispatch(uiError('El usuario es requerido'));
-            console.log('usuario incorrecto');
             Swal.fire('El usuario es requerido')
 
             return false;
         }else if(!isEmail(correo)){
             dispatch(uiError('El correo es inválido'));
-            console.log('correo incorrecto');
             return false;
         }else if(password.trim().length < 3){
             dispatch(uiError('El password debe ser más de 3 carteres'));
-            console.log('password incorrecto');
             Swal.fire('El password debe ser más de 3 carteres')
 
             return false
@@ -122,7 +117,7 @@ export const RegisterScreen = () => {
                                     onChange={handleInputChange}
                                 />
                                  <div className="input-group-addon mt-2 ml-2 mr-2">
-                                        <a className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
+                                        <a href='#' onClick={handleClickShowPassword} title='ver / ocultar'
                                         >
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>

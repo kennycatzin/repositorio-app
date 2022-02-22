@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getDataDashboard, getListaArchivos } from '../../../actions/dashboard';
+import { getDataDashboard } from '../../../actions/dashboard';
 import { CardsEntries } from './CardsEntries'
 import { CarouselEntries } from './CarouselEntries'
 import { PendientesComponent } from './PendientesComponent';

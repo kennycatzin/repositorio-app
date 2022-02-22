@@ -55,7 +55,6 @@ export const RolesModal = () => {
             id_departamento
         }
         dispatch(guardarRol(obj, actualConteo));        
-        console.log('guardando...');
         
     }
 

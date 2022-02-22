@@ -1,20 +1,17 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { eliminarDepartamento, getDepartamentos, getPaginacionDepas, openCloseModalDepartamentos } from '../../../../actions/departamentos';
+import { eliminarDepartamento, getDepartamentos, openCloseModalDepartamentos } from '../../../../actions/departamentos';
 import { DepartamentosModal } from '../../../modal/departamentosModal'
 import Swal from 'sweetalert2'
 
 export const TableDepartamentos = ({ cabeceras, data }) => {
     const dispatch = useDispatch();
-    const {depaIndex} = useSelector(state => state.departamentos);
     const [contador, setContador] = useState(0);
     const handleEditar = (item) => {
-        console.log(item)
         dispatch(openCloseModalDepartamentos(true, item));
     }
     const {totales} = useSelector(state => state.departamentos);
     const handleEliminar = (item) => {
-        console.log(item)
         Swal.fire({
             title: 'Realmente desea eliminar este registro?',
             text: "No podrá revertir esta acción",
@@ -35,7 +32,6 @@ export const TableDepartamentos = ({ cabeceras, data }) => {
     }
     const handlePaginar = (index) => {
         let valor = contador + (index);
-        console.log(valor);
         if(valor >= 0 && valor <= totales){
             dispatch(getDepartamentos(valor));
             setContador(valor);

@@ -7,11 +7,9 @@ export const FolderComponent = ({categoria, tipo}) => {
     const dispatch = useDispatch();
     const handleClick = () => {
         if(tipo === 2){
-            console.log('Aqui hago la funcion para buiscar')
-            console.log(categoria);
+       
 
             dispatch(setSubFolderActive(categoria));
-            console.log('Se debio guardar en el state')
         }else{
             dispatch(repoSetFolderActive(categoria));
 

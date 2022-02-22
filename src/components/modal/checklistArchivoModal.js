@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminRolesByDepartamento, guardarConfiguracionRolArchivo, openCloseChecklistArchivoModal } from '../../actions/repositorio';
@@ -11,7 +11,6 @@ export const ChecklistArchivoModal = () => {
     const id_archivo = useSelector(state => state.repo.activeArchivo.id);
     const { uid } = useSelector(state => state.auth);
     const {depas} = useSelector(state => state.repo.auxiliaresFormArchivos);
-    const [formValues, setformValues] = useState();
     // const id_departamento = formValues;
     const [id_departamento, setid_Departamento] = useState(0);
     const {titulo} = useSelector(state => state.repo.subcategoriaActiva);
@@ -32,9 +31,7 @@ export const ChecklistArchivoModal = () => {
         },
     };
     const handleInputChange = ({ target }) => {
-        console.log(target);
         // setidDepartamento(target.value);
-        // console.log(target.value)
         // dispatch(getAdminRolesByDepartamento(idDepartamento));  
 
 
@@ -43,14 +40,12 @@ export const ChecklistArchivoModal = () => {
         //     [target.name]: target.value
         // });
         setid_Departamento(target.value)
-        console.log(target.value);
         dispatch(getAdminRolesByDepartamento(target.value));  
     }
     // const [dateStart, setDateStart] = useState(now.toDate())
     const closeModal = () => {
 
         dispatch(openCloseChecklistArchivoModal(false, {}));
-        console.log('cerrando');
     }
     const handleGuardar = () => {
         let arrRoles = [];
@@ -61,7 +56,6 @@ export const ChecklistArchivoModal = () => {
             usuario: uid,
             roles: arrRoles
         }
-        console.log(objSend);
         dispatch(guardarConfiguracionRolArchivo(objSend));
         handleReset();
     }
@@ -101,7 +95,6 @@ export const ChecklistArchivoModal = () => {
                                                 onChange={handleInputChange}>
                                                 <option value="">Seleccione un área</option>
                                                 {
-                                                    // console.log(auxiliaresFormArchivos.tipos)
                                                     (depas !== undefined ) &&
                                                         depas.map((aux) => (
                                                             <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>
@@ -131,7 +124,7 @@ export const ChecklistArchivoModal = () => {
                                         <table className="table">
                                             <tbody>
                                                 {
-                                                    (repoAdminDepa != undefined) &&
+                                                    (repoAdminDepa !== undefined) &&
                                                     repoAdminDepa.map((v, i) => (
                                                         <tr key={i}>
                                                             <td>

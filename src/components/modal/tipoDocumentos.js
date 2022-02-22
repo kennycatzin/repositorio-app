@@ -14,7 +14,7 @@ export const TipoModal = () => {
     const { tdModal, tdActive } = useSelector(state => state.tipoDocumentos);
     const dispatch = useDispatch();
     const [formValues, setFormValues] = useState(initialState);
-    const { id = 0, tipo = '', descripcion = '', nombre_corto = '', usuario= 1 } = formValues;
+    const { id = 0, tipo = '', descripcion = '', nombre_corto = '' } = formValues;
     const {uid} = useSelector(state => state.auth)
 
         
@@ -31,7 +31,6 @@ export const TipoModal = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(id);
         const objSave = {
             id,
             tipo,
@@ -40,7 +39,6 @@ export const TipoModal = () => {
             usuario: uid
         }
         dispatch(guardarTipoDocumento(objSave));
-        console.log(objSave);
         // dispatch();
         closeModal();
     }
@@ -55,7 +53,6 @@ export const TipoModal = () => {
         },
     };
     const closeModal = () => {
-        console.log('cerrando');
         
         dispatch(openCloseModalTipoDocumento(false));
     }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { FolderComponent } from '../../shared/folderComponent';
 import { CategoriaComponent } from './categoriaComponent';
 
 export const CategoryEntries = () => {

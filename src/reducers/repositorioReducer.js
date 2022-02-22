@@ -33,7 +33,6 @@ export const repositorioReducer = (state = initialState, action) => {
                 checking: false
             }
             case types.repoGetFiles:
-                console.log(state)
             return {
                 ...state,
                 filesData: [...action.payload],
@@ -67,7 +66,7 @@ export const repositorioReducer = (state = initialState, action) => {
             } 
             case types.repoDeleteDataArchivo:
                 let idDelArchivo = action.payload;           
-                let newArrayDel = state.subcategoriaActiva.archivos.filter((item) => item.id != idDelArchivo);
+                let newArrayDel = state.subcategoriaActiva.archivos.filter((item) => item.id !== idDelArchivo);
                 let subCatDel = state.subcategoriaActiva;
                 let objFinalDel = {
                     ...subCatDel,
@@ -90,14 +89,12 @@ export const repositorioReducer = (state = initialState, action) => {
 
                 }
             case types.repoModalCategoria:
-                console.log('entro')
                 return {
                     ...state,
                     activeCategoria: action.payload.objeto,
                     modalCategoria: action.payload.modalCategoria
                 }  
             case types.repoModalArchivo:
-                console.log('entro')
                 return {
                     ...state,
                     subcategoriaActiva: action.payload.objeto,
@@ -133,7 +130,6 @@ export const repositorioReducer = (state = initialState, action) => {
                     modalChecklistArchivo: action.payload.modalChecklist,
                 }    
             case types.repoGetRolesByDepartamento:     
-                console.log('entro a configuracion');       
                 return {
                     ...state,
                     repoAdminDepa: action.payload.rolDepa

@@ -12,7 +12,6 @@ export const registroEstatus = (objeto = {}, tipo= '', endpoint = '', segEndpoin
                 Swal.showLoading()
             },
         })
-        console.log(objeto)
         dispatch( startLoading() );
         let url = '';
         let accion = '';
@@ -23,10 +22,8 @@ export const registroEstatus = (objeto = {}, tipo= '', endpoint = '', segEndpoin
             url = endpoint;
             accion = 'POST';
         }
-        console.log(objeto)
         const resp = await fetchSinToken( tipo + '/' + url, objeto, accion );
         const body = await resp.json();
-        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -56,7 +53,6 @@ export const getTableObjeto = (tipo, endPoint = '') => {
             const body = await resp.json();
             if( body.ok ) {
                 dispatch( finishLoading() );
-                console.log(body);
                 dispatch( getObjeto(body.data));
             } else {
                 dispatch( finishLoading() );
@@ -75,7 +71,6 @@ export const getAuxRoles = () => {
             const body = await resp.json();
             if( body.ok ) {
                 dispatch( finishLoading() );
-                console.log(body);
                 dispatch( getRolesAuxiliar(body.data));
             } else {
                 dispatch( finishLoading() );
@@ -94,7 +89,6 @@ const getRolesAuxiliar = ( objeto ) => ({
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken( `${objeto}/${endPoint}/` + idObjeto, {activo, usuario}, 'PUT' );
         const body = await resp.json();
-        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );

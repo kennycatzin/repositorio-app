@@ -35,7 +35,6 @@ export const DetalleArchivoModal = () => {
 
     const closeModal = () => {
         dispatch(openModalDetalleArchivo(false, {}));
-        console.log('cerrando')
     }
     Modal.setAppElement('#root');
     return (

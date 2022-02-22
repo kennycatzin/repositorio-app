@@ -19,7 +19,6 @@ export const authReducer = (state = initialState, action) => {
             }
 
         case types.authLogout:
-            console.log('voy para juera');
             return {
                 checking: false
             }

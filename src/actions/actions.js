@@ -15,7 +15,6 @@ export const startLoginEmailPAssword = (usuario, password) => {
         dispatch( startLoading() );
         const resp = await fetchSinToken( 'auth/login', {usuario, password}, 'POST' );
         const body = await resp.json();
-        console.log(body);
         if( body.ok ) {
             localStorage.setItem('token', body.token );
             localStorage.setItem('id', body.usuario.id );
@@ -58,7 +57,6 @@ export const register = (usuario, email, password, name) => {
         dispatch( startLoading() );
         const resp = await fetchSinToken( 'auth/register', {email, password, name, password_confirmation: password, usuario}, 'POST' );
         const body = await resp.json();
-        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );
@@ -84,7 +82,6 @@ export const register = (usuario, email, password, name) => {
 export const startChecking = () => {
     return async(dispatch) => {
         const miID = localStorage.getItem('id');
-        console.log(miID);
         if(miID != null){        
             const resp = await fetchSinToken( 'auth/renovar/'+ miID);
             const body = await resp.json();

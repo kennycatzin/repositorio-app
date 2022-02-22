@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { guardarDepartamento, openCloseModalDepartamentos } from '../../actions/departamentos';
-import { modalEstatus } from '../../actions/ui';
 import Swal from 'sweetalert2'
 import validator from 'validator';
 
@@ -19,7 +18,7 @@ export const DepartamentosModal = () => {
     const { depaModal, depaActive } = useSelector(state => state.departamentos);
     const dispatch = useDispatch();
     const [formValues, setFormValues] = useState(initialState);
-    const { id = 0, departamento = '', descripcion = '', nombre_corto = '', correo = '', usuario= 1 } = formValues;
+    const { id = 0, departamento = '', descripcion = '', nombre_corto = '', correo = ''} = formValues;
     const {uid} = useSelector(state => state.auth)
 
     const customStyles = {
@@ -39,7 +38,6 @@ export const DepartamentosModal = () => {
      }, [depaActive, setFormValues]);
     const closeModal = () => {
         
-        console.log('cerrando');
         dispatch(openCloseModalDepartamentos(false));        
 
     }
@@ -62,7 +60,6 @@ export const DepartamentosModal = () => {
                 usuario: uid
             }
             dispatch(guardarDepartamento(objSave));
-            console.log(objSave);
             // dispatch();
             closeModal();
         }else{
@@ -73,12 +70,6 @@ export const DepartamentosModal = () => {
                 footer: '<span>Debe contener @ y dominio (correo@dominio.com)</span>'
               })
         }
-    }
-    const validaciones = (valor) => {
-        if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)){
-            return true;
-        }
-        return false;
     }
     const email = (value) => {
         if (!validator.isEmail(value)) {

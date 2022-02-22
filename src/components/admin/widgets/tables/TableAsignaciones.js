@@ -7,13 +7,10 @@ import { eliminarObjeto } from '../../../../actions/catalogos';
 export const TableAsignaciones = ({ cabeceras, data }) => {
     const dispatch = useDispatch();
     const {tabla} = useSelector(state => state.ui);
-    console.log(tabla)
     const handleEditar = (item) => {
         dispatch((modalEstatus(true, item)));
-        console.log(item)
     }
     const handleEliminar = (item) => {
-        console.log(item)
         const {id} = item;
         Swal.fire({
             title: 'Realmente desea eliminar este usuario?',

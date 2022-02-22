@@ -16,7 +16,6 @@ import { AdminRoutes } from './AdminRoutes';
 export const AppRouter = () => {
     const dispatch = useDispatch();    
     const { checking, tipo} = useSelector(state => state.auth)
-    console.log(checking, tipo);
     const rutaServidor = '';
     //const rutaServidor = '/repositorio-af';
     useEffect(() => {

@@ -2,12 +2,10 @@ import Swal from 'sweetalert2'
 import { fetchSinToken } from '../helpers/fetch';
 import { types } from '../types/types';
 export const getUsuariosAdmin = (index = 0) => {
-    console.log(index);
     return async (dispatch) => {
         const resp = await fetchSinToken('user/get-data-admin/' + index);
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getUsuarios(body.data, body.mensaje, body.paginas))
         } else {
             Swal.fire({
@@ -56,7 +54,7 @@ export const guardarUsuario = (objeto, conteoActual) => {
         let url = '';
         let accion = '';
         if (objeto.id !== 0) {
-            url = 'auth/update-user' + '/' + objeto.id;
+            url = `auth/update-user/${objeto.id} `;
             accion = 'POST';
         } else {
             url = 'user/guardar-usuario';
@@ -87,7 +85,6 @@ export const getBusquedaUsuarios = (obj) => {
         const resp = await fetchSinToken('user/get-busqueda', obj, 'POST');
         const body = await resp.json();
         if (body.ok) {
-            console.log(body)
             dispatch(getUsuarios(body.data, body.mensaje));
 
         } else {
@@ -105,7 +102,6 @@ export const eliminarUsuario = (objeto, conteo) => {
         //status/update-baja/' + idObjeto,
         const resp = await fetchSinToken( 'user/set-usuario-baja/' + objeto.id, objeto, 'PUT' );
         const body = await resp.json();
-        console.log(body)
         if( body.ok ) {
             // localStorage.setItem('token', body.token );
             // localStorage.setItem('token-init-date', new Date().getTime() );

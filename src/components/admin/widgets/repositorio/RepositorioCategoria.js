@@ -33,7 +33,6 @@ export const RepositorioCategoria = ({ data }) => {
          dispatch(categoriaActiva(obj));
     };
     const handleAgregarSubcategoria = () => {
-        console.log('abrir modal bro');
         dispatch(openModalSubcategoria(true, {}));
     }
     return (

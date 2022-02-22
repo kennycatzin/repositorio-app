@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { getAdminConfiguracion, getCategoriasRoles, openCloseConfModalRolArchivo } from '../../../actions/roles';
-import { ArchivoModal } from '../../modal/archivoModal';
 import { ConfRolesArchivosModal } from '../../modal/confRolesArchivosModal';
 import { ConfRolCategoria } from '../widgets/ConfRolCategoria';
 
@@ -13,14 +12,13 @@ export const ArchivoConf = () => {
   const { rolAdminListado } = useSelector(state => state.roles);
 
   const handdleRegresar = () => {
-    console.log("regresando");
     navigate(-1);
   }
   useEffect(() => {
    dispatch(getCategoriasRoles());
    (!!activeRol)&&
     dispatch(getAdminConfiguracion(activeRol.id))   
-  }, [dispatch]);
+  }, [dispatch, activeRol.id, activeRol]);
   
 
   const handleConfigurar = () => {
@@ -65,7 +63,7 @@ export const ArchivoConf = () => {
             <div className="table-responsive">
               <div id="accordion">
                 {
-                  (rolAdminListado != undefined)?
+                  (rolAdminListado !== undefined)?
                     rolAdminListado.map(item => (
                       <ConfRolCategoria key={item.id} data={item} />
                     )):
@@ -76,7 +74,6 @@ export const ArchivoConf = () => {
           </div>
         </div>
       </div>
-      <ArchivoModal />
       <ConfRolesArchivosModal />
     </>
   )

@@ -19,11 +19,11 @@ export const RolesScreen = () => {
     const handleAgregar = () => {
         dispatch(openCloseModalRol(true, {}))
     }
-    const { roles, rolTotal, paginas } = useSelector(state => state.roles) 
+    const { roles, rolTotal } = useSelector(state => state.roles) 
     const handleBuscar = (e) => {
         e.preventDefault();
         setbusqueda(e.target.value)
-        if(e.target.value != ''){
+        if(e.target.value !== ''){
             if(e.target.value.length > 2){
                 const obj = {
                     busqueda: e.target.value

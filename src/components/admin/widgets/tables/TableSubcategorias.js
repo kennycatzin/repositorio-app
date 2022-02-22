@@ -13,13 +13,11 @@ export const TableSubcategorias = ({ data }) => {
 
     }
     const handleAgregarArchivo = (obj) => {
-        console.log('abrir modal bro');
         //dispatch(openModalSubcategoria(true, data));
         // TODO: Funcionalidad modal
         dispatch(openModalArchivo(true, obj));
     }
     const handleEliminar = (item) => {
-        console.log(item)
         const { id } = item;
         Swal.fire({
             title: 'Realmente desea eliminar este registro?',

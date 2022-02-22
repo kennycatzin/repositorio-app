@@ -37,7 +37,6 @@ export const TableroModal = () => {
 
     useEffect(() => {
         if(activeTablero !== undefined && activeTablero !== {}){
-            console.log(activeTablero)
             const valores = {
                 id: activeTablero.id,
                 titulo: activeTablero.titulo,
@@ -53,12 +52,10 @@ export const TableroModal = () => {
 
     const closeModal = () => {
 
-        console.log('cerrando');
         dispatch(openCloseModalTablero(false));
     }
     const handleImagenChange = (e) => {
-        console.log(e.target.files[0]);
-        if(e.target.files[0].type == "image/png" || e.target.files[0].type == "image/jpeg"){
+        if(e.target.files[0].type === "image/png" || e.target.files[0].type === "image/jpeg"){
             setmiImagen(e.target.files[0]);
         }else{
             Swal.fire({
@@ -71,7 +68,7 @@ export const TableroModal = () => {
         // setSelectedFile(e.target.files[0]);
     }
     const handleInputChange = ({ target }) => {
-        if(target.name == "fecha_inicio" || target.name == "fecha_final"){
+        if(target.name === "fecha_inicio" || target.name === "fecha_final"){
             if(target.value >= moment(fecha).format('YYYY-MM-DD')){
                 setFormValues({
                     ...formValues,

@@ -67,7 +67,6 @@ export const rolReducer = (state = initialState, action) => {
             }
         case types.rolDeleteCrudo:
             let obj = action.payload;
-            console.log(obj);
             let newArray = state.archivos_crudos.filter((item) => item.id_archivo !== obj.id_archivo);
             const miObjeto = {   
                 id: (new Date()).getTime().toString(36),             
@@ -83,7 +82,7 @@ export const rolReducer = (state = initialState, action) => {
             }
         case types.rolDeleteConfigurado:
             let objDel = action.payload;           
-            let newArrayDel = state.archivos_configurados.filter((item2) => item2.id != objDel.id);
+            let newArrayDel = state.archivos_configurados.filter((item2) => item2.id !== objDel.id);
             state.archivos_crudos.push(objDel);
             return {
                 ...state,
@@ -97,7 +96,6 @@ export const rolReducer = (state = initialState, action) => {
 
             }
         case types.rolGetConfiguracionAdmin:     
-            console.log('entro a configuracion');       
             return {
                 ...state,
             rolAdminListado: action.payload

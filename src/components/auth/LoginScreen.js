@@ -5,7 +5,6 @@ import './auth.css';
 import { useDispatch } from 'react-redux'
 import { startLoginEmailPAssword } from '../../actions/actions';
 import { useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
 export const LoginScreen = () => {
     // dar acceso al dispatch
     const { loading } = useSelector(state => state.ui);
@@ -25,7 +24,6 @@ export const LoginScreen = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         dispatch(startLoginEmailPAssword(email, password))
-        console.log(email, password);
 
     }
     return (
@@ -66,7 +64,7 @@ export const LoginScreen = () => {
                                         onChange={handleInputChange}
                                     />
                                     <div className="input-group-addon mt-2 ml-2 mr-2">
-                                        <a className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
+                                        <a href='#' onClick={handleClickShowPassword} title='ver / ocultar'
                                         >
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>

@@ -28,17 +28,14 @@ export const ConfRolesArchivosModal = () => {
     // const [dateStart, setDateStart] = useState(now.toDate())
     const handleInputChange = ({ target }) => {
         setcategoria(target.value);
-        console.log(target.value);
         dispatch(getSubcategoriasRoles(target.value));
     }
     const handleInputChangeSubcategoria = ({ target }) => {
         setsubcategoria(target.value);
-        console.log(target.value);
         dispatch(getArchivosAdminConf(target.value, activeRol.id));
     }
     const closeModal = () => {
 
-        console.log('cerrando');
         dispatch(openCloseConfModalRolArchivo(false));
     }
     const handleClick = (obj) => {
@@ -50,11 +47,9 @@ export const ConfRolesArchivosModal = () => {
             usuario: uid,
             archivos: archivos_configurados
         }
-        console.log(subcategoria.id, activeRol.id);
         dispatch(configurarArchivoRol(objSave, subcategoria, activeRol.id));
     }
     const handleEliminar = (item) => {
-        console.log(item);
         Swal.fire({
             title: 'Realmente desea eliminar este registro?',
             text: "No podrá revertir esta acción",
@@ -65,8 +60,7 @@ export const ConfRolesArchivosModal = () => {
             confirmButtonText: 'Si, eliminar'
         }).then((result) => {
             if (result.isConfirmed) {
-                if (item.tipo == 'n') {
-                    console.log('entro al n');
+                if (item.tipo === 'n') {
                     dispatch(deleteArchivoAddCrudo(item))
                 } else {
                     dispatch(bajaConfArchivoRol(item, 1, activeRol.id))
@@ -144,7 +138,7 @@ export const ConfRolesArchivosModal = () => {
 
                                                     <tbody>
                                                         {
-                                                            (archivos_crudos != undefined) &&
+                                                            (archivos_crudos !== undefined) &&
                                                             archivos_crudos.map((item, index) => (
                                                                 <tr key={(new Date()).getTime().toString(2 + index)} className='animate__animated animate__fadeIn size'>
                                                                     <td>{item.nombre}</td>
@@ -176,7 +170,7 @@ export const ConfRolesArchivosModal = () => {
                                                     </thead>
                                                     <tbody>
                                                         {
-                                                            (archivos_configurados != undefined) &&
+                                                            (archivos_configurados !== undefined) &&
                                                             archivos_configurados.map(item => (
                                                                 <tr key={item.id} className='animate__animated animate__fadeIn'>
                                                                     <td>{item.nombre}</td>

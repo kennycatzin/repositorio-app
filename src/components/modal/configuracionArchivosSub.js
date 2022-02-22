@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import {  guardarArchivoConfiguracion, openModalFormularioArchivos } from '../../actions/repositorio';
-import Swal from 'sweetalert2'
 
 const initialState = {
     id: 0,
@@ -25,7 +24,7 @@ export const ConfiguracionArchivoSub = () => {
     const {uid} = useSelector(state => state.auth)
     const {titulo} = useSelector(state => state.repo.subcategoriaActiva);
     const objCategoria = useSelector(state => state.repo.activeCategoria);
-    const { id, consecutivo = 0, descripcion = '', id_tipo = 0, id_departamento= 0,  archivo = ''} = formValues;
+    const { id, consecutivo = 0, descripcion = '', id_tipo = 0, id_departamento= 0} = formValues;
 
     const customStyles = {
         content: {
@@ -43,12 +42,10 @@ export const ConfiguracionArchivoSub = () => {
         }
      }, [activeArchivo, setformValues])
     const handleImagenChange = (e) => {
-        console.log(e.target.files[0]);
         setmiArchivo(e.target.files[0]);
     }
     // const [dateStart, setDateStart] = useState(now.toDate())
     const handleInputChange = ({ target }) => {
-        console.log(target);
         setformValues({
             ...formValues,
             [target.name]: target.value
@@ -77,7 +74,6 @@ export const ConfiguracionArchivoSub = () => {
 
     const closeModal = () => {
         dispatch(openModalFormularioArchivos(false, {}))
-        console.log('cerrando')
     }
     Modal.setAppElement('#root');
     return (
@@ -124,7 +120,6 @@ export const ConfiguracionArchivoSub = () => {
                                                 onChange={handleInputChange}>
                                                 <option value="">Seleccione un tipo de documento</option>
                                                 {
-                                                    // console.log(auxiliaresFormArchivos.tipos)
                                                     (tipos !== undefined ) &&
                                                         tipos.map((aux) => (
                                                             <option key={aux.id_tipo} value={aux.id_tipo}>{aux.tipo_completo}</option>
@@ -156,7 +151,6 @@ export const ConfiguracionArchivoSub = () => {
                                                 onChange={handleInputChange}>
                                                 <option value="">Seleccione un área</option>
                                                 {
-                                                    // console.log(auxiliaresFormArchivos.tipos)
                                                     (depas !== undefined ) &&
                                                         depas.map((aux) => (
                                                             <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>

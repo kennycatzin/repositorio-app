@@ -8,7 +8,6 @@ import moment from 'moment';
 export const TableTablero = ({cabeceras, data}) => {
     const dispatch = useDispatch();
     const handleEditar = (item) => {
-        console.log(item)
         dispatch(openCloseModalTablero(true, item));
     }
 
