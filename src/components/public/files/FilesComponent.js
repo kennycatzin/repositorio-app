@@ -18,13 +18,12 @@ export const FilesComponent = ({ data }) => {
             <div className="card card-user">
                 <div className="author">
                     <div className="card-body text-center">
-                        <div className="block block-two"></div>
-                        <div className="block block-four"></div>
+                       
                         <img className="img-fluid w-50" src="https://icon-library.com/images/1274d94986596d5426ef6ff28712209f.png" alt="..." />
-                        <p className="description">
+                        <p className="text-white">
                             {data.nombre}
                         </p>
-                        <p className="text-muted">
+                        <p className="text-white">
                             {data.descripcion}
                         </p>
                     </div>

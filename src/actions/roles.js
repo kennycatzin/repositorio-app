@@ -272,7 +272,7 @@ export const configurarArchivoRol = (obj, id_subcategoria, id_rol) => {
             // localStorage.setItem('token-init-date', new Date().getTime() );
             Swal.fire({
                 title: 'Datos correctos',
-                text: 'Se ha eliminado correctamente',
+                text: 'Se ha guardado correctamente',
                 confirmButtonColor: "#1d8cf8",
                 icon: 'success',
             })

@@ -2,8 +2,8 @@ import axios from 'axios';
 
 //const baseUrl = 'http://localhost:8000/api';
 //const baseUrlPruebas = 'http://172.18.4.205:8080/repositorio-api/public/api';
-//const baseUrl = 'http://172.18.3.7/repositorio-api/public/api';
-const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
+const baseUrl = 'http://172.18.3.7/repositorio-api/public/api';
+//const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
 
 const fetchSinToken = (endpoint, data, method = 'GET') => {
     const url = `${ baseUrl }/${ endpoint }`;

@@ -37,7 +37,7 @@ export const ArchivoConf = () => {
       </div>
       <div className="row">
         <div className="col-sm-6 text-left">
-          <h5 className="card-category">Configuracion</h5>
+          <h5 className="card-category">Configuración</h5>
           <h2 className="card-title">{(!!activeRol)&& activeRol.rol}</h2>
         </div>
         <div className="col-sm-6">

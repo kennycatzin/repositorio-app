@@ -11,8 +11,8 @@ export const Sidebar = () => {
                     <Link to="/" className="simple-text logo-mini">
                         <i className="fa fa-check-circle" aria-hidden="true"></i>
                     </Link>
-                    <Link to="/" className="simple-text logo-normal">
-                        Repositorio
+                    <Link to="/" className="simple-text logo-normal text-left">
+                        Menú
                     </Link>
                 </div>
                 <ul className="nav">
