@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { addArchivoAconfigurar, bajaConfArchivoRol, configurarArchivoRol, deleteArchivoAddCrudo, getArchivosAdminConf, getSubcategoriasRoles, openCloseConfModalRolArchivo } from '../../actions/roles';
+import { addArchivoAconfigurar, bajaConfArchivoRol, configurarArchivoRol, deleteArchivoAddCrudo, getArchivosAdminConf, getSubcategoriasRoles, openCloseConfModalRolArchivo } from './../../../actions/roles';
 import Swal from 'sweetalert2';
 export const ConfRolesArchivosModal = () => {
     const { modalConfRolArchivoOpen } = useSelector(state => state.roles);

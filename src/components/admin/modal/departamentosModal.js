@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { guardarDepartamento, openCloseModalDepartamentos } from '../../actions/departamentos';
+import { guardarDepartamento, openCloseModalDepartamentos } from '../../../actions/departamentos';
 import Swal from 'sweetalert2'
 import validator from 'validator';
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { getTableObjeto } from '../../../actions/catalogos';
 import { modalEstatus } from '../../../actions/ui';
-import { EstatusModal } from '../../modal/estatusModal';
+import { EstatusModal } from '../modal/estatusModal';
 import { TableEstatus } from '../widgets/tables/TableEstatus';
 
 export const EstatusScreen = () => {

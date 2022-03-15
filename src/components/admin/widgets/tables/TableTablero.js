@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2'
 import { eliminarTablero, openCloseModalTablero,  } from '../../../../actions/tablero';
-import { TableroModal } from '../../../modal/tableroModal';
+import { TableroModal } from '../../modal/tableroModal';
 import moment from 'moment';
 
 export const TableTablero = ({cabeceras, data}) => {

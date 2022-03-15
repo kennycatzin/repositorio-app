@@ -1,9 +1,8 @@
 import React from 'react'
-import { useEffect } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAuxFormularioArchivo, openModalArchivo, openModalFormularioArchivos } from '../../actions/repositorio';
-import { TableConfArchivos } from '../admin/widgets/tables/TableConfArchivos';
+import { openModalArchivo, openModalFormularioArchivos } from '../../../actions/repositorio';
+import { TableConfArchivos } from '../../admin/widgets/tables/TableConfArchivos';
 import {ConfiguracionArchivoSub} from './configuracionArchivosSub';
 import { DetalleArchivoModal } from './detalleArchivoModal';
 

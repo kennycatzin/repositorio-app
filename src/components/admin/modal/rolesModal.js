@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { guardarRol, openCloseModalRol } from '../../actions/roles';
+import { guardarRol, openCloseModalRol } from '../../../actions/roles';
 
 const initialState = {
     id: 0,

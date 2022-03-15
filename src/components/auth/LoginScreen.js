@@ -64,10 +64,10 @@ export const LoginScreen = () => {
                                         onChange={handleInputChange}
                                     />
                                     <div className="input-group-addon mt-2 ml-2 mr-2">
-                                        <a href='#' onClick={handleClickShowPassword} title='ver / ocultar'
+                                        <div className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
                                         >
                                             <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <br />

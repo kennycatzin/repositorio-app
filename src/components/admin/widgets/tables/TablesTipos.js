@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2'
 import { eliminarTipoDocumento, openCloseModalTipoDocumento } from '../../../../actions/tipoDocumentos'
-import { TipoModal } from '../../../modal/tipoDocumentos';
+import { TipoModal } from '../../modal/tipoDocumentos';
 
 export const TablesTipos = ({cabeceras, data}) => {
     const dispatch = useDispatch();

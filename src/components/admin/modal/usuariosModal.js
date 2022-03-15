@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { guardarUsuario, openCloseModalUsuarios } from '../../actions/user';
+import { guardarUsuario, openCloseModalUsuarios } from '../../../actions/user';
 import Swal from 'sweetalert2';
 
 const initialState = {
@@ -180,10 +180,10 @@ export const UsuariosModal = () => {
                                                 onChange={handleInputChange}
                                             />
                                             <div className="input-group-addon mt-2 ml-2 mr-2">
-                                                <a href='#' className='text-white' onClick={handleClickShowPassword} title='ver / ocultar'
+                                                <div className='text-white pointer' onClick={handleClickShowPassword} title='ver / ocultar'
                                                 >
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -198,10 +198,10 @@ export const UsuariosModal = () => {
                                                 onChange={handleInputChange}
                                             />
                                             <div className="input-group-addon mt-2 ml-2 mr-2">
-                                                <a href='#' className='text-white' onClick={handleClickShowPassword} title='ver / ocultar'
+                                                <div className='text-white pointer' onClick={handleClickShowPassword} title='ver / ocultar'
                                                 >
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
+                                                    <i className="fa fa-eye" aria-hidden="true"></i>
+                                                </div>
                                             </div>
                                         </div>
 

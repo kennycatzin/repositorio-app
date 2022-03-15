@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { bajaRol, getRolesAdmin, manejadoPaginador, openCloseModalRol, setRolActivo } from '../../../../actions/roles';
-import { RolesModal } from '../../../modal/rolesModal';
+import { RolesModal } from '../../modal/rolesModal';
 import Swal from 'sweetalert2'
 
 export const TableRoles = ({ cabeceras, data }) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { eliminarDepartamento, getDepartamentos, openCloseModalDepartamentos } from '../../../../actions/departamentos';
-import { DepartamentosModal } from '../../../modal/departamentosModal'
+import { DepartamentosModal } from '../../modal/departamentosModal'
 import Swal from 'sweetalert2'
 
 export const TableDepartamentos = ({ cabeceras, data }) => {

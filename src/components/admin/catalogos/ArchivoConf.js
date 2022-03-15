@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { getAdminConfiguracion, getCategoriasRoles, openCloseConfModalRolArchivo } from '../../../actions/roles';
-import { ConfRolesArchivosModal } from '../../modal/confRolesArchivosModal';
+import { ConfRolesArchivosModal } from '../modal/confRolesArchivosModal';
 import { ConfRolCategoria } from '../widgets/ConfRolCategoria';
 
 export const ArchivoConf = () => {

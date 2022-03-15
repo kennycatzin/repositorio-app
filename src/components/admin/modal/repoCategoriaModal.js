@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { guardarCategoria, openModalCategoria } from '../../actions/repositorio';
+import { guardarCategoria, openModalCategoria } from '../../../actions/repositorio';
 
 const initialState = {
     id: null,

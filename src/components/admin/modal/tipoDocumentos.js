@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { guardarTipoDocumento, openCloseModalTipoDocumento } from '../../actions/tipoDocumentos';
+import { guardarTipoDocumento, openCloseModalTipoDocumento } from './../../../actions/tipoDocumentos';
 
 const initialState = {
     id: null,

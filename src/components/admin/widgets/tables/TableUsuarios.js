@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { eliminarUsuario, getUsuariosAdmin, openCloseModalUsuarios, userManejadoPaginador } from '../../../../actions/user'
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux'
-import { UsuariosModal } from '../../../modal/usuariosModal'
+import { UsuariosModal } from '../../modal/usuariosModal'
 
 export const TableUsuarios = ({ cabeceras, data }) => {
     const dispatch = useDispatch();

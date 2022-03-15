@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { guardarTablero, openCloseModalTablero } from '../../actions/tablero';
+import { guardarTablero, openCloseModalTablero } from '../../../actions/tablero';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 

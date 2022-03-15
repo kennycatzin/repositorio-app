@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { registroEstatus } from '../../actions/catalogos';
-import { modalEstatus } from '../../actions/ui';
+import { registroEstatus } from '../../../actions/catalogos';
+import { modalEstatus } from '../../../actions/ui';
 
 const initialState = {
     id: null,

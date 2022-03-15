@@ -1,7 +1,7 @@
 import React, {  useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdminRolesByDepartamento, guardarConfiguracionRolArchivo, openCloseChecklistArchivoModal } from '../../actions/repositorio';
+import { getAdminRolesByDepartamento, guardarConfiguracionRolArchivo, openCloseChecklistArchivoModal } from '../../../actions/repositorio';
 import { useChecklist } from 'react-checklist';
 
 export const ChecklistArchivoModal = () => {

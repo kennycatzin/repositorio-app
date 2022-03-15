@@ -2,8 +2,8 @@ import React from 'react'
 import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux';
 import { bajaCategoria, categoriaActiva, openModalCategoria, openModalSubcategoria } from '../../../../actions/repositorio';
-import { RepositorioModal } from '../../../modal/repositorioModal';
-import { ArchivoModal } from '../../../modal/archivoModal';
+import { RepositorioModal } from '../../modal/repositorioModal';
+import { ArchivoModal } from '../../modal/archivoModal';
 import {TableSubcategorias} from './../tables/TableSubcategorias'
 
 export const RepositorioCategoria = ({ data }) => {

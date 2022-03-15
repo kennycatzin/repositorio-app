@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { getTableObjeto } from '../../actions/catalogos';
-import { AsignacionModal } from '../modal/asignacionModal';
+import { getTableObjeto } from './../../actions/catalogos';
+import { AsignacionModal } from './modal/asignacionModal';
 import { TableAsignaciones } from './widgets/tables/TableAsignaciones'
 
 export const AsignacionScreen = () => {

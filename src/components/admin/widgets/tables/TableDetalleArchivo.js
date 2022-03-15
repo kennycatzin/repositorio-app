@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import { ConfiguracionArchivoSub } from '../../../modal/configuracionArchivosSub';
+import { ConfiguracionArchivoSub } from '../../modal/configuracionArchivosSub';
 
 export const TableDetalleArchivo = ({cabeceras, data}) => {
 

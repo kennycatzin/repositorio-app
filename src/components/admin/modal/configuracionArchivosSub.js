@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import {  guardarArchivoConfiguracion, openModalFormularioArchivos } from '../../actions/repositorio';
+import {  guardarArchivoConfiguracion, openModalFormularioArchivos } from '../../../actions/repositorio';
 
 const initialState = {
     id: 0,

@@ -28,6 +28,12 @@ export const Sidebar = () => {
                             <p className='h5 text-white'>Repositorio</p>
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/category">
+                            <i className="tim-icons icon-tv-2"></i>
+                            <p className='h5 text-white'>EQUIPO</p>
+                        </Link>
+                    </li>
                     {
                         tipo ==='ADMIN' ?
                             <li>
@@ -46,6 +52,18 @@ export const Sidebar = () => {
                                 </Link>
                             </li>: null
                     }
+                    
+                    {
+                        tipo ==='ADMIN' || tipo === 'INVENTARIO' ?
+                            <li>
+                                <Link to="/menu-inventario">
+                                    <i className="tim-icons icon-laptop"></i>
+                                    <p className='h5 text-white'>INVENTARIO</p>
+                                </Link>
+                            </li>: null
+                    }
+                    
+                    
                     
                 </ul>
             </div>

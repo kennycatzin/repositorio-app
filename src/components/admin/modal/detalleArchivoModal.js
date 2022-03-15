@@ -1,8 +1,8 @@
 import React from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModalDetalleArchivo } from '../../actions/repositorio';
-import { TableDetalleArchivo } from '../admin/widgets/tables/TableDetalleArchivo';
+import { openModalDetalleArchivo } from '../../../actions/repositorio';
+import { TableDetalleArchivo } from '../../admin/widgets/tables/TableDetalleArchivo';
 
 export const DetalleArchivoModal = () => {
     // const dispatch = useDispatch();

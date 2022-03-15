@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2'
 import { bajaArchivos, openCloseChecklistArchivoModal, openModalDetalleArchivo, openModalFormularioArchivos } from '../../../../actions/repositorio';
-import { ChecklistArchivoModal } from '../../../modal/checklistArchivoModal';
+import { ChecklistArchivoModal } from '../../modal/checklistArchivoModal';
 
 export const TableConfArchivos = ({cabeceras, data}) => {
     const dispatch = useDispatch();

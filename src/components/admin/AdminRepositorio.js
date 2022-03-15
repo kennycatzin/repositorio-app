@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getAdminConf, getAdminRolesByDepartamento, getAuxFormularioArchivo, getTiposConfigArchivos, openModalCategoria } from '../../actions/repositorio'
-import { RepoCategoriaModal } from '../modal/repoCategoriaModal'
+import { RepoCategoriaModal } from './modal/repoCategoriaModal'
 import { RepositorioEntry } from './widgets/repositorio/RepositorioEntry'
 
 export const AdminRepositorio = () => {
