@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 const initialState = {
     id: 0,
     nombre: '',
+    email: '',
     usuario: '',
     id_rol: 0,
     tipo: ''
@@ -16,7 +17,7 @@ export const UsuariosModal = () => {
     const { auxRoles } = useSelector(state => state.ui);
 
     const [formValues, setformValues] = useState(initialState);
-    const { id = 0, id_rol = 0, nombre = '', usuario = '', tipo = '', password_confirmation = '', password = '' } = formValues;
+    const { id = 0, id_rol = 0, nombre = '', email = '', usuario = '', tipo = '', password_confirmation = '', password = '' } = formValues;
     const { uid } = useSelector(state => state.auth)
     const { userActualConteo } = useSelector(state => state.usuarios)
     const [values, setValues] = useState({
@@ -62,7 +63,7 @@ export const UsuariosModal = () => {
             const obj = {
                 id,
                 name: nombre,
-                email: '',
+                email,
                 password,
                 password_confirmation,
                 tipo,
@@ -113,13 +114,24 @@ export const UsuariosModal = () => {
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="card-body">
-                                <div className='row container'>
-                                    <div className="form-group col-6">
-                                        <label >Nombre</label>
+                            <div className="form-group">
+                                        <label>Nombre</label>
                                         <input type="text"
                                             className="form-control"
                                             value={nombre}
                                             name="nombre"
+                                            
+                                            onChange={handleInputChange}
+
+                                        />
+                                    </div>
+                                <div className='row'>
+                                    <div className="form-group col-6">
+                                        <label >Correo</label>
+                                        <input type="text"
+                                            className="form-control"
+                                            value={email}
+                                            name="email"
                                             onChange={handleInputChange}
 
                                         />
@@ -132,11 +144,10 @@ export const UsuariosModal = () => {
                                             name="usuario"
                                             onChange={handleInputChange}
                                             autoComplete="off"
-
                                         />
                                     </div>
                                 </div>
-                                <div className='row container'>
+                                <div className='row'>
                                     <div className="form-group col-6">
                                         <label>Roles</label>
                                         <select className="form-control"
@@ -150,7 +161,6 @@ export const UsuariosModal = () => {
                                                 auxRoles.map((aux) => (
                                                     <option key={aux.id} value={aux.id}>{aux.rol}</option>
                                                 ))
-
                                             }
                                         </select>
                                     </div>
@@ -168,7 +178,7 @@ export const UsuariosModal = () => {
                                         </select>
                                     </div>
                                 </div>
-                                <div className='row container'>
+                                <div className='row'>
                                     <div className="form-group col-6">
                                         <label >Contraseña</label>
                                         <div className="input-group form-group">
@@ -182,7 +192,7 @@ export const UsuariosModal = () => {
                                             <div className="input-group-addon mt-2 ml-2 mr-2">
                                                 <div className='text-white pointer' onClick={handleClickShowPassword} title='ver / ocultar'
                                                 >
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <i className="fa fa-eye" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                         </div>

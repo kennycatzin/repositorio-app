@@ -45,7 +45,7 @@ export const guardarUsuario = (objeto, conteoActual) => {
     return async( dispatch ) => {
         Swal.fire({
             title: 'Espere por favor',
-            timer: 10000,
+            timer: 20000,
             timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading()

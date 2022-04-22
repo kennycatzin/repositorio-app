@@ -4,13 +4,18 @@ import { InventarioItem } from '../widgets/InventarioItem';
 export const InventarioMenuScreen = () => {
   const data = [
     {
-      url: 'inventario-asignaciones',
+      url: 'inventario-articulos',
+      nombre: 'Solicitudes',
+      icono: 'icon-paper'
+    },
+    {
+      url: 'inventario-formulario-asignacion',
       nombre: 'Asignaciones',
-      icono: 'icon-tap-02'
+      icono: 'icon-bulb-63'
     },
     {
       url: 'inventario-computadoras',
-      nombre: 'Computadoras',
+      nombre: 'Equipos',
       icono: 'icon-laptop'
     },
     {
@@ -20,7 +25,7 @@ export const InventarioMenuScreen = () => {
     },
     {
       url: 'inventario-tipos',
-      nombre: 'Tipo de equipos',
+      nombre: 'Tipos de equipo',
       icono: 'icon-vector'
     },
     {
@@ -30,9 +35,10 @@ export const InventarioMenuScreen = () => {
     },
     {
       url: 'inventario-articulos',
-      nombre: 'Artículos',
-      icono: 'icon-app'
-    }
+      nombre: 'Sucursales',
+      icono: 'icon-istanbul'
+    },
+    
   ];
   return (
     <div className="card">

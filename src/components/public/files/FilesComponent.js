@@ -20,7 +20,7 @@ export const FilesComponent = ({ data }) => {
                     <div className="card-body text-center">
                        
                         <img className="img-fluid w-50" src="https://icon-library.com/images/1274d94986596d5426ef6ff28712209f.png" alt="..." />
-                        <p className="text-white">
+                        <p className="text-white mt-2">
                             {data.nombre}
                         </p>
                         <p className="text-white">

@@ -138,9 +138,9 @@ export const ConfRolesArchivosModal = () => {
 
                                                     <tbody>
                                                         {
-                                                            (archivos_crudos !== undefined) &&
+                                                            (archivos_crudos !== undefined) &&            
                                                             archivos_crudos.map((item, index) => (
-                                                                <tr key={(new Date()).getTime().toString(2 + index)} className='animate__animated animate__fadeIn size'>
+                                                                <tr key={index + 1} className='animate__animated animate__fadeIn size'>
                                                                     <td>{item.nombre}</td>
                                                                     <td>
                                                                         <button onClick={() => handleClick(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Agregar archivo a la configuración">

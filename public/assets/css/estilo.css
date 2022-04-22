@@ -17,6 +17,10 @@
     background-color: #007bff;
     color: #FFF;
   }
+  .card-counter.pink{
+    background-color: #6610f2;
+    color: #FFF;
+  }
 
   .card-counter.danger{
     background-color: #ef5350;
@@ -215,4 +219,10 @@ select option {
 }
 .cont-roles{
   height: 250px;
+}
+.largo{
+  height: 95%;
+}
+.corto{
+  height: 70% !important;
 }

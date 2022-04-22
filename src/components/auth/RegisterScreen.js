@@ -10,26 +10,25 @@ import Swal from 'sweetalert2';
 
 export const RegisterScreen = () => {
     const { loading } = useSelector( state => state.ui );
-
     const dispatch = useDispatch();
     const [formValues, handleInputChange] = useForm({
             nombre: '',
             usuario: '',
-            correo: 'correo@correo.com',
+            correo: '',
             password: '',
             confirm_password: ''
     });
     const {nombre, correo, password, usuario} = formValues;
     let navigate = useNavigate();
-
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log(isFormValid())
        if(isFormValid()){
-            dispatch(register(usuario, correo, password, nombre));
-            
+            dispatch(register(usuario, correo, password, nombre));            
             navigate("/login", {replace: true});
 
         }else{
+            Swal.fire('Un campo está incorrecto');
         }
     }
     const [values, setValues] = React.useState({
@@ -52,6 +51,7 @@ export const RegisterScreen = () => {
             return false;
         }else if(!isEmail(correo)){
             dispatch(uiError('El correo es inválido'));
+            Swal.fire('El correo es inválido')
             return false;
         }else if(password.trim().length < 3){
             dispatch(uiError('El password debe ser más de 3 carteres'));
@@ -59,7 +59,6 @@ export const RegisterScreen = () => {
 
             return false
         }
-
         return true;
     }
     return (
@@ -74,7 +73,7 @@ export const RegisterScreen = () => {
                         </div>
                     </div>
                     <div className="card-body">
-                        <form onSubmit={handleSubmit}>
+                        <form >
                             {/* <div className="alert alert-danger" role="alert">
                                Ha ocurrido un error en el registro del usuario
                             </div> */}
@@ -106,6 +105,19 @@ export const RegisterScreen = () => {
                             </div>
                             <div className="input-group form-group">
                                 <div className="input-group-prepend">
+                                    <span className="input-group-text"><i className="tim-icons icon-email-85"></i></span>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    className="form-control" 
+                                    placeholder="Correo"
+                                    value={correo}
+                                    name="correo"
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="input-group form-group">
+                                <div className="input-group-prepend">
                                     <span className="input-group-text"><i className="fas fa-key"></i></span>
                                 </div>
                                 <input 
@@ -119,26 +131,23 @@ export const RegisterScreen = () => {
                                  <div className="input-group-addon mt-2 ml-2 mr-2">
                                         <div className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
                                         >
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <i className="fa fa-eye" aria-hidden="true"></i>
                                         </div>
                                     </div>
                             </div>
-                           <br/>
                             <div className="form-group col-auto text-center">
-                                <input 
-                                    type="submit" 
-                                    value="Registro" 
-                                    className="btn btn-info btn-block"
-                                    disabled = {loading}
-                                />
+                                <button onClick={handleSubmit} className="btn btn-info btn-block">
+                                    Registro
+                                </button>
+                               
+                                <div className="d-flex justify-content-center links">
+                                    <Link to="/login">¿Ya tienes una cuenta? Ingresa</Link>
+                                </div>
                             </div>
+                            
                         </form>
                     </div>
-                    <div className="card-footer">
-                        <div className="d-flex justify-content-center links">
-                            <Link to="/login">¿Ya tienes una cuenta? Ingresa</Link>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>

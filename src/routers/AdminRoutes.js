@@ -17,21 +17,23 @@ import { AdminRepositorio } from '../components/admin/AdminRepositorio';
 import { ArchivoConf } from '../components/admin/catalogos/ArchivoConf';
 import { UsuariosScreen } from '../components/admin/catalogos/UsuariosScreen';
 import { InventarioMenuScreen } from '../components/inventario/pages/InventarioMenuScreen';
-import { InventarioArticulosScreen } from '../components/inventario/pages/InventarioArticulosScreen';
-import { InventarioAsignacionesScreen } from '../components/inventario/pages/InventarioAsignacionesScreen';
+import { InventarioArticulosScreen } from '../components/inventario/pages/solicitudes/InventarioArticulosScreen';
+import { InventarioAsignacionesScreen } from '../components/inventario/pages/asignaciones/InventarioAsignacionesScreen';
 import { InventarioComputadorasScreen } from '../components/inventario/pages/InventarioComputadorasScreen';
 import { InventarioLicenciasScreen } from '../components/inventario/pages/InventarioLicenciasScreen';
 import { InventarioMarcasScreen } from '../components/inventario/pages/InventarioMarcasScreen';
 import { InventarioTiposScreen } from '../components/inventario/pages/InventarioTiposScreen';
+import { InventarioFormAsignacionScreen } from '../components/inventario/pages/asignaciones/InventarioFormAsignacionScreen';
+import { EquipoScreen } from '../components/public/equipo/EquipoScreen';
+import { PrecioMetalScreen } from '../components/precio_metal/pages/PrecioMetalScreen';
 
 export const AdminRoutes = () => {
     const rutaServidor = '';
     //const rutaServidor = '/repositorio-af';
     return (
-        <div className="wrapper">
-            
+        <div className="wrapper">            
             <Sidebar/>
-            <div className="main-panel ">
+            <div className="main-panel">
                 <Navbar/>
                 <div className="content">
                     <Routes>
@@ -42,6 +44,7 @@ export const AdminRoutes = () => {
                             <Route path={rutaServidor + "/category"} element={<CategoryScreen/>} />
                             <Route path={rutaServidor + "/subcategorie"} element={<SubcategoriesScreen/>} />               
                             <Route path={rutaServidor + "/files"} element={<FilesScreen/>} />      
+                            <Route path={rutaServidor + "/equipo"} element={<EquipoScreen/>} />      
 
                             <Route path={rutaServidor + "/configuraciones"} element={<ConfiruagionesScreen/>} />
                             <Route path={rutaServidor + "/departamentos"} element={<DepartamentosScreen/>} />
@@ -59,6 +62,9 @@ export const AdminRoutes = () => {
                             <Route path={rutaServidor + "/inventario-marcas"} element={<InventarioMarcasScreen/>} />      
                             <Route path={rutaServidor + "/inventario-tipos"} element={<InventarioTiposScreen/>} />      
                             <Route path={rutaServidor + "/inventario-licencias"} element={<InventarioLicenciasScreen/>} />      
+                            <Route path={rutaServidor + "/inventario-formulario-asignacion"} element={<InventarioFormAsignacionScreen/>} />      
+                            
+                            <Route path={rutaServidor + "/precio_metal"} element={<PrecioMetalScreen/>} />      
 
                             
                     </Routes>

@@ -1,8 +1,12 @@
 import axios from 'axios';
 
-//const baseUrl = 'http://localhost:8000/api';
-//const baseUrlPruebas = 'http://172.18.4.205:8080/repositorio-api/public/api';
+
+// const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
 const baseUrl = 'http://172.18.3.7/repositorio-api/public/api';
+
+// const precioBaseUrl = 'http://172.18.4.205:8080/server_connections/public/api';
+const precioBaseUrl = 'http://172.18.3.7/server_connections/public/api';
+
 //const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
 
 const fetchSinToken = (endpoint, data, method = 'GET') => {
@@ -24,7 +28,25 @@ const fetchSinToken = (endpoint, data, method = 'GET') => {
         });
     }
 }
-
+const fetchPrecioMetal = (endpoint, data, method = 'GET') => {
+    const url = `${ precioBaseUrl }/${ endpoint }`;
+    if (method === 'GET') {
+        return fetch(url, {
+            method,
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+    } else {
+        return fetch(url, {
+            method,
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+    }
+}
 // const fetchFormImagen = ( endpoint, data, method = 'GET' ) => {
 //     const url = `${ baseUrl }/${ endpoint }`;
 //     if ( method === 'GET' ) {
@@ -86,5 +108,6 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
 export {
     fetchSinToken,
     fetchConToken,
-    fetchFormImagen
+    fetchFormImagen,
+    fetchPrecioMetal
 }

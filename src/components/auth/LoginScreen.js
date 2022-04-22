@@ -45,7 +45,7 @@ export const LoginScreen = () => {
                                     </div>
                                     <input type="text"
                                         className="form-control"
-                                        placeholder="username"
+                                        placeholder="Usuario"
                                         name="email"
                                         value={email}
                                         onChange={handleInputChange}
@@ -58,7 +58,7 @@ export const LoginScreen = () => {
                                     </div>
                                     <input className="form-control"
                                         type={values.showPassword ? "text" : "password"}
-                                        placeholder="password"
+                                        placeholder="Contraseña"
                                         name="password"
                                         value={password}
                                         onChange={handleInputChange}
@@ -66,7 +66,7 @@ export const LoginScreen = () => {
                                     <div className="input-group-addon mt-2 ml-2 mr-2">
                                         <div className='pointer' onClick={handleClickShowPassword} title='ver / ocultar'
                                         >
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <i className="fa fa-eye" aria-hidden="true"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,6 @@ export const LoginScreen = () => {
                             <div className="d-flex justify-content-center links">
                                 <Link to="/register"> ¿Aún no tienes una cuenta? Regístrate</Link>
                             </div>
-
                         </div>
                     </div>
                 </div>

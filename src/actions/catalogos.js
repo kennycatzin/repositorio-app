@@ -6,7 +6,7 @@ export const registroEstatus = (objeto = {}, tipo= '', endpoint = '', segEndpoin
     return async( dispatch ) => {
         Swal.fire({
             title: 'Espere por favor',
-            timer: 10000,
+            timer: 250000,
             timerProgressBar: true,
             didOpen: () => {
                 Swal.showLoading()

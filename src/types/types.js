@@ -4,16 +4,12 @@ export const types =  {
 
     uiSetError: '[ui] Set Error',
     uiRemoveError: '[ui] Remove Error',
-
     uiStartLoading: '[UI] Start loading',
     uiFinishLoading: '[UI] Finish loading',
-
     uiModalEstatus: '[UI] Modal Estatus Open',
-
     uiGetTableCatalogoObjeto: '[UI] Get data in table',
     uiUpdateCatalogoEstatus: '[UI] Update Estatus',
     uiGetRoles: '[UI] Get Roles',
-
 
     authCheckingFinish: '[auth] Finish checking login state',
     authStartLogin: '[auth] Start login',
@@ -93,4 +89,57 @@ export const types =  {
     userModalUsuario: '[user] Abrir modal con el TD activo usuarios',
     userPaginar: '[user] Maneja el estado de la paginación en el panel',
 
+    asignacionStartLoading: '[asignacion] Start loading',
+    asignacionFinishLoading: '[asignacion] Finish loading',
+    asignacionpaginar: '[asignacion] get asignaciones paginados en 8',
+    asignacionSucursales: '[asignacion] get sucursales para admin',
+    asignacionEquipoAsignado: '[asignacion] get Equipo asignado',
+    asignacionTipoEquiposAdmin: '[asignacion] get tipo equipos admin',
+    asignacionEquipoDisponible: '[asignacion] get equipos disponibles admin',
+    asignacionAgregarNuevo: '[asignacion] set agregar nuevo equipo',
+    asignacionEliminarNuevo: '[asignacion] set eliminar nuevo equipo',
+    asignacionEliminarAsignado: '[asignacion] set eliminar equipo asignado',
+    asignacionSetIdActivo: '[asignacion] set id usuario activo',
+    asignacionSetArrLimpios: '[asignacion] set limpiar arreglos',
+
+    solicitudGetEquipos: '[solicitud] get lista equipos',
+    solicitudModalOpen: '[solicitud] Open - Close modal',
+    solicitudGetEstatusAgregar: '[solicitud] Get Estatus para agregar equipo',
+    solicitudAgregarEquipo: '[solicitud] Agregar equipo para envio',
+    solicitudEliminarEquipoAgregado: '[solicitud] Eliminar equipo de la lista agregada',
+    solicitudGetSolicitudes: '[solicitud] Get solicitudes Admin',
+    solicitudSetActiveSolicitud: '[solicitud] Set solicitud active',
+    solicitudSustElementoDetalle: '[solicitud] Sustituir elemento en el detalle',
+
+    precioGetSucursales: '[precio] Obtener el listado de sucursales y obtener el listado de metales',
+    setListadoSucReales: '[precio] setear sucursales con sus precios correspondientes',
+    precioSetTipoMovimiento: '[precio] setear el tipo de movimiento que se hará',
+    precioSetCamposLimpios: '[precio] set campos limpios',
+
+    licGetLicencias: '[lic] Obtener el listado de licencias',
+    licGuardarLicencias: '[lic] Guardar licencias por medio del post',
+    licEliminarLicencia: '[lic] Eliminar licencia',
+    licBusquedaLicencias: '[lic] Busqueda de licencias',
+    licPaginar: '[lic] paginador del catálogo de licencias',
+    licModalLicencias: '[lic] controlador del open close modal',
+    licGetEstatusLicencias: '[lic] get estatus para manipular las licencias',
+
+    equipoGetEquipos: '[ equipo] Obtener el listado de equipos',
+    equipoGuardarEquipos: '[ equipo] Guardar equipo por medio del post',
+    equipoEliminaEquipo: '[ equipo] Eliminar equipo',
+    equipoBusquedaEquipo: '[ equipo] Busqueda de equipos',
+
+    marcaGetObjetos: '[marca] Obtener el listado de Objetos',
+    marcaGuardarObjeto: '[marca] Guardar Objeto por medio del post',
+    marcaEliminarObjeto: '[marca] Eliminar Objeto',
+    marcaBusquedaObjeto: '[marca] Busqueda de Objetos',
+    marcaPaginar: '[marca] paginador del catálogo de Objetos',
+    marcaModalObjetos: '[marca] controlador del open close modal',
+
+    tipoEGetObjetos: '[tipoE] Obtener el listado de Objetos',
+    tipoEGuardarObjeto: '[tipoE] Guardar Objeto por medio del post',
+    tipoEEliminarObjeto: '[tipoE] Eliminar Objeto',
+    tipoEBusquedaObjeto: '[tipoE] Busqueda de Objetos',
+    tipoEPaginar: '[tipoE] paginador del catálogo de Objetos',
+    tipoEModalObjetos: '[tipoE] controlador del open close modal',
 }

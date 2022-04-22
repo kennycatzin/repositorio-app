@@ -1,4 +1,4 @@
-import React, {  useState } from 'react'
+import React, { useState } from 'react'
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminRolesByDepartamento, guardarConfiguracionRolArchivo, openCloseChecklistArchivoModal } from '../../../actions/repositorio';
@@ -10,12 +10,12 @@ export const ChecklistArchivoModal = () => {
     const { repoAdminDepa } = useSelector(state => state.repo);
     const id_archivo = useSelector(state => state.repo.activeArchivo.id);
     const { uid } = useSelector(state => state.auth);
-    const {depas} = useSelector(state => state.repo.auxiliaresFormArchivos);
+    const { depas } = useSelector(state => state.repo.auxiliaresFormArchivos);
     // const id_departamento = formValues;
     const [id_departamento, setid_Departamento] = useState(0);
-    const {titulo} = useSelector(state => state.repo.subcategoriaActiva);
+    const { titulo } = useSelector(state => state.repo.subcategoriaActiva);
     const objCategoria = useSelector(state => state.repo.activeCategoria);
-    const {nombre, descripcion} = useSelector(state => state.repo.activeArchivo);
+    const { nombre, descripcion } = useSelector(state => state.repo.activeArchivo);
     const { handleCheck, isCheckedAll, checkedItems, setCheckedItems } = useChecklist(repoAdminDepa, {
         key: 'id_rol',
         keyType: 'number',
@@ -40,7 +40,7 @@ export const ChecklistArchivoModal = () => {
         //     [target.name]: target.value
         // });
         setid_Departamento(target.value)
-        dispatch(getAdminRolesByDepartamento(target.value));  
+        dispatch(getAdminRolesByDepartamento(target.value));
     }
     // const [dateStart, setDateStart] = useState(now.toDate())
     const closeModal = () => {
@@ -81,29 +81,29 @@ export const ChecklistArchivoModal = () => {
                             <h5 className="card-subtitle text-center text-primary">{objCategoria.titulo} / {titulo} / {nombre} - {descripcion}</h5>
 
                         </div>
-                        <br/>
+                        <br />
                         <div className='container'>
 
-                        <div className="row">
-                                    <label className="col-md-3 col-form-label">Seleccione un departamento</label>
-                                    <div className="col-md-9">
-                                        <div className="form-group">
-                                            <select className="form-control"
-                                                id="exampleFormControlSelect1"
-                                                value={id_departamento == null ? '' : id_departamento}
-                                                name="id_departamento"
-                                                onChange={handleInputChange}>
-                                                <option value="">Seleccione un área</option>
-                                                {
-                                                    (depas !== undefined ) &&
-                                                        depas.map((aux) => (
-                                                            <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>
-                                                    ))
-                                                }
-                                            </select>
-                                        </div>
+                            <div className="row">
+                                <label className="col-md-3 col-form-label">Seleccione un departamento</label>
+                                <div className="col-md-9">
+                                    <div className="form-group">
+                                        <select className="form-control"
+                                            id="exampleFormControlSelect1"
+                                            value={id_departamento == null ? '' : id_departamento}
+                                            name="id_departamento"
+                                            onChange={handleInputChange}>
+                                            <option value="">Seleccione un área</option>
+                                            {
+                                                (depas !== undefined) &&
+                                                depas.map((aux) => (
+                                                    <option key={aux.id_departamento} value={aux.id_departamento}>{aux.departamento_completo}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
                                 </div>
+                            </div>
                             <div className="form-check">
                                 <label className="form-check-label">
                                     <input className="form-check-input"

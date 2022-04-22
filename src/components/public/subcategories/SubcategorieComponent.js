@@ -17,7 +17,7 @@ export const SubcategorieComponent = ({subcategoria}) => {
                     <Link onClick={handleClick} to="/files">
                         <img className="img-fluid w-50" src="https://icon-library.com/images/file-folder-icon-png/file-folder-icon-png-4.jpg" alt="..." />
                     </Link>
-                    <p className="card-title">
+                    <p className="card-title mt-3">
                         {
                             subcategoria.titulo
                         }

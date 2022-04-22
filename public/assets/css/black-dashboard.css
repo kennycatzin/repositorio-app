@@ -6129,8 +6129,7 @@ a.badge-darker.focus {
 .list-group-item {
   position: relative;
   display: block;
-  padding: 1rem 1rem;
-  margin-bottom: -0.0625rem;
+  padding: 5px 5px;
   background-color: #ffffff;
   border: 0.0625rem solid #e9ecef;
 }
@@ -7366,7 +7365,12 @@ button.bg-default:hover,
 button.bg-default:focus {
   background-color: #243152 !important;
 }
-
+.bg-gris{
+  background-color: #f0f0f0 !important;
+}
+.bg-white {
+  background-color: #ffffff !important;
+}
 .bg-white {
   background-color: #ffffff !important;
 }
@@ -16785,11 +16789,19 @@ hr {
 .table .small {
   font-weight: 300;
 }
-
+.opacity-2 {
+  opacity:0.7!important;
+}
+.opacity-nada {
+  opacity:1!important;
+}
 .card-tasks .card-body .table {
   margin-bottom: 0;
 }
-
+.card-tasks .table-full-width {
+  max-height: 250px;
+  position: relative;
+}
 .card-tasks .card-body .table>thead>tr>th,
 .card-tasks .card-body .table>tbody>tr>th,
 .card-tasks .card-body .table>tfoot>tr>th,
@@ -17864,7 +17876,7 @@ table.tablesorter thead tr .headerSortDown {
   position: relative;
   float: right;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   border-top: 2px;
   background: linear-gradient(#1e1e2f, #1e1e24);
   -webkit-transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
@@ -20460,12 +20472,48 @@ Copyright (c) 2015 Daniel Eden
 .card-tasks {
   height: 300px;
 }
-
-.card-tasks .table-full-width {
-  max-height: 250px;
+.card-active{
+  background-color: red;
+}
+.card-arti .table-full-width {
+  max-height: 500px;
   position: relative;
 }
+.card-arti .table-full-width {
+  max-height: 500px;
+  position: relative;
+}
+.card-nuevo {
+  height: 500px;
+}
 
+.card-nuevo .table-full-width {
+  max-height: 550px;
+  position: relative;
+}
+.card-articulos {
+  height: 850px;
+}
+
+.card-articulos .table-full-width {
+  max-height: 850px;
+  position: relative;
+}
+.card-solicitud {
+  height: 850px;
+}
+
+.card-solicitud .table-full-width {
+  max-height: 850px;
+  position: relative;
+}
+.card-detalle {
+  height: 850px;
+}
+.bomba {
+  max-height: 750px;
+  overflow-y: scroll;
+}
 .card-tasks .card-header .title {
   margin-right: 20px;
   font-weight: 400;

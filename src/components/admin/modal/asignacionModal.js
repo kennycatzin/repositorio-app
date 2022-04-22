@@ -8,6 +8,7 @@ const initialState = {
     id: 0,
     nombre: '',
     usuario: '',
+    correo: '',
     id_rol: 0,
     tipo: '',
 }
@@ -32,7 +33,7 @@ export const AsignacionModal = () => {
             setformValues(itemActive)
         }
     }, [itemActive, dispatch]);
-    const { id = 0, id_rol = 0, name = '', usuario = '', tipo = '' } = formValues;
+    const { id = 0, id_rol = 0, name = '', email = '', usuario = '', tipo = '' } = formValues;
     const {uid} = useSelector(state => state.auth)
 
     const closeModal = () => {
@@ -52,6 +53,7 @@ export const AsignacionModal = () => {
             id: null,
             id_usuario: id,
             id_rol,
+            email,
             usuario: uid,
             tipo,            
         }
@@ -85,24 +87,37 @@ export const AsignacionModal = () => {
                                 <div className="form-group">
                                     <label >Nombre</label>
                                     <input type="text" 
-                                            className="form-control" 
+                                            className="form-control text-white" 
                                             id="exampleFormControlInput1" 
                                             value={name}
                                             name="name"
                                             onChange={handleInputChange}
                                             disabled />
                                 </div>
-                                <div className="form-group">
-                                    <label >Usuario</label>
-                                    <input type="text" 
-                                            className="form-control" 
+                                <div className='row'>
+                                    <div className="form-group col-6">
+                                        <label >Correo</label>
+                                        <input type="text"
+                                            className="form-control"
+                                            value={email}
+                                            name="email"
+                                            onChange={handleInputChange}
+
+                                        />
+                                    </div>
+                                    <div className="form-group col-6">
+                                        <label >Usuario</label>
+                                        <input type="text" 
+                                            className="form-control text-white" 
                                             id="exampleFormControlInput1" 
                                             value={usuario}
                                             name="usuario"
                                             onChange={handleInputChange}
                                             disabled />
+                                    </div>
                                 </div>
-                                <div className="form-group">
+                                <div className='row'>
+                                    <div className="form-group col-6">
                                     <label>Roles</label>
                                     <select className="form-control"
                                              id="exampleFormControlSelect1"
@@ -118,8 +133,8 @@ export const AsignacionModal = () => {
 
                                         }
                                     </select>
-                                </div>
-                                <div className="form-group">
+                                    </div>
+                                    <div className="form-group col-6">
                                     <label>Tipo de usuario</label>
                                     <select className="form-control" 
                                             id="exampleFormControlSelect1"
@@ -130,9 +145,13 @@ export const AsignacionModal = () => {
                                         <option>Seleccione un tipo</option>
                                         <option value="ADMIN">ADMINISTRADOR</option>
                                         <option value="USUARIO">USUARIO</option>
+                                        <option value="FINANZAS">FINANZAS</option>
+                                        <option value="INVENTARIO">INVENTARIO</option>
                                         <option value="RH">RH</option>
                                     </select>
+                                    </div>
                                 </div>
+                                
                             </div>
                             <div className="card-footer text-center">
                                 <button type="submit" className="btn btn-fill btn-info" >Guardar</button>
