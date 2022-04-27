@@ -101,7 +101,7 @@ export const LicenciaModal = () => {
                                                 value={id_estatus}
                                                 name="id_estatus"
                                                 onChange={handleInputChange}>
-                                                <option>Seleccione un rol</option>
+                                                <option>Seleccione un estatus</option>
                                                 {
                                                     (licEstatus != null) &&
                                                     licEstatus.map((aux) => (

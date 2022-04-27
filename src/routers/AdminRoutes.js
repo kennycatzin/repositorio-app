@@ -19,13 +19,13 @@ import { UsuariosScreen } from '../components/admin/catalogos/UsuariosScreen';
 import { InventarioMenuScreen } from '../components/inventario/pages/InventarioMenuScreen';
 import { InventarioArticulosScreen } from '../components/inventario/pages/solicitudes/InventarioArticulosScreen';
 import { InventarioAsignacionesScreen } from '../components/inventario/pages/asignaciones/InventarioAsignacionesScreen';
-import { InventarioComputadorasScreen } from '../components/inventario/pages/InventarioComputadorasScreen';
 import { InventarioLicenciasScreen } from '../components/inventario/pages/InventarioLicenciasScreen';
 import { InventarioMarcasScreen } from '../components/inventario/pages/InventarioMarcasScreen';
 import { InventarioTiposScreen } from '../components/inventario/pages/InventarioTiposScreen';
 import { InventarioFormAsignacionScreen } from '../components/inventario/pages/asignaciones/InventarioFormAsignacionScreen';
 import { EquipoScreen } from '../components/public/equipo/EquipoScreen';
 import { PrecioMetalScreen } from '../components/precio_metal/pages/PrecioMetalScreen';
+import { InventarioEquiposScreen } from '../components/inventario/pages/InventarioEquiposScreen';
 
 export const AdminRoutes = () => {
     const rutaServidor = '';
@@ -58,7 +58,7 @@ export const AdminRoutes = () => {
                             <Route path={rutaServidor + "/menu-inventario"} element={<InventarioMenuScreen/>} />      
                             <Route path={rutaServidor + "/inventario-articulos"} element={<InventarioArticulosScreen/>} />      
                             <Route path={rutaServidor + "/inventario-asignaciones"} element={<InventarioAsignacionesScreen/>} />      
-                            <Route path={rutaServidor + "/inventario-computadoras"} element={<InventarioComputadorasScreen/>} />      
+                            <Route path={rutaServidor + "/inventario-equipos"} element={<InventarioEquiposScreen/>} />      
                             <Route path={rutaServidor + "/inventario-marcas"} element={<InventarioMarcasScreen/>} />      
                             <Route path={rutaServidor + "/inventario-tipos"} element={<InventarioTiposScreen/>} />      
                             <Route path={rutaServidor + "/inventario-licencias"} element={<InventarioLicenciasScreen/>} />      

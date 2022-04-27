@@ -19,6 +19,71 @@ export const getTiposEquiposAdmin = (pagina = 0) => {
 
     }
 }
+export const guardarTipoEquipo = (objeto) => {
+    Swal.fire({
+        title: 'Espere por favor',
+        timer: 10000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        },
+    })
+    return async( dispatch ) => {
+        let resp = '';
+        if(objeto.id == 0){
+             resp = await fetchSinToken( 'tipo_equipo/store-item', objeto, 'POST' );
+        }else{
+             resp = await fetchSinToken( 'tipo_equipo/update-item/' + objeto.id, objeto, 'PUT' );
+        }
+        const body = await resp.json();
+        if( body.ok ) {           
+            Swal.fire({
+                title: 'Datos correctos',
+                text: 'Se ha creado correctamente',
+                confirmButtonColor: "#1d8cf8", 
+                icon: 'success',
+              })
+            dispatch(getTiposEquiposAdmin());
+        } else {
+            Swal.fire({
+                title: 'Datos incorrectos',
+                text: 'Ha ocurrido un problema',
+                confirmButtonColor: "#1d8cf8", 
+                icon: 'error',
+            })
+        }
+    }     
+}
+export const eliminarTipoEquipo = (objeto) => {
+    Swal.fire({
+        title: 'Espere por favor',
+        timer: 30000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        },
+    })
+    return async( dispatch ) => {        
+        const resp = await fetchSinToken( 'tipo_equipo/eliminar-item/'+ objeto.id, objeto, 'PUT' );        
+        const body = await resp.json();
+        if( body.ok ) {           
+            Swal.fire({
+                title: 'Datos correctos',
+                text: 'Se ha creado correctamente',
+                confirmButtonColor: "#1d8cf8", 
+                icon: 'success',
+              })
+            dispatch(getTiposEquiposAdmin());
+        } else {
+            Swal.fire({
+                title: 'Datos incorrectos',
+                text: 'Ha ocurrido un problema',
+                confirmButtonColor: "#1d8cf8", 
+                icon: 'error',
+            })
+        }
+    }     
+}
 const getTiposEquipos = (data) => ({
     type: types.tipoEGetObjetos,
     payload: {
@@ -28,6 +93,12 @@ const getTiposEquipos = (data) => ({
     }
 });
 
-
+export const openCloseModalTipoEquipos = (estado, obj = {}) => ({
+    type: types.tipoEModalObjetos,
+    payload: {
+        tipoEActive: obj,
+        tipoEModal: estado
+    }
+})
 
 

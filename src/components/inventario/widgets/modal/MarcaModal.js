@@ -57,7 +57,7 @@ export const MarcaModal = () => {
     return (
         <Modal
             isOpen={marcaModal}
-            onRequestClose={marcaModal}
+            onRequestClose={closeModal}
             style={customStyles}
             closeTimeoutMS={200}
             contentLabel="Example Modal"

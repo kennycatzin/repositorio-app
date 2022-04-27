@@ -23,7 +23,6 @@ export const marcaReducer = (state = initialState, action) => {
                 marcaActualConteo: state.marcaActualConteo + action.payload.conteo
             } 
         case types.marcaModalObjetos:
-            console.log(action.payload);
                 return {
                     ...state,
                     marcaActive: action.payload.marcaActive,

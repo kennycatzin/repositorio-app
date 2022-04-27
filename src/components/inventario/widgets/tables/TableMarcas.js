@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
-import { eliminarMarca, openCloseModalMarcas } from '../../../../actions/marcas';
+import { eliminarMarca, getMarcasAdmin, openCloseModalMarcas } from '../../../../actions/marcas';
 import { LicenciaModal } from '../modal/LicenciaModal';
 import { MarcaModal } from '../modal/MarcaModal';
 
@@ -43,7 +43,8 @@ export const TableMarcas = ({ data }) => {
     const handlePaginar = (index, pagina) => {
         let valor = contador + (index);
         if (valor >= 0 && valor <= registros) {
-            // dispatch(getLicenciasAdmin(valor));
+            console.log(valor);
+            dispatch(getMarcasAdmin(valor));
             // dispatch(userManejadoPaginador(index, pagina))
 
             setContador(valor);
@@ -90,7 +91,7 @@ export const TableMarcas = ({ data }) => {
                 </tbody>
             </table>
             <div className='row d-flex justify-content-around'>
-                <button onClick={() => handlePaginar(-8, -1)} className='btn btn-primary btn-sm'>
+                <button onClick={() => handlePaginar(-5, -1)} className='btn btn-primary btn-sm'>
                     <i className="tim-icons icon-double-left"></i>
                 </button>
                 <div className='row'>
@@ -98,7 +99,7 @@ export const TableMarcas = ({ data }) => {
                             <h4 className='pl-2 pr-2' > / </h4>
                             <h4> {paginas ? paginas : 1} </h4>
                 </div>
-                <button onClick={() => handlePaginar(+8, +1)} className='btn btn-primary btn-sm'>
+                <button onClick={() => handlePaginar(+5, +1)} className='btn btn-primary btn-sm'>
                     <i  className="tim-icons icon-double-right"></i>
                 </button>
 

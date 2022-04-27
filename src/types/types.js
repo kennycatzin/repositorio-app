@@ -128,6 +128,8 @@ export const types =  {
     equipoGuardarEquipos: '[ equipo] Guardar equipo por medio del post',
     equipoEliminaEquipo: '[ equipo] Eliminar equipo',
     equipoBusquedaEquipo: '[ equipo] Busqueda de equipos',
+    equipoModalObjetos: '[equipo] controlador del open close modal',
+    equipoGetHelpers: '[equipo] get helpers para el formulario',
 
     marcaGetObjetos: '[marca] Obtener el listado de Objetos',
     marcaGuardarObjeto: '[marca] Guardar Objeto por medio del post',

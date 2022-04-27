@@ -14,7 +14,7 @@ export const InventarioMenuScreen = () => {
       icono: 'icon-bulb-63'
     },
     {
-      url: 'inventario-computadoras',
+      url: 'inventario-equipos',
       nombre: 'Equipos',
       icono: 'icon-laptop'
     },
