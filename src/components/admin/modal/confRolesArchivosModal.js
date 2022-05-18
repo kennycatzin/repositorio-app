@@ -141,7 +141,7 @@ export const ConfRolesArchivosModal = () => {
                                                             (archivos_crudos !== undefined) &&            
                                                             archivos_crudos.map((item, index) => (
                                                                 <tr key={index + 1} className='animate__animated animate__fadeIn size'>
-                                                                    <td>{item.nombre}</td>
+                                                                    <td className='small'>{item.nombre} / {item.descripcion}</td>
                                                                     <td>
                                                                         <button onClick={() => handleClick(item)} type="button" rel="tooltip" className="btn btn-info btn-sm " data-original-title="Refresh" title="Agregar archivo a la configuración">
                                                                             <i className="tim-icons icon-triangle-right-17"></i>
@@ -173,7 +173,7 @@ export const ConfRolesArchivosModal = () => {
                                                             (archivos_configurados !== undefined) &&
                                                             archivos_configurados.map(item => (
                                                                 <tr key={item.id} className='animate__animated animate__fadeIn'>
-                                                                    <td>{item.nombre}</td>
+                                                                    <td className='small'>{item.nombre} / {item.descripcion}</td>
                                                                     <td>
                                                                         <button onClick={() => handleEliminar(item)} type="button" rel="tooltip" className="btn btn-danger btn-sm " data-original-title="Refresh" title="Eliminar archivo configurado">
                                                                             <i className="tim-icons icon-trash-simple"></i>

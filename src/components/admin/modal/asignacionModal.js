@@ -147,6 +147,7 @@ export const AsignacionModal = () => {
                                         <option value="USUARIO">USUARIO</option>
                                         <option value="FINANZAS">FINANZAS</option>
                                         <option value="INVENTARIO">INVENTARIO</option>
+                                        <option value="OFICIAL">OFICIAL</option>
                                         <option value="RH">RH</option>
                                     </select>
                                     </div>

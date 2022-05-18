@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 
-// const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
-const baseUrl = 'http://172.18.3.7/repositorio-api/public/api';
+const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
+// const baseUrl = 'http://172.18.3.7/repositorio-api/public/api';
 
-// const precioBaseUrl = 'http://172.18.4.205:8080/server_connections/public/api';
-const precioBaseUrl = 'http://172.18.3.7/server_connections/public/api';
+const precioBaseUrl = 'http://172.18.4.205:8080/server_connections/public/api';
+// const precioBaseUrl = 'http://172.18.3.7/server_connections/public/api';
 
-//const baseUrl = 'http://172.18.4.205:8080/repositorio-api/public/api';
 
 const fetchSinToken = (endpoint, data, method = 'GET') => {
     const url = `${ baseUrl }/${ endpoint }`;
@@ -27,6 +26,31 @@ const fetchSinToken = (endpoint, data, method = 'GET') => {
             body: JSON.stringify(data)
         });
     }
+}
+const fetchSinexportRecordToExceloken = (endpoint, data, method = 'GET') => {
+    const url = `${ precioBaseUrl }/${ endpoint }`;
+    fetch(url, {
+        method: 'POST',
+       })
+    .then((res) => {
+        console.log(res)
+        return res.blob();
+    })
+    .then((blob) => {
+        console.log(blob)
+
+        const href = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = href;
+        link.setAttribute('download', 'config.xlsx'); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    })
+    .catch((err) => {
+        console.log(err)
+        return Promise.reject({ Error: 'Something Went Wrong', err });
+    })    
 }
 const fetchPrecioMetal = (endpoint, data, method = 'GET') => {
     const url = `${ precioBaseUrl }/${ endpoint }`;
@@ -109,5 +133,6 @@ export {
     fetchSinToken,
     fetchConToken,
     fetchFormImagen,
-    fetchPrecioMetal
+    fetchPrecioMetal,
+    fetchSinexportRecordToExceloken
 }

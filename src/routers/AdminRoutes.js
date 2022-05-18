@@ -26,6 +26,8 @@ import { InventarioFormAsignacionScreen } from '../components/inventario/pages/a
 import { EquipoScreen } from '../components/public/equipo/EquipoScreen';
 import { PrecioMetalScreen } from '../components/precio_metal/pages/PrecioMetalScreen';
 import { InventarioEquiposScreen } from '../components/inventario/pages/InventarioEquiposScreen';
+import { OficalCumplimientoReportPage } from '../components/reports/oficial_cumplimiento/OficalCumplimientoReportPage';
+import { RepositorioReportPage } from '../components/reports/repositorio/RepositorioReportPage';
 
 export const AdminRoutes = () => {
     const rutaServidor = '';
@@ -65,6 +67,8 @@ export const AdminRoutes = () => {
                             <Route path={rutaServidor + "/inventario-formulario-asignacion"} element={<InventarioFormAsignacionScreen/>} />      
                             
                             <Route path={rutaServidor + "/precio_metal"} element={<PrecioMetalScreen/>} />      
+                            <Route path={rutaServidor + "/reportes-ofcu"} element={<OficalCumplimientoReportPage/>} />      
+                            <Route path={rutaServidor + "/reportes-repoadmin"} element={<RepositorioReportPage/>} />      
 
                             
                     </Routes>

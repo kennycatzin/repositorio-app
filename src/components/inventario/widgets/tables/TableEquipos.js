@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2'
 import { eliminarEquipo, getEquiposAdmin, openCloseModalEquipos } from '../../../../actions/equipo';
-import { EquipoModal } from '../modal/EquipoModal';
 
 const cabeceras = [
     "Equipo",
@@ -107,7 +106,6 @@ export const TableEquipos = ({ data }) => {
                     <i className="tim-icons icon-double-right"></i>
                 </button>
             </div>
-            <EquipoModal />
         </>
     )
 }

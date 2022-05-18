@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 export const Sidebar = () => {
     const { tipo } = useSelector(state => state.auth)
     return (
-        <div className="sidebar" data="blue">
-            <div className="sidebar-wrapper">
+        <div className="sidebar overflow-auto" data="blue">
+            <div className="sidebar-wrapper  overflow-auto">
                 <div className="logo">
                     <Link to="/" className="simple-text logo-mini">
                         <i className="fa fa-check-circle" aria-hidden="true"></i>
@@ -27,10 +27,10 @@ export const Sidebar = () => {
                             <i className="tim-icons icon-paper"></i>
                             <p className='h5 text-white'>Repositorio</p>
                         </Link>
-                    </li>                   
+                    </li>
                     <li>
                         <a data-toggle="collapse" href="#pagesExamples" className="" aria-expanded="false">
-                        <i className="tim-icons icon-tv-2"></i>
+                            <i className="tim-icons icon-tv-2"></i>
                             <p className='h5 text-white'>
                                 Equipo
                                 <b className="caret"></b>
@@ -38,7 +38,7 @@ export const Sidebar = () => {
                         </a>
                         <div className="collapse" id="pagesExamples" >
                             <ul className="nav">
-                            <li>
+                                <li>
                                     <Link to="/soli-usuario">
                                         <span className="sidebar-mini-icon">S</span>
                                         <span className="sidebar-normal"> Solicitudes </span>
@@ -56,8 +56,8 @@ export const Sidebar = () => {
                                         <span className="sidebar-normal"> Enviar equipo </span>
                                     </Link>
                                 </li>
-                                
-                                
+
+
                             </ul>
                         </div>
                     </li>
@@ -74,7 +74,7 @@ export const Sidebar = () => {
                             : null
                     }
                     {
-                        tipo === 'ADMIN' ?
+                         (tipo === 'ADMIN' || tipo === 'RH') ?
                             <li>
                                 <Link to="/configuraciones">
                                     <i className="tim-icons icon-settings"></i>
@@ -84,7 +84,7 @@ export const Sidebar = () => {
                     }
 
                     {
-                        tipo === 'ADMIN' || tipo === 'INVENTARIO' ?
+                        (tipo === 'ADMIN' || tipo === 'INVENTARIO') ?
                             <li>
                                 <Link to="/menu-inventario">
                                     <i className="tim-icons icon-laptop"></i>
@@ -101,6 +101,53 @@ export const Sidebar = () => {
                                 </Link>
                             </li> : null
                     }
+                    {
+                        (tipo === 'ADMIN' || tipo === 'OFICIAL') ?
+                            <li>
+                                <a data-toggle="collapse" href="#reportes" className="" aria-expanded="false">
+                                    <i className="tim-icons icon-single-copy-04"></i>
+                                    <p className='h5 text-white'>
+                                        Reportes
+                                        <b className="caret"></b>
+                                    </p>
+                                </a>
+                                <div className="collapse" id="reportes" >
+                                    <ul className="nav">
+                                        {
+                                            (tipo === 'ADMIN' || tipo ==='OFICIAL') && (
+                                                <li>
+                                                    <Link to="/reportes-ofcu">
+                                                        <span className="sidebar-mini-icon">OC</span>
+                                                        <span className="sidebar-normal"> Oficial cumplimiento </span>
+                                                    </Link>
+                                                </li>
+                                            )
+                                            
+
+                                        }
+                                        {
+                                            (tipo === 'ADMIN') && (
+                                                <li>
+                                                    <Link to="/reportes-repoadmin">
+                                                        <span className="sidebar-mini-icon">R</span>
+                                                        <span className="sidebar-normal"> Repositorio </span>
+                                                    </Link>
+                                                </li>
+                                            )
+                                            
+
+                                        }
+
+
+                                        
+
+
+                                    </ul>
+                                </div>
+                            </li> : null
+                    }
+
+
                 </ul>
             </div>
         </div>

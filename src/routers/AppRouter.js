@@ -4,58 +4,65 @@ import {
     BrowserRouter,
     Routes,
     Route
-  } from "react-router-dom";
+} from "react-router-dom";
 import { startChecking } from '../actions/actions';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
 
 import { UserRoutes } from './UserRoutes';
-import {PublicRoute} from './PublicRoute'
+import { PublicRoute } from './PublicRoute'
 import { PrivateRoute } from './PrivateRoute';
 import { AdminRoutes } from './AdminRoutes';
+import { OficialRoutes } from './OficialRoutes';
 export const AppRouter = () => {
-    const dispatch = useDispatch();    
-    const { checking, tipo} = useSelector(state => state.auth)
+    const dispatch = useDispatch();
+    const { checking, tipo } = useSelector(state => state.auth)
     const rutaServidor = '';
     //const rutaServidor = '/repositorio-af';
+    console.log(tipo)
     useEffect(() => {
         dispatch(startChecking());
     }, [dispatch])
-    if(checking){
-        return(<h5>Espere....</h5>)
+    if (checking) {
+        return (<h5>Espere....</h5>)
     }
     return (
         <BrowserRouter>
             <Routes>
-            <Route path={rutaServidor + "/login"} element={
+                <Route path={rutaServidor + "/login"} element={
                     <PublicRoute>
                         <LoginScreen />,
                     </PublicRoute>
-                    }
-            />
-            <Route path={rutaServidor + "/register"} element={
+                }
+                />
+                <Route path={rutaServidor + "/register"} element={
                     <PublicRoute>
                         <RegisterScreen />,
                     </PublicRoute>
-                }     
-            />
+                }
+                />
 
-            <Route path={rutaServidor + "/*"}  element ={
-                tipo === "ADMIN" ? 
-                    <PrivateRoute>
-                        <AdminRoutes/>
-                    </PrivateRoute> :        
-                    <PrivateRoute>
-                        <UserRoutes/>
-                    </PrivateRoute>
-              }
-          />
+                <Route path={rutaServidor + "/*"} element={
+                    tipo === "ADMIN" ?
+                        <PrivateRoute>
+                            <AdminRoutes />
+                        </PrivateRoute> :
+                       
+                            <PrivateRoute>
+                                <UserRoutes />
+                            </PrivateRoute> 
+
+
+
+                }
+
+                />
                 {/* <Route path="/*" element={<UserRoutes />} />
                 <Route path="/login" element={<LoginScreen />} />
                 <Route path="/register" element={<RegisterScreen />} /> */}
-                
-                
-                
+
+
+
             </Routes>
         </BrowserRouter>
     )

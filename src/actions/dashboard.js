@@ -27,6 +27,22 @@ export const getDataDashboard = (uid) => {
         }
     }
 }
+export const getBusquedaArchivos = (obj) => {
+    return async (dispatch) => {
+        const resp = await fetchSinToken('archivo/get-busqueda-archivos', obj, 'POST');
+        const body = await resp.json();
+        if (body.ok) {
+            dispatch(getFilesTablero(body.data, 'Buscador'))
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                text: 'No existen datos',
+                confirmButtonColor: "#1d8cf8",
+                icon: 'error',
+            })
+        }
+    }
+}
 export const getListaArchivos = (id_usuario, id_estatus, nombre) => {
     return async(dispatch)=>{
         if(id_usuario != null){     

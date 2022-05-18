@@ -144,4 +144,9 @@ export const types =  {
     tipoEBusquedaObjeto: '[tipoE] Busqueda de Objetos',
     tipoEPaginar: '[tipoE] paginador del catálogo de Objetos',
     tipoEModalObjetos: '[tipoE] controlador del open close modal',
+
+    reporteGetInfo: '[reporte] Obtener listado de datos',
+    reporteStartLoading: '[reporte] Start loading',
+    reporteFinishLoading: '[reporte] Finish loading',
+   
 }

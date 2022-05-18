@@ -12,6 +12,7 @@ const initEvent = {
     descripcion: '',
     fecha_inicio: '',
     fecha_final: '',
+    orden: 1,
     archivo: ''
    
 }
@@ -31,7 +32,7 @@ export const TableroModal = () => {
     // const [dateStart, setDateStart] = useState(now.toDate())
     const [formValues, setFormValues] = useState(initEvent);
     const fecha = Date.now();
-    const { id,  titulo = '', descripcion = '', fecha_inicio = moment(fecha).format('YYYY-MM-DD'), fecha_final = moment(fecha).format('YYYY-MM-DD'), imagen } = formValues;
+    const { id,  titulo = '', descripcion = '', fecha_inicio = moment(fecha).format('YYYY-MM-DD'), fecha_final = moment(fecha).format('YYYY-MM-DD'), imagen, orden = 1 } = formValues;
     const [miImagen, setmiImagen] = useState();
     const {uid} = useSelector(state => state.auth)
 
@@ -40,6 +41,7 @@ export const TableroModal = () => {
             const valores = {
                 id: activeTablero.id,
                 titulo: activeTablero.titulo,
+                orden: activeTablero.orden,
                 descripcion: activeTablero.descripcion,
                 fecha_inicio: activeTablero.fecha_inicio,
                 fecha_final: activeTablero.fecha_final,
@@ -99,6 +101,7 @@ export const TableroModal = () => {
         formData.append("activo", 1);
         formData.append("descripcion", descripcion);
         formData.append("tipo", 1);
+        formData.append("orden", orden);
         formData.append("fecha_inicio", fecha_inicio);
         formData.append("fecha_final", fecha_final);
         formData.append("archivo", miImagen);
@@ -177,6 +180,19 @@ export const TableroModal = () => {
                                                 className="form-control"
                                                 name="fecha_final"
                                                 value={moment(fecha_final).format('YYYY-MM-DD') }
+                                                onChange={handleInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <label className="col-md-3 col-form-label">Orden</label>
+                                    <div className="col-md-3">
+                                        <div className="">
+                                            <input type="number"
+                                                className="form-control"
+                                                name='orden'
+                                                value={orden}
                                                 onChange={handleInputChange}
                                             />
                                         </div>

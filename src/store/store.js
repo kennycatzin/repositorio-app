@@ -9,6 +9,7 @@ import { equipoReducer } from '../reducers/equipoReducer';
 import { licenciaReducer } from '../reducers/licenciaReducer';
 import { marcaReducer } from '../reducers/marcaReducer';
 import { precioReducer } from '../reducers/precioReducer';
+import { reporteReducer } from '../reducers/reporteReducer';
 import { repositorioReducer } from '../reducers/repositorioReducer';
 import { rolReducer } from '../reducers/rolReducer';
 import { solicitudReducer } from '../reducers/solicitudReducer';
@@ -35,7 +36,8 @@ const reducers = combineReducers ({
     licencia: licenciaReducer,
     equipo: equipoReducer,
     tipo_equipo: tipoEquipoReducer,
-    marcas: marcaReducer
+    marcas: marcaReducer,
+    reporte: reporteReducer
 });
 export const store = createStore(
     reducers,

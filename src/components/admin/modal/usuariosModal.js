@@ -63,7 +63,7 @@ export const UsuariosModal = () => {
             const obj = {
                 id,
                 name: nombre,
-                email,
+                email: email,
                 password,
                 password_confirmation,
                 tipo,
@@ -114,17 +114,17 @@ export const UsuariosModal = () => {
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="card-body">
-                            <div className="form-group">
-                                        <label>Nombre</label>
-                                        <input type="text"
-                                            className="form-control"
-                                            value={nombre}
-                                            name="nombre"
-                                            
-                                            onChange={handleInputChange}
+                                <div className="form-group">
+                                    <label>Nombre</label>
+                                    <input type="text"
+                                        className="form-control"
+                                        value={nombre}
+                                        name="nombre"
 
-                                        />
-                                    </div>
+                                        onChange={handleInputChange}
+
+                                    />
+                                </div>
                                 <div className='row'>
                                     <div className="form-group col-6">
                                         <label >Correo</label>
@@ -174,6 +174,9 @@ export const UsuariosModal = () => {
                                             <option>Seleccione un tipo</option>
                                             <option value="ADMIN">ADMINISTRADOR</option>
                                             <option value="USUARIO">USUARIO</option>
+                                            <option value="FINANZAS">FINANZAS</option>
+                                            <option value="INVENTARIO">INVENTARIO</option>
+                                            <option value="OFICIAL">OFICIAL</option>
                                             <option value="RH">RH</option>
                                         </select>
                                     </div>

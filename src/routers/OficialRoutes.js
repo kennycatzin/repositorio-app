@@ -6,15 +6,18 @@ import { CategoryScreen } from '../components/public/categorys/CategoryScreen';
 import { Sidebar } from '../components/shared/sidebar';
 import { SubcategoriesScreen } from '../components/public/subcategories/SubcategoriesScreen';
 import { FilesScreen } from '../components/public/files/FilesScreen';
-import { InventarioMenuScreen } from '../components/inventario/pages/InventarioMenuScreen';
-export const InventarioRoutes = () => {
+import { OficalCumplimientoReportPage } from '../components/reports/oficial_cumplimiento/OficalCumplimientoReportPage';
+import { ConfiruagionesScreen } from '../components/admin/ConfiruagionesScreen';
+
+export const OficialRoutes = () => {
     const rutaServidor = '';
     //const rutaServidor = '/repositorio-af';
+    console.log('entro');
     return (
         <div className="wrapper">
             
             <Sidebar/>
-            <div className="main-panel ">
+            <div className="main-panel">
                 <Navbar/>
                 <div className="content">
                     <Routes>
@@ -22,11 +25,10 @@ export const InventarioRoutes = () => {
                             <Route path={rutaServidor + "/"} element={<DashboardScreen/>} />
                             <Route path={rutaServidor + "/category"} element={<CategoryScreen/>} />
                             <Route path={rutaServidor + "/subcategorie"} element={<SubcategoriesScreen/>} />               
-                            <Route path={rutaServidor + "/files"} element={<FilesScreen/>} />      
+                            <Route path={rutaServidor + "/files"} element={<FilesScreen/>} />               
 
-                            <Route path={rutaServidor + "/menu-inventario"} element={<InventarioMenuScreen/>} />      
-                            
-                            
+                            <Route path={rutaServidor + "/configuraciones"} element={<ConfiruagionesScreen/>} />
+
                     </Routes>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { fetchSinToken } from "../helpers/fetch";
+import { fetchSinexportRecordToExceloken, fetchSinToken } from "../helpers/fetch";
 import { types } from "../types/types";
 import Swal from 'sweetalert2'
 
@@ -51,6 +51,27 @@ export const guardarMarca = (objeto) => {
                 icon: 'error',
             })
         }
+    }     
+}
+export const descargaPruebaAdmin = () => {
+    Swal.fire({
+        title: 'Espere por favor',
+        timer: 30000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+        },
+    })
+    return async( dispatch ) => {        
+        const resp = fetchSinexportRecordToExceloken( 'oficial/cumplimiento', {}, 'POST' );        
+       
+            Swal.fire({
+                title: 'Datos correctos',
+                text: 'Se ha creado correctamente',
+                confirmButtonColor: "#1d8cf8", 
+                icon: 'success',
+              })
+
     }     
 }
 export const eliminarMarca = (objeto) => {
